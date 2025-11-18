@@ -43,13 +43,17 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Main Title */}
-        <motion.h1
-          className="text-7xl md:text-8xl font-satoshi font-bold mb-8 tracking-tight"
-          variants={titleVariants}
-        >
-          argos
-        </motion.h1>
+      {/* Main Title - Logo */}
+      <motion.div
+        variants={titleVariants}
+      >
+        <img 
+          src="/img/logo-argos.png" 
+          alt="Argos Logo" 
+          className="h-32 md:h-40 mb-8 mx-auto"
+        />
+      </motion.div>
+
 
         {/* Tagline */}
         <motion.div
