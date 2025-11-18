@@ -130,9 +130,27 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
+    /* Define a fonte padrão do corpo como Inter (mais legível para textos longos) */
+    font-family: var(--font-sans); 
   }
+
+  /* AQUI ESTÁ A MÁGICA PARA A ARGOS */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-satoshi); /* Força a fonte Satoshi */
+    font-weight: 700; /* Força o Negrito (Bold). Use 900 se quiser Extra Black */
+    letter-spacing: -0.02em; /* Deixa as letras levemente juntas (Fica muito premium) */
+    color: var(--foreground); /* Garante que a cor esteja certa no modo dark */
+  }
+
+  /* Se quiser que os títulos H1 sejam roxos por padrão (opcional) */
+  /* h1 {
+     color: var(--color-purple-primary);
+  } 
+  */
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
