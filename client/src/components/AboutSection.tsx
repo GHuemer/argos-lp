@@ -36,21 +36,23 @@ export default function AboutSection() {
       {/* Wave Pattern Background */}
       <WavePattern />
 
-      {/* --- NOVO ELEMENTO DE GLOW CENTRAL --- */}
+      {/* --- NOVO E AJUSTADO ELEMENTO DE GLOW CENTRAL --- */}
+      {/* Este glow é mais focado e central, como na imagem. */}
       <div 
         className="absolute inset-0 flex justify-center items-center pointer-events-none" 
-        style={{ zIndex: 0 }} // Garante que o glow fique no fundo
+        style={{ zIndex: 0 }} 
       >
         <div 
-          className="w-[800px] h-[800px] rounded-full" 
+          className="w-[600px] h-[600px] rounded-full" 
           style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.05) 40%, transparent 70%)',
-            filter: 'blur(100px)', // Ajuste o blur para mais ou menos intensidade
-            opacity: 0.7, // Ajuste a opacidade para mais ou menos visibilidade
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 30%, transparent 60%)',
+            filter: 'blur(150px)', // Aumentei o blur para maior difusão
+            opacity: 0.8, // Aumentei a opacidade
+            transform: 'translateY(-20px)' // Leve ajuste para centralizar melhor visualmente
           }}
         ></div>
       </div>
-      {/* --- FIM DO NOVO ELEMENTO DE GLOW CENTRAL --- */}
+      {/* --- FIM DO NOVO E AJUSTADO ELEMENTO DE GLOW CENTRAL --- */}
 
 
       <div className="container mx-auto px-4 relative z-10"> {/* z-10 para o conteúdo ficar acima do glow */}
@@ -87,66 +89,58 @@ export default function AboutSection() {
           </motion.p>
 
           {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
-          <div className="hidden md:block relative w-full h-[400px] max-w-[900px] mx-auto my-12">
+          {/* Ajustei a altura e largura máxima para a roda ter mais espaço */}
+          <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto my-12">
             
             {/* SVG Lines Animation */}
             <motion.svg 
               className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              viewBox="0 0 900 400"
+              viewBox="0 0 1000 500" // Ajustei o viewBox para a nova altura
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              {/* Definições de gradiente para as linhas (opcional, usando cor sólida por enquanto) */}
-              <defs>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#6B3FFF" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#A855F7" stopOpacity="0.8" />
-                </linearGradient>
-              </defs>
-
               {/* Centro da roda */}
-              <circle cx="450" cy="200" r="6" fill="#A855F7" className="animate-pulse">
+              <circle cx="500" cy="250" r="6" fill="#A855F7" className="animate-pulse">
                  <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
               </circle>
 
               {/* Linhas conectando o centro às caixas */}
-              {/* As coordenadas coincidem aproximadamente com as posições das divs abaixo */}
-              <motion.line x1="450" y1="200" x2="450" y2="50" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Novas coordenadas para replicar a imagem: */}
+              {/* Centro (500, 250) */}
+              
+              {/* Linha para Vigilância constante (Esquerda-Centro) */}
+              <motion.line x1="500" y1="250" x2="200" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              <motion.line x1="450" y1="200" x2="150" y2="200" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Proteção total (Direita-Centro) */}
+              <motion.line x1="500" y1="250" x2="800" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              <motion.line x1="450" y1="200" x2="750" y2="200" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Visão além do óbvio (Baixo-Esquerda) */}
+              <motion.line x1="500" y1="250" x2="350" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              <motion.line x1="450" y1="200" x2="280" y2="350" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Beleza e presença (Baixo-Direita) */}
+              <motion.line x1="500" y1="250" x2="650" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              <motion.line x1="450" y1="200" x2="620" y2="350" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Atenção absoluta (Inferior-Centro) */}
+              <motion.line x1="500" y1="250" x2="500" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
+
             </motion.svg>
 
-            {/* Box 1: Topo Centro */}
-            <motion.div 
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
-              initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-              whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
-            >
-              <span className="text-white font-satoshi font-bold">Atenção absoluta</span>
-            </motion.div>
-
-            {/* Box 2: Esquerda Centro */}
+            {/* Box 1: Vigilância constante (Esquerda-Centro) */}
             <motion.div 
               className="absolute top-1/2 left-[5%] -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
-              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
               <span className="text-white font-satoshi font-bold">Vigilância constante</span>
             </motion.div>
 
-            {/* Box 3: Direita Centro */}
+            {/* Box 2: Proteção total (Direita-Centro) */}
             <motion.div 
               className="absolute top-1/2 right-[5%] -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
@@ -155,22 +149,31 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Proteção total</span>
             </motion.div>
 
-            {/* Box 4: Baixo Esquerda */}
+            {/* Box 3: Visão além do óbvio (Baixo-Esquerda) */}
             <motion.div 
-              className="absolute bottom-0 left-[20%] -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute bottom-[5%] left-[20%] -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
               <span className="text-white font-satoshi font-bold">Visão além do óbvio</span>
             </motion.div>
 
-             {/* Box 5: Baixo Direita */}
+             {/* Box 4: Beleza e presença (Baixo-Direita) */}
              <motion.div 
-              className="absolute bottom-0 right-[20%] translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute bottom-[5%] right-[20%] translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
               <span className="text-white font-satoshi font-bold">Beleza e presença</span>
+            </motion.div>
+
+            {/* Box 5: Atenção absoluta (Inferior-Centro) - Nova posição */}
+            <motion.div 
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
+            >
+              <span className="text-white font-satoshi font-bold">Atenção absoluta</span>
             </motion.div>
 
           </div>
