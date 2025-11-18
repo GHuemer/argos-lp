@@ -36,7 +36,24 @@ export default function AboutSection() {
       {/* Wave Pattern Background */}
       <WavePattern />
 
-      <div className="container mx-auto px-4 relative z-10">
+      {/* --- NOVO ELEMENTO DE GLOW CENTRAL --- */}
+      <div 
+        className="absolute inset-0 flex justify-center items-center pointer-events-none" 
+        style={{ zIndex: 0 }} // Garante que o glow fique no fundo
+      >
+        <div 
+          className="w-[800px] h-[800px] rounded-full" 
+          style={{
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.05) 40%, transparent 70%)',
+            filter: 'blur(100px)', // Ajuste o blur para mais ou menos intensidade
+            opacity: 0.7, // Ajuste a opacidade para mais ou menos visibilidade
+          }}
+        ></div>
+      </div>
+      {/* --- FIM DO NOVO ELEMENTO DE GLOW CENTRAL --- */}
+
+
+      <div className="container mx-auto px-4 relative z-10"> {/* z-10 para o conteúdo ficar acima do glow */}
         {/* Header */}
         <motion.div
           className="mb-16 text-center"
