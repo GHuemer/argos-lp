@@ -1,26 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import WavePattern from './WavePattern'; // Mantendo seu import
+import { motion } from 'framer-motion';
+import WavePattern from './WavePattern'; // Certifique-se que este import continua correto
 
 export default function AboutSection() {
-  // --- 1. Configuração do Scroll para a Seção Final (Radar) ---
-  const radarRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: radarRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Transformações para criar o efeito "Pulsando" ao scrollar
-  // Círculos expandem em ritmos diferentes para dar profundidade
-  const scaleRing1 = useTransform(scrollYProgress, [0, 1], [0.8, 1.3]);
-  const scaleRing2 = useTransform(scrollYProgress, [0, 1], [0.6, 1.5]);
-  const scaleRing3 = useTransform(scrollYProgress, [0, 1], [0.4, 1.8]);
-  
-  // Opacidade muda conforme o elemento passa pela tela (aparece, brilha, some)
-  const opacityRings = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0, 0.3, 1, 0.3, 0]);
-  const yContent = useTransform(scrollYProgress, [0, 1], [50, -50]); // Leve parallax no texto
-
-  // --- 2. Variantes Originais ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -47,7 +28,7 @@ export default function AboutSection() {
     'Proteção total',
     'Visão além do óbvio',
     'Beleza e presença',
-    'Atenção absoluta', 
+    'Atenção absoluta', // Ordem para mobile
   ];
 
   return (
@@ -257,116 +238,90 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* --- Final Message - Minimalist Radar/Ripple Effect (MODIFICADO) --- */}
-          <div 
-            ref={radarRef} // Referência para capturar o scroll
+          {/* --- Final Message - Melhorado com UX/IHC --- */}
+          <motion.div
             className="relative w-full py-32 mt-32 overflow-hidden"
+            variants={itemVariants}
+            viewport={{ once: true, margin: '-100px' }}
           >
-            {/* Background Effects */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              
-              {/* 1. Glow Central Difuso (Fundo suave) */}
-              <motion.div 
-                style={{ opacity: opacityRings }}
-                className="absolute w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px]" 
+            {/* 🔹 Elementos Visuais de Fundo */}
+            <div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              aria-hidden="true"
+            >
+              {/* Glow suave */}
+              <div
+                className="absolute w-[650px] h-[650px] bg-purple-900/25 rounded-full blur-[120px]"
+                style={{ animation: 'pulseGlow 8s ease-in-out infinite' }}
               />
-
-              {/* 2. Ondas Minimalistas (SVG) com Pulsação via Scroll */}
-              <svg 
-                className="absolute w-[1200px] h-[1200px]"
+          
+              {/* Linhas concêntricas animadas */}
+              <motion.svg
+                className="absolute w-[1200px] h-[1200px] opacity-25"
                 viewBox="0 0 1200 1200"
                 fill="none"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 2 }}
               >
-                {/* Círculos concêntricos reagindo ao scroll */}
-                {/* Círculo 1 (Mais interno) */}
-                <motion.circle 
-                  cx="600" cy="600" r="200" 
-                  stroke="#A855F7" strokeWidth="1" strokeOpacity="0.3"
-                  style={{ scale: scaleRing1, opacity: opacityRings }}
-                />
-                
-                {/* Círculo 2 (Meio) */}
-                <motion.circle 
-                  cx="600" cy="600" r="350" 
-                  stroke="#A855F7" strokeWidth="0.8" strokeOpacity="0.2"
-                  style={{ scale: scaleRing2, opacity: opacityRings }}
-                />
-
-                {/* Círculo 3 (Externo) */}
-                <motion.circle 
-                  cx="600" cy="600" r="550" 
-                  stroke="#A855F7" strokeWidth="0.5" strokeOpacity="0.1"
-                  style={{ scale: scaleRing3, opacity: opacityRings }}
-                />
-              </svg>
+                {[150, 250, 350, 450, 550].map((r, i) => (
+                  <circle
+                    key={i}
+                    cx="600"
+                    cy="600"
+                    r={r}
+                    stroke="#A855F7"
+                    strokeWidth="1"
+                    strokeOpacity={0.25 - i * 0.04}
+                  />
+                ))}
+              </motion.svg>
             </div>
-
-          {/* Conteúdo de Texto com Parallax Suave (versão melhorada) */}
-          {(() => {
-            // Detecta preferência do usuário por reduzir animações (não requer imports adicionais)
-            const prefersReduced = (typeof window !== 'undefined' && window.matchMedia)
-              ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-              : false;
           
-            // Se preferir reduzir, desativa o parallax aplicando y = 0
-            const textY = prefersReduced ? 0 : yContent;
-          
-            return (
-              <motion.div
-                style={{ y: textY }}
-                className="relative z-10 text-center px-4"
-                // fallback para reduced-motion: sem animação inicial
-                initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 10 }}
-                whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
+            {/* 🔹 Conteúdo */}
+            <motion.div
+              className="relative z-10 text-center px-4"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+            >
+              <h2
+                className="text-white font-satoshi font-bold mb-8"
+                style={{
+                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                  lineHeight: 1.1,
+                }}
               >
-                <p
-                  className="text-white font-satoshi font-bold mb-6"
-                  style={{
-                    fontSize: 'clamp(1.75rem, 4.8vw, 3.25rem)', // responsivo mais fino
-                    lineHeight: 1.05,
-                    textWrap: 'balance',
-                    WebkitTextStroke: '0.3px rgba(0,0,0,0.15)', // leve contorno para contraste
-                    textShadow: '0 6px 30px rgba(0,0,0,0.45)', // sutil para legibilidade sobre glow
-                  }}
+                A Argos nasce da visão. <br className="hidden md:block" />
+                <motion.span
+                  className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
                 >
-                  A Argos nasce da visão.
-                  <br className="hidden md:block" />
-                  <span
-                    className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500"
-                    style={{
-                      // melhora contraste do gradiente em fundos variados
-                      WebkitTextStroke: '0.15px rgba(255,255,255,0.02)',
-                      display: 'inline-block',
-                    }}
-                  >
-                    {' '}E vive para proteger a visão de quem confia na gente.
-                  </span>
-                </p>
+                  E vive para proteger a visão de quem confia na gente.
+                </motion.span>
+              </h2>
           
-                {/* Divider (decorativo) */}
-                <div
-                  aria-hidden="true"
-                  className="w-24 h-[2px] bg-purple-500/30 mx-auto mb-6 rounded-full"
-                  style={{ willChange: 'opacity, transform' }}
-                ></div>
+              {/* Separador refinado */}
+              <div
+                className="w-24 h-[2px] mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-500/50 to-purple-300/30"
+                style={{ transition: 'opacity 0.4s' }}
+              />
           
-                <p
-                  className="text-gray-400 font-satoshi text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
-                  style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.125rem)' }}
-                >
-                  Se você quer apenas posts, qualquer agência serve.
-                  <br />
-                  <span className="text-gray-100">
-                    Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
-                  </span>
-                </p>
-              </motion.div>
-            );
-          })()}
-
-        </motion.div>
+              {/* Texto de apoio */}
+              <p
+                className="text-gray-400 font-satoshi max-w-2xl mx-auto leading-relaxed"
+                style={{ fontSize: 'clamp(1rem, 2.2vw, 1.25rem)' }}
+              >
+                Se você quer apenas posts, qualquer agência serve.
+                <br />
+                <span className="text-gray-100">
+                  Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+                </span>
+              </p>
+            </motion.div>
+          </motion.div>
       </div>
     </section>
   );
