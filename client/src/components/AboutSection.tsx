@@ -36,21 +36,7 @@ export default function AboutSection() {
       {/* Wave Pattern Background */}
       <WavePattern />
 
-      {/* --- NOVO E AJUSTADO ELEMENTO DE GLOW CENTRAL (Mais forte e centralizado) --- */}
-      <div 
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" 
-        style={{ zIndex: 0 }} 
-      >
-        <div 
-          className="w-[800px] h-[800px] rounded-full" 
-          style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(168, 85, 247, 0.15) 30%, transparent 60%)',
-            filter: 'blur(180px)', // Blur ainda maior para mais difusão
-            opacity: 0.9, // Opacidade quase total
-          }}
-        ></div>
-      </div>
-      {/* --- FIM DO NOVO E AJUSTADO ELEMENTO DE GLOW CENTRAL --- */}
+      {/* Glow roxo será posicionado dentro da seção da roda no desktop */}
 
 
       <div className="container mx-auto px-4 relative z-10">
@@ -90,6 +76,20 @@ export default function AboutSection() {
           {/* Ajustei a altura e largura máxima para a roda ter mais espaço e centralização */}
           <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto my-12">
             
+            {/* Glow Central Roxo */}
+            <div 
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-5" 
+            >
+              <div 
+                className="w-[300px] h-[300px] rounded-full" 
+                style={{
+                  background: 'radial-gradient(circle, rgba(217, 70, 239, 0.6) 0%, rgba(168, 85, 247, 0.3) 40%, transparent 70%)',
+                  filter: 'blur(60px)',
+                  opacity: 1,
+                }}
+              ></div>
+            </div>
+            
             {/* SVG Lines Animation */}
             <motion.svg 
               className="absolute inset-0 w-full h-full pointer-events-none z-0"
@@ -107,31 +107,31 @@ export default function AboutSection() {
               {/* Recalculadas para bater exatamente nos cards com width 192px (w-48) */}
               {/* Coordenadas do Centro: (500, 250) */}
               
-              {/* Linha para Vigilância constante (Esquerda-Centro) - x=104 (5% + half-card-width) */}
-              <motion.line x1="500" y1="250" x2="196" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Vigilância constante (Esquerda-Centro) */}
+              <motion.line x1="500" y1="250" x2="80" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              {/* Linha para Proteção total (Direita-Centro) - x=804 (95% - half-card-width) */}
-              <motion.line x1="500" y1="250" x2="804" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Proteção total (Direita-Centro) */}
+              <motion.line x1="500" y1="250" x2="920" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              {/* Linha para Visão além do óbvio (Baixo-Esquerda) - x=250 (20% + half-card-width), y=412 (5% from bottom) */}
-              <motion.line x1="500" y1="250" x2="250" y2="412" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Visão além do óbvio (Baixo-Esquerda) */}
+              <motion.line x1="500" y1="250" x2="150" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              {/* Linha para Beleza e presença (Baixo-Direita) - x=750 (80% - half-card-width), y=412 (5% from bottom) */}
-              <motion.line x1="500" y1="250" x2="750" y2="412" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Beleza e presença (Baixo-Direita) */}
+              <motion.line x1="500" y1="250" x2="850" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               
-              {/* Linha para Atenção absoluta (Inferior-Centro) - y=412 (0% from bottom + top-padding + half-height) */}
-              <motion.line x1="500" y1="250" x2="500" y2="412" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.5"
+              {/* Linha para Atenção absoluta (Inferior-Centro) */}
+              <motion.line x1="500" y1="250" x2="500" y2="470" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
 
             </motion.svg>
 
             {/* Box 1: Vigilância constante (Esquerda-Centro) */}
             <motion.div 
-              className="absolute top-1/2 left-[10%] -translate-y-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute top-1/2 left-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
@@ -140,7 +140,7 @@ export default function AboutSection() {
 
             {/* Box 2: Proteção total (Direita-Centro) */}
             <motion.div 
-              className="absolute top-1/2 right-[10%] translate-x-1/2 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute top-1/2 right-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
@@ -149,7 +149,7 @@ export default function AboutSection() {
 
             {/* Box 3: Visão além do óbvio (Inferior-Esquerda) */}
             <motion.div 
-              className="absolute bottom-[20px] left-[25%] -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute bottom-[30px] left-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
@@ -158,7 +158,7 @@ export default function AboutSection() {
 
              {/* Box 4: Beleza e presença (Inferior-Direita) */}
              <motion.div 
-              className="absolute bottom-[20px] right-[25%] translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute bottom-[30px] right-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
@@ -167,7 +167,7 @@ export default function AboutSection() {
 
             {/* Box 5: Atenção absoluta (Fundo-Centro) */}
             <motion.div 
-              className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
