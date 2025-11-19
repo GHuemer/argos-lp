@@ -216,7 +216,8 @@ export default function AboutSection() {
             <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-24">
               Somos a Agência que
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* gap-6 para um pouco mais de espaço */}
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 'Previne erros antes que aconteçam',
                 'Enxerga oportunidades antes dos concorrentes',
@@ -227,8 +228,6 @@ export default function AboutSection() {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  // AQUI: Removidas as classes de borda, fundo e padding (card style)
-                  // Mantido apenas flex, alinhamento e group para o hover
                   className="flex items-start gap-3 group"
                   variants={itemVariants}
                 >
@@ -239,20 +238,42 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* Final Message */}
+          {/* --- Final Message - com fundo de ondas --- */}
           <motion.div
-            className="p-8 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm text-center"
+            className="relative w-full py-20 md:py-32 mt-32 -mx-4 md:-mx-0 overflow-hidden rounded-3xl"
             variants={itemVariants}
           >
-            <p className="text-2xl font-satoshi font-bold mb-4 text-white">
-              A Argos nasce da visão. <br className="hidden md:block"/>
-              <span className="text-purple-400">E vive para proteger a visão de quem confia na gente.</span>
-            </p>
-            <p className="text-gray-400 font-satoshi text-sm md:text-base mt-4">
-              Se você quer apenas posts, qualquer agência serve. <br />
-              Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
-            </p>
+            {/* SVG Background com ondas alternando preto e roxo */}
+            <svg 
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 1200 600"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              {/* Ondas alternando preto e roxo */}
+              <circle cx="600" cy="300" r="500" fill="#1a0033" />
+              <circle cx="600" cy="300" r="450" fill="#000000" />
+              <circle cx="600" cy="300" r="400" fill="#6B3FFF" />
+              <circle cx="600" cy="300" r="350" fill="#000000" />
+              <circle cx="600" cy="300" r="300" fill="#7C3AED" />
+              <circle cx="600" cy="300" r="250" fill="#000000" />
+              <circle cx="600" cy="300" r="200" fill="#8B5FFF" />
+              <circle cx="600" cy="300" r="150" fill="#000000" />
+              <circle cx="600" cy="300" r="100" fill="#A855F7" />
+            </svg>
+
+            {/* Conteúdo centralizado */}
+            <div className="relative z-10 text-center px-4">
+              <p className="text-3xl md:text-4xl font-satoshi font-bold mb-8 text-white">
+                A Argos nasce da visão. <br className="hidden md:block"/>
+                <span className="text-purple-400">E vive para proteger a visão de quem confia na gente.</span>
+              </p>
+              <p className="text-gray-300 font-satoshi text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                Se você quer apenas posts, qualquer agência serve. <br /><br />
+                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+              </p>
+            </div>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
