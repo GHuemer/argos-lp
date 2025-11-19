@@ -85,7 +85,7 @@
   --sidebar-ring: oklch(0.623 0.214 259.815);
 }
 
-/*.dark {
+.dark {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Playfair Display', serif;
   --font-satoshi: 'Satoshi', sans-serif;
@@ -124,7 +124,7 @@
   --sidebar-accent-foreground:  oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.488 0.243 264.376);
-}*/
+}
 
 @layer base {
   * {
