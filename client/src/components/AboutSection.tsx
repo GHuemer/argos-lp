@@ -213,7 +213,7 @@ export default function AboutSection() {
             variants={containerVariants}
           >
             {/* Título em branco e maior */}
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-12">
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-24">
               Somos a Agência que
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* gap-6 para um pouco mais de espaço */}
