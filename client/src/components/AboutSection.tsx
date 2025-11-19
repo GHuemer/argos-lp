@@ -301,27 +301,70 @@ export default function AboutSection() {
               </svg>
             </div>
 
-            {/* Conteúdo de Texto com Parallax Suave */}
-            <motion.div 
-              style={{ y: yContent }}
-              className="relative z-10 text-center px-4"
-            >
-              <p className="text-3xl md:text-5xl font-satoshi font-bold mb-8 text-white drop-shadow-xl">
-                A Argos nasce da visão. <br className="hidden md:block"/>
-                <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
-                  E vive para proteger a visão de quem confia na gente.
-                </span>
-              </p>
-              
-              <div className="w-24 h-[2px] bg-purple-500/30 mx-auto mb-8 rounded-full"></div>
-
-              <p className="text-gray-400 font-satoshi text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
-                Se você quer apenas posts, qualquer agência serve. <br />
-                <span className="text-gray-200">Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.</span>
-              </p>
-            </motion.div>
-          </div>
-          {/* --- Fim da Seção Modificada --- */}
+          {/* Conteúdo de Texto com Parallax Suave (versão melhorada) */}
+          {(() => {
+            // Detecta preferência do usuário por reduzir animações (não requer imports adicionais)
+            const prefersReduced = (typeof window !== 'undefined' && window.matchMedia)
+              ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              : false;
+          
+            // Se preferir reduzir, desativa o parallax aplicando y = 0
+            const textY = prefersReduced ? 0 : yContent;
+          
+            return (
+              <motion.div
+                style={{ y: textY }}
+                className="relative z-10 text-center px-4"
+                // fallback para reduced-motion: sem animação inicial
+                initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+              >
+                <p
+                  className="text-white font-satoshi font-bold mb-6"
+                  style={{
+                    fontSize: 'clamp(1.75rem, 4.8vw, 3.25rem)', // responsivo mais fino
+                    lineHeight: 1.05,
+                    textWrap: 'balance',
+                    WebkitTextStroke: '0.3px rgba(0,0,0,0.15)', // leve contorno para contraste
+                    textShadow: '0 6px 30px rgba(0,0,0,0.45)', // sutil para legibilidade sobre glow
+                  }}
+                >
+                  A Argos nasce da visão.
+                  <br className="hidden md:block" />
+                  <span
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500"
+                    style={{
+                      // melhora contraste do gradiente em fundos variados
+                      WebkitTextStroke: '0.15px rgba(255,255,255,0.02)',
+                      display: 'inline-block',
+                    }}
+                  >
+                    {' '}E vive para proteger a visão de quem confia na gente.
+                  </span>
+                </p>
+          
+                {/* Divider (decorativo) */}
+                <div
+                  aria-hidden="true"
+                  className="w-24 h-[2px] bg-purple-500/30 mx-auto mb-6 rounded-full"
+                  style={{ willChange: 'opacity, transform' }}
+                ></div>
+          
+                <p
+                  className="text-gray-400 font-satoshi text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+                  style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.125rem)' }}
+                >
+                  Se você quer apenas posts, qualquer agência serve.
+                  <br />
+                  <span className="text-gray-100">
+                    Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+                  </span>
+                </p>
+              </motion.div>
+            );
+          })()}
 
         </motion.div>
       </div>
