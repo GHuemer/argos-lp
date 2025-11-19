@@ -202,7 +202,7 @@ export default function AboutSection() {
               Ver antes. Ver mais. Ver além.
             </p>
             
-            <p className="text-gray-300 leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
+            <p className="text-white leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
           </motion.div>
