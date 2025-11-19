@@ -60,10 +60,10 @@ export default function Hero() {
           variants={itemVariants}
           className="space-y-4 mb-12"
         >
-          <p className="text-2xl md:text-3xl font-satoshi font-light tracking-wide">
+          <p className="text-2xl md:text-3xl font-satoshi font-bold tracking-wide">
             Ver antes. Ver mais. Ver além.
           </p>
-          <p className="text-lg md:text-xl text-gray-400 font-satoshi font-light">
+          <p className="text-lg md:text-xl text-white font-satoshi font-light">
             Marketing digital para empresas do mundo real
           </p>
         </motion.div>
