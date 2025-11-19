@@ -1,28 +1,7 @@
-"use client";
-
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import WavePattern from './WavePattern'; 
+import { motion } from 'framer-motion';
+import WavePattern from './WavePattern'; // Certifique-se que este import continua correto
 
 export default function AboutSection() {
-  // --- Lógica de Scroll EXCLUSIVA para a Seção Final (Radar) ---
-  const radarRef = useRef(null);
-  
-  // Monitora o scroll apenas na seção final (Radar Minimalista)
-  const { scrollYProgress } = useScroll({
-    target: radarRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Transformações para o efeito "Pulsar" ao rolar a tela
-  // scale: aumenta o tamanho dos círculos conforme desce
-  const radarScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 1, 1.4]);
-  // opacity: aparece, fica forte no meio, e some no final
-  const radarOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.8, 1], [0, 0.5, 1, 0.5, 0]);
-  // parallax: move o texto levemente contra o scroll
-  const textY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
-  // --- Variantes Originais ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,13 +22,13 @@ export default function AboutSection() {
     },
   };
 
-  // Dados dos pilares para a versão Mobile
+  // Dados dos pilares para a versão Mobile (Lista simples)
   const pillarsList = [
     'Vigilância constante',
     'Proteção total',
     'Visão além do óbvio',
     'Beleza e presença',
-    'Atenção absoluta',
+    'Atenção absoluta', // Ordem para mobile
   ];
 
   return (
@@ -90,7 +69,7 @@ export default function AboutSection() {
             Argos Panoptes, na mitologia grega, era conhecido como o gigante de mil olhos — o guardião criado por Hera para vigiar o que era mais importante para ela. Seu corpo era coberto de olhos. Enquanto metade dormia, a outra metade permanecia acordada. Nada escapava ao seu olhar.
           </motion.p>
 
-          {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) - MANTIDA INTACTA --- */}
+          {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
           <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto my-12">
             
             {/* Glow Central Roxo */}
@@ -259,57 +238,48 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* --- Final Message - RADAR PULSANDO COM SCROLL (CORRIGIDO) --- */}
-          <div 
-            ref={radarRef} // IMPORTANTE: Referência para capturar o scroll desta seção
-            className="relative w-full py-32 mt-32 overflow-hidden"
+          {/* Final Message - Minimalista com fundo de ondas suave */}
+          <motion.div
+            className="relative w-full py-24 md:py-40 overflow-hidden"
+            variants={itemVariants}
           >
-            {/* Background Effects */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              
-              {/* 1. Glow Central Difuso (Fundo suave) */}
-              <motion.div 
-                className="absolute w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px]"
-                style={{ opacity: radarOpacity, scale: radarScale }} 
-              />
-
-              {/* 2. Ondas Minimalistas (SVG) com Pulsação via Scroll */}
-              <motion.svg 
-                className="absolute w-[1200px] h-[1200px] opacity-30"
-                viewBox="0 0 1200 1200"
-                fill="none"
-                style={{ scale: radarScale, opacity: radarOpacity }} // O SVG inteiro "respira" com o scroll
-              >
-                {/* Círculos concêntricos com linhas finas */}
-                <circle cx="600" cy="600" r="150" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.2" />
-                <circle cx="600" cy="600" r="250" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.15" />
-                <circle cx="600" cy="600" r="350" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.1" />
-                <circle cx="600" cy="600" r="450" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.05" />
-                <circle cx="600" cy="600" r="550" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.02" />
-              </motion.svg>
-            </div>
-
-            {/* Conteúdo de Texto com Parallax Suave */}
-            <motion.div 
-              className="relative z-10 text-center px-4"
-              style={{ y: textY }} // Texto move levemente contra o fundo
+            {/* SVG Background - Ondas suaves e minimalistas */}
+            <svg 
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 1200 600"
+              preserveAspectRatio="xMidYMid slice"
             >
-              <p className="text-3xl md:text-5xl font-satoshi font-bold mb-8 text-white drop-shadow-xl">
-                A Argos nasce da visão. <br className="hidden md:block"/>
-                <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
-                  E vive para proteger a visão de quem confia na gente.
-                </span>
-              </p>
+              {/* Gradiente de fundo */}
+              <defs>
+                <radialGradient id="waveBg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#1a0033" />
+                  <stop offset="100%" stopColor="#000000" />
+                </radialGradient>
+              </defs>
               
-              <div className="w-24 h-1 bg-purple-500/30 mx-auto mb-8 rounded-full"></div>
-
-              <p className="text-gray-400 font-satoshi text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
-                Se você quer apenas posts, qualquer agência serve. <br />
-                <span className="text-gray-200">Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.</span>
+              {/* Fundo base */}
+              <rect width="1200" height="600" fill="url(#waveBg)" />
+              
+              {/* Ondas minimalistas - apenas 3 círculos */}
+              <circle cx="600" cy="300" r="350" fill="none" stroke="#6B3FFF" strokeWidth="1" opacity="0.3" />
+              <circle cx="600" cy="300" r="250" fill="none" stroke="#7C3AED" strokeWidth="1" opacity="0.4" />
+              <circle cx="600" cy="300" r="150" fill="none" stroke="#8B5FFF" strokeWidth="1" opacity="0.5" />
+            </svg>
+          
+            {/* Conteúdo centralizado */}
+            <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-8 text-white leading-relaxed">
+                A Argos nasce da visão.   
+          
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">E vive para proteger a visão de quem confia na gente.</span>
               </p>
-            </motion.div>
-          </div>
-          {/* --- FIM DO RADAR --- */}
+              <p className="text-gray-400 font-satoshi text-base md:text-lg leading-relaxed">
+                Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
+                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+              </p>
+            </div>
+          </motion.div>
+
 
         </motion.div>
       </div>
