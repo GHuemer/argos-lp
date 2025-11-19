@@ -61,10 +61,10 @@ export default function ServicesSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-satoshi text-white font-bold mb-4">
             Serviços
           </h2>
-          <p className="text-lg text-gray-400 font-satoshi">
+          <p className="text-lg text-white font-satoshi">
             Soluções completas para sua marca crescer
           </p>
         </motion.div>
@@ -124,7 +124,7 @@ export default function ServicesSection() {
                     <h3 className="text-xl md:text-2xl font-satoshi font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-gray-400 font-satoshi leading-relaxed text-sm md:text-base group-hover:text-gray-300 transition-colors duration-300">
+                    <p className="text-white font-satoshi leading-relaxed text-sm md:text-base group-hover:text-gray-300 transition-colors duration-300">
                       {service.description}
                     </p>
                   </div>
