@@ -212,11 +212,11 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            {/* TÍTULO "Somos a Agência que" COM ESTILO PADRÃO (BRANCO) */}
+            {/* Título em branco e maior */}
             <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-12">
               Somos a Agência que
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* gap-6 para um pouco mais de espaço */}
               {[
                 'Previne erros antes que aconteçam',
                 'Enxerga oportunidades antes dos concorrentes',
@@ -227,11 +227,13 @@ export default function AboutSection() {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-start gap-3 p-4 rounded-lg border border-purple-500/20 hover:border-purple-500/50 bg-black/40 transition-colors group"
+                  // AQUI: Removidas as classes de borda, fundo e padding (card style)
+                  // Mantido apenas flex, alinhamento e group para o hover
+                  className="flex items-start gap-3 group"
                   variants={itemVariants}
                 >
                   <span className="text-purple-500 font-bold text-xl mt-1 group-hover:text-purple-300 transition-colors">✓</span>
-                  <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors">{item}</p>
+                  <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors text-lg">{item}</p>
                 </motion.div>
               ))}
             </div>
