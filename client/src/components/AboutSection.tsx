@@ -256,4 +256,4 @@ export default function AboutSection() {
     </section>
   );
 }
-```http://googleusercontent.com/image_generation_content/9
+
