@@ -190,7 +190,6 @@ export default function AboutSection() {
 
 
           {/* Philosophy Box */}
-          {/* AUMENTADA A DISTÂNCIA SUPERIOR (mt-60) */}
           <motion.div
             className="mt-60 mb-32" 
             variants={itemVariants}
@@ -199,7 +198,6 @@ export default function AboutSection() {
               Nossa Filosofia
             </h3>
             
-            {/* FRASE DE IMPACTO: MAIOR, MAIS ESPAÇADA (mb-20) */}
             <p className="text-4xl md:text-5xl text-center font-satoshi font-bold mb-20 py-4 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.7)]">
               Ver antes. Ver mais. Ver além.
             </p>
@@ -214,7 +212,10 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            <h3 className="text-3xl font-satoshi font-bold text-center md:text-left">Somos a Agência que</h3>
+            {/* TÍTULO "Somos a Agência que" COM ESTILO DA FILOSOFIA */}
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(168,85,247,0.6)] mb-12"> {/* Aumentei o mb para mais espaçamento */}
+              Somos a Agência que
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 'Previne erros antes que aconteçam',
@@ -255,3 +256,4 @@ export default function AboutSection() {
     </section>
   );
 }
+```http://googleusercontent.com/image_generation_content/9
