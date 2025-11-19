@@ -274,7 +274,7 @@ export default function AboutSection() {
               <p className="text-2xl md:text-4xl font-satoshi font-bold mb-8 leading-relaxed">
                 <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">E vive para proteger a visão de quem confia na gente.</span>
               </p>
-              <p className="text-gray-400 font-satoshi text-base md:text-lg leading-relaxed">
+              <p className="text-3xl md:text-5xl font-satoshi font-bold text-white leading-tight">
                 Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
                 Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
               </p>
