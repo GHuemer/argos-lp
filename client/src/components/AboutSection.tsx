@@ -238,38 +238,46 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* --- Final Message - com fundo de ondas --- */}
+          {/* --- Final Message - Minimalist Radar/Ripple Effect --- */}
           <motion.div
-            className="relative w-full py-20 md:py-32 mt-32 -mx-4 md:-mx-0 overflow-hidden rounded-3xl"
+            className="relative w-full py-32 mt-32 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background com ondas alternando preto e roxo */}
-            <svg 
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 1200 600"
-              preserveAspectRatio="xMidYMid slice"
-            >
-              {/* Ondas alternando preto e roxo */}
-              <circle cx="600" cy="300" r="500" fill="#1a0033" />
-              <circle cx="600" cy="300" r="450" fill="#000000" />
-              <circle cx="600" cy="300" r="400" fill="#6B3FFF" />
-              <circle cx="600" cy="300" r="350" fill="#000000" />
-              <circle cx="600" cy="300" r="300" fill="#7C3AED" />
-              <circle cx="600" cy="300" r="250" fill="#000000" />
-              <circle cx="600" cy="300" r="200" fill="#8B5FFF" />
-              <circle cx="600" cy="300" r="150" fill="#000000" />
-              <circle cx="600" cy="300" r="100" fill="#A855F7" />
-            </svg>
+            {/* Background Effects */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              
+              {/* 1. Glow Central Difuso (Fundo suave) */}
+              <div className="absolute w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px]" />
 
-            {/* Conteúdo centralizado */}
+              {/* 2. Ondas Minimalistas (SVG) */}
+              <svg 
+                className="absolute w-[1200px] h-[1200px] opacity-30"
+                viewBox="0 0 1200 1200"
+                fill="none"
+              >
+                {/* Círculos concêntricos com linhas finas */}
+                <circle cx="600" cy="600" r="150" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.2" />
+                <circle cx="600" cy="600" r="250" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.15" />
+                <circle cx="600" cy="600" r="350" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.1" />
+                <circle cx="600" cy="600" r="450" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.05" />
+                <circle cx="600" cy="600" r="550" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.02" />
+              </svg>
+            </div>
+
+            {/* Conteúdo de Texto */}
             <div className="relative z-10 text-center px-4">
-              <p className="text-3xl md:text-4xl font-satoshi font-bold mb-8 text-white">
+              <p className="text-3xl md:text-5xl font-satoshi font-bold mb-8 text-white drop-shadow-xl">
                 A Argos nasce da visão. <br className="hidden md:block"/>
-                <span className="text-purple-400">E vive para proteger a visão de quem confia na gente.</span>
+                <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
+                  E vive para proteger a visão de quem confia na gente.
+                </span>
               </p>
-              <p className="text-gray-300 font-satoshi text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-                Se você quer apenas posts, qualquer agência serve. <br /><br />
-                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+              
+              <div className="w-24 h-1 bg-purple-500/30 mx-auto mb-8 rounded-full"></div> {/* Pequeno detalhe visual separador */}
+
+              <p className="text-gray-400 font-satoshi text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+                Se você quer apenas posts, qualquer agência serve. <br />
+                <span className="text-gray-200">Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.</span>
               </p>
             </div>
           </motion.div>
