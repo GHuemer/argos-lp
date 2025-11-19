@@ -197,16 +197,16 @@ export default function AboutSection() {
 
           {/* Philosophy Box */}
           <motion.div
-            className="p-8 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm mt-12"
+            className="mt-32 mb-32"
             variants={itemVariants}
           >
-            <h3 className="text-2xl font-satoshi font-bold mb-4 text-center">
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-8 text-center">
               Nossa Filosofia
             </h3>
-            <p className="text-xl text-center font-satoshi font-semibold text-purple-400 mb-6 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">
+            <p className="text-3xl md:text-4xl text-center font-satoshi font-bold mb-8 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
               Ver antes. Ver mais. Ver além.
             </p>
-            <p className="text-gray-300 leading-relaxed font-satoshi text-center max-w-3xl mx-auto">
+            <p className="text-gray-300 leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
           </motion.div>
