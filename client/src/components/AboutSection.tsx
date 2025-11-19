@@ -1,7 +1,26 @@
-import { motion } from 'framer-motion';
-import WavePattern from './WavePattern'; // Certifique-se que este import continua correto
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import WavePattern from './WavePattern'; // Mantendo seu import
 
 export default function AboutSection() {
+  // --- 1. Configuração do Scroll para a Seção Final (Radar) ---
+  const radarRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: radarRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transformações para criar o efeito "Pulsando" ao scrollar
+  // Círculos expandem em ritmos diferentes para dar profundidade
+  const scaleRing1 = useTransform(scrollYProgress, [0, 1], [0.8, 1.3]);
+  const scaleRing2 = useTransform(scrollYProgress, [0, 1], [0.6, 1.5]);
+  const scaleRing3 = useTransform(scrollYProgress, [0, 1], [0.4, 1.8]);
+  
+  // Opacidade muda conforme o elemento passa pela tela (aparece, brilha, some)
+  const opacityRings = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0, 0.3, 1, 0.3, 0]);
+  const yContent = useTransform(scrollYProgress, [0, 1], [50, -50]); // Leve parallax no texto
+
+  // --- 2. Variantes Originais ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,7 +47,7 @@ export default function AboutSection() {
     'Proteção total',
     'Visão além do óbvio',
     'Beleza e presença',
-    'Atenção absoluta', // Ordem para mobile
+    'Atenção absoluta', 
   ];
 
   return (
@@ -238,34 +257,55 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* --- Final Message - Minimalist Radar/Ripple Effect --- */}
-          <motion.div
+          {/* --- Final Message - Minimalist Radar/Ripple Effect (MODIFICADO) --- */}
+          <div 
+            ref={radarRef} // Referência para capturar o scroll
             className="relative w-full py-32 mt-32 overflow-hidden"
-            variants={itemVariants}
           >
             {/* Background Effects */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               
               {/* 1. Glow Central Difuso (Fundo suave) */}
-              <div className="absolute w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px]" />
+              <motion.div 
+                style={{ opacity: opacityRings }}
+                className="absolute w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px]" 
+              />
 
-              {/* 2. Ondas Minimalistas (SVG) */}
+              {/* 2. Ondas Minimalistas (SVG) com Pulsação via Scroll */}
               <svg 
-                className="absolute w-[1200px] h-[1200px] opacity-30"
+                className="absolute w-[1200px] h-[1200px]"
                 viewBox="0 0 1200 1200"
                 fill="none"
               >
-                {/* Círculos concêntricos com linhas finas */}
-                <circle cx="600" cy="600" r="150" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.2" />
-                <circle cx="600" cy="600" r="250" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.15" />
-                <circle cx="600" cy="600" r="350" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.1" />
-                <circle cx="600" cy="600" r="450" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.05" />
-                <circle cx="600" cy="600" r="550" stroke="#A855F7" strokeWidth="1" strokeOpacity="0.02" />
+                {/* Círculos concêntricos reagindo ao scroll */}
+                {/* Círculo 1 (Mais interno) */}
+                <motion.circle 
+                  cx="600" cy="600" r="200" 
+                  stroke="#A855F7" strokeWidth="1" strokeOpacity="0.3"
+                  style={{ scale: scaleRing1, opacity: opacityRings }}
+                />
+                
+                {/* Círculo 2 (Meio) */}
+                <motion.circle 
+                  cx="600" cy="600" r="350" 
+                  stroke="#A855F7" strokeWidth="0.8" strokeOpacity="0.2"
+                  style={{ scale: scaleRing2, opacity: opacityRings }}
+                />
+
+                {/* Círculo 3 (Externo) */}
+                <motion.circle 
+                  cx="600" cy="600" r="550" 
+                  stroke="#A855F7" strokeWidth="0.5" strokeOpacity="0.1"
+                  style={{ scale: scaleRing3, opacity: opacityRings }}
+                />
               </svg>
             </div>
 
-            {/* Conteúdo de Texto */}
-            <div className="relative z-10 text-center px-4">
+            {/* Conteúdo de Texto com Parallax Suave */}
+            <motion.div 
+              style={{ y: yContent }}
+              className="relative z-10 text-center px-4"
+            >
               <p className="text-3xl md:text-5xl font-satoshi font-bold mb-8 text-white drop-shadow-xl">
                 A Argos nasce da visão. <br className="hidden md:block"/>
                 <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
@@ -273,14 +313,15 @@ export default function AboutSection() {
                 </span>
               </p>
               
-              <div className="w-24 h-1 bg-purple-500/30 mx-auto mb-8 rounded-full"></div> {/* Pequeno detalhe visual separador */}
+              <div className="w-24 h-[2px] bg-purple-500/30 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-gray-400 font-satoshi text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
                 Se você quer apenas posts, qualquer agência serve. <br />
                 <span className="text-gray-200">Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.</span>
               </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
+          {/* --- Fim da Seção Modificada --- */}
 
         </motion.div>
       </div>
