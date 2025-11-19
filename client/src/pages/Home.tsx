@@ -7,6 +7,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import MethodologySection from '@/components/MethodologySection';
 import OfferSection from '@/components/OfferSection';
 import Footer from '@/components/Footer';
+import CTAFinalSection from '@/components/CTAFinalSection';
 
 export default function Home() {
   return (
@@ -35,6 +36,8 @@ export default function Home() {
       {/* Offer Section */}
       <OfferSection />
 
+      <CTAFinalSection />
+      
       {/* Footer */}
       <Footer />
     </div>
