@@ -260,17 +260,18 @@ export default function AboutSection() {
               {/* Fundo base */}
               <rect width="1200" height="600" fill="url(#waveBg)" />
               
-              {/* Ondas minimalistas - apenas 3 círculos */}
-              <circle cx="600" cy="300" r="350" fill="none" stroke="#6B3FFF" strokeWidth="1" opacity="0.3" />
-              <circle cx="600" cy="300" r="250" fill="none" stroke="#7C3AED" strokeWidth="1" opacity="0.4" />
-              <circle cx="600" cy="300" r="150" fill="none" stroke="#8B5FFF" strokeWidth="1" opacity="0.5" />
+              {/* Ondas minimalistas - apenas 3 círculos com opacidade reduzida */}
+              <circle cx="600" cy="300" r="350" fill="none" stroke="#6B3FFF" strokeWidth="1" opacity="0.1" />
+              <circle cx="600" cy="300" r="250" fill="none" stroke="#7C3AED" strokeWidth="1" opacity="0.15" />
+              <circle cx="600" cy="300" r="150" fill="none" stroke="#8B5FFF" strokeWidth="1" opacity="0.2" />
             </svg>
-          
+            
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-8 text-white leading-relaxed">
-                A Argos nasce da visão.   
-          
+              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-4 text-white leading-relaxed">
+                A Argos nasce da visão. 
+              </p>
+              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-8 leading-relaxed">
                 <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">E vive para proteger a visão de quem confia na gente.</span>
               </p>
               <p className="text-gray-400 font-satoshi text-base md:text-lg leading-relaxed">
@@ -279,7 +280,6 @@ export default function AboutSection() {
               </p>
             </div>
           </motion.div>
-
 
         </motion.div>
       </div>
