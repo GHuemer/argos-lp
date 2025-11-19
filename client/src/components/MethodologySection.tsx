@@ -14,15 +14,12 @@ export default function MethodologySection() {
       id="methodology"
       className="relative w-full py-24 bg-black text-white overflow-hidden flex flex-col justify-center"
     >
-      {/* 1. Fundo Preto Absoluto com Ondas Sutis */}
+      {/* 1. Fundo Preto Absoluto da Seção Principal */}
       <div className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-screen">
          <WavePattern />
       </div>
 
-      {/* Luz Ambiente (Glow) para não ficar "morto", mas mantendo o fundo preto */}
-      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#6B3FFF] opacity-10 blur-[150px] rounded-full pointer-events-none" />
-
-      {/* --- CONTEÚDO PRINCIPAL --- */}
+      {/* --- CONTEÚDO SUPERIOR (TEXTO) --- */}
       <div className="container mx-auto px-4 relative z-10 mb-20">
         <motion.div
           className="flex flex-col items-center text-center max-w-4xl mx-auto"
@@ -34,7 +31,7 @@ export default function MethodologySection() {
           {/* Badge */}
           <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
             <div className="w-1.5 h-1.5 rounded-full bg-[#6B3FFF] mr-2 animate-pulse" />
-            <span className="text-xs font-satoshi font-medium tracking-wider uppercase text-gray-300">
+            <span className="text-xs font-satoshi font-bold tracking-wider uppercase text-white">
               Método Exclusivo
             </span>
           </div>
@@ -52,27 +49,31 @@ export default function MethodologySection() {
         </motion.div>
       </div>
 
-      {/* --- A BARRA ROXA DE ESTATÍSTICAS (SUBSTITUINDO OS CARDS) --- */}
+      {/* --- BARRA HORIZONTAL COM DEGRADÊ DA IMAGEM --- */}
       <motion.div 
-        className="relative z-10 w-full py-16 bg-[#1a0b2e] border-y border-[#6B3FFF]/20" 
+        className="relative z-10 w-full py-20 border-y border-[#6B3FFF]/30" 
         initial={{ opacity: 0, scaleX: 0.95 }}
         whileInView={{ opacity: 1, scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        {/* Brilho interno na barra */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] opacity-50 pointer-events-none" />
+        {/* O GRADIENTE DA IMAGEM:
+           Radial gradient que começa roxo vibrante no centro e vai escurecendo para preto.
+        */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#6B3FFF_0%,#2e1065_40%,#000000_100%)] opacity-90" />
+        
+        {/* Camada extra de 'noise' ou textura sutil se desejar, mas mantendo limpo por enquanto */}
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center divide-x divide-white/5 md:divide-none">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center divide-white/10 md:divide-none">
             {stats.map((stat, index) => (
               <div key={index} className="flex flex-col items-center justify-center p-4">
-                {/* Número Roxo Claro */}
-                <span className="text-5xl md:text-6xl font-satoshi font-bold text-[#d8b4fe] mb-3 drop-shadow-lg">
+                {/* NÚMEROS: White + Bold */}
+                <span className="text-5xl md:text-6xl font-satoshi font-bold text-white mb-3 drop-shadow-xl">
                   {stat.value}
                 </span>
-                {/* Legenda Branca */}
-                <span className="text-sm md:text-base text-gray-300 font-satoshi font-medium tracking-wide uppercase">
+                {/* LEGENDAS: White + Bold */}
+                <span className="text-sm md:text-base text-white font-satoshi font-bold tracking-wide uppercase opacity-90">
                   {stat.label}
                 </span>
               </div>
