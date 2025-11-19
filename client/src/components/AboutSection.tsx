@@ -217,7 +217,7 @@ export default function AboutSection() {
               Somos a Agência que
             </h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
               {[
                 'Previne erros antes que aconteçam',
                 'Enxerga oportunidades antes dos concorrentes',
@@ -275,7 +275,7 @@ export default function AboutSection() {
                     E vive para proteger a visão de quem confia na gente.
                   </span>
                 </p>
-              <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors text-lg">
+              <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
                 Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
                 Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
               </p>
