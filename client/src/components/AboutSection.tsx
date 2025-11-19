@@ -36,11 +36,8 @@ export default function AboutSection() {
       {/* Wave Pattern Background */}
       <WavePattern />
 
-      {/* Glow roxo será posicionado dentro da seção da roda no desktop */}
-
-
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header - RECOLOCADO AQUI */}
+        {/* Header */}
         <motion.div
           className="mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +55,7 @@ export default function AboutSection() {
 
         {/* Main Content Wrapper */}
         <motion.div
-          className="max-w-5xl mx-auto space-y-20" // Aumentei o espaçamento vertical
+          className="max-w-5xl mx-auto space-y-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -73,7 +70,6 @@ export default function AboutSection() {
           </motion.p>
 
           {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
-          {/* Ajustei a altura e largura máxima para a roda ter mais espaço e centralização */}
           <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto my-12">
             
             {/* Glow Central Roxo */}
@@ -93,7 +89,7 @@ export default function AboutSection() {
             {/* SVG Lines Animation */}
             <motion.svg 
               className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              viewBox="0 0 1000 500" // Ajustei o viewBox para a nova altura
+              viewBox="0 0 1000 500"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
@@ -104,8 +100,6 @@ export default function AboutSection() {
               </circle>
 
               {/* Linhas conectando o centro às caixas */}
-              {/* Recalculadas para bater exatamente nos cards com width 192px (w-48) */}
-              {/* Coordenadas do Centro: (500, 250) */}
               
               {/* Linha para Vigilância constante (Esquerda-Centro) */}
               <motion.line x1="500" y1="250" x2="80" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
@@ -129,7 +123,7 @@ export default function AboutSection() {
 
             </motion.svg>
 
-            {/* Box 1: Vigilância constante (Esquerda-Centro) */}
+            {/* Box 1: Vigilância constante */}
             <motion.div 
               className="absolute top-1/2 left-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
@@ -138,7 +132,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Vigilância constante</span>
             </motion.div>
 
-            {/* Box 2: Proteção total (Direita-Centro) */}
+            {/* Box 2: Proteção total */}
             <motion.div 
               className="absolute top-1/2 right-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
@@ -147,7 +141,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Proteção total</span>
             </motion.div>
 
-            {/* Box 3: Visão além do óbvio (Inferior-Esquerda) */}
+            {/* Box 3: Visão além do óbvio */}
             <motion.div 
               className="absolute bottom-[30px] left-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -156,7 +150,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Visão além do óbvio</span>
             </motion.div>
 
-             {/* Box 4: Beleza e presença (Inferior-Direita) */}
+             {/* Box 4: Beleza e presença */}
              <motion.div 
               className="absolute bottom-[30px] right-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -165,7 +159,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Beleza e presença</span>
             </motion.div>
 
-            {/* Box 5: Atenção absoluta (Fundo-Centro) */}
+            {/* Box 5: Atenção absoluta */}
             <motion.div 
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
@@ -178,7 +172,7 @@ export default function AboutSection() {
           {/* --- FIM DA SEÇÃO DA RODA (DESKTOP) --- */}
 
 
-          {/* --- INÍCIO DA LISTA PARA MOBILE (Visível apenas em telas pequenas) --- */}
+          {/* --- INÍCIO DA LISTA PARA MOBILE --- */}
           <div className="grid grid-cols-1 gap-4 md:hidden">
             {pillarsList.map((pillar, index) => (
               <motion.div
@@ -196,16 +190,20 @@ export default function AboutSection() {
 
 
           {/* Philosophy Box */}
+          {/* AUMENTADA A DISTÂNCIA SUPERIOR (mt-60) */}
           <motion.div
-            className="mt-32 mb-32"
+            className="mt-60 mb-32" 
             variants={itemVariants}
           >
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-8 text-center">
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-20 text-center">
               Nossa Filosofia
             </h3>
-            <p className="text-3xl md:text-4xl text-center font-satoshi font-bold mb-8 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+            
+            {/* FRASE DE IMPACTO: MAIOR, MAIS ESPAÇADA (mb-20) */}
+            <p className="text-4xl md:text-5xl text-center font-satoshi font-bold mb-20 py-4 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.7)]">
               Ver antes. Ver mais. Ver além.
             </p>
+            
             <p className="text-gray-300 leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
