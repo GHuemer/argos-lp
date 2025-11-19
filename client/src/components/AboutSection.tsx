@@ -45,10 +45,10 @@ export default function AboutSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
+          <h2 className="text-white text-4xl md:text-5xl font-satoshi font-bold mb-4">
             A Origem do Nome
           </h2>
-          <p className="text-lg text-gray-300 font-satoshi">
+          <p className="text-lg text-white font-satoshi">
             que define nossa essência
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export default function AboutSection() {
         >
           {/* Description Text */}
           <motion.p
-            className="text-lg leading-relaxed text-gray-300 font-satoshi text-center max-w-3xl mx-auto"
+            className="text-lg leading-relaxed text-white font-satoshi text-center max-w-3xl mx-auto"
             variants={itemVariants}
           >
             Argos Panoptes, na mitologia grega, era conhecido como o gigante de mil olhos — o guardião criado por Hera para vigiar o que era mais importante para ela. Seu corpo era coberto de olhos. Enquanto metade dormia, a outra metade permanecia acordada. Nada escapava ao seu olhar.
@@ -194,7 +194,7 @@ export default function AboutSection() {
             className="mt-60 mb-32" 
             variants={itemVariants}
           >
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-20 text-center">
+            <h3 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-20 text-center">
               Nossa Filosofia
             </h3>
             
