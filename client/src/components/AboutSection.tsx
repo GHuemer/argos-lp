@@ -268,12 +268,13 @@ export default function AboutSection() {
             
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-4 text-white leading-relaxed">
-                A Argos nasce da visão. 
-              </p>
-              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-8 leading-relaxed">
-                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">E vive para proteger a visão de quem confia na gente.</span>
-              </p>
+              {/* Títulos agrupados em um único <p> para remover espaçamento entre eles */}
+                <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
+                  <span className="text-gray-300 block">A Argos nasce da visão.</span>
+                  <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent block">
+                    E vive para proteger a visão de quem confia na gente.
+                  </span>
+                </p>
               <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors text-lg">
                 Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
                 Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
