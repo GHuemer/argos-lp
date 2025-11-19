@@ -43,30 +43,31 @@ export default function MethodologySection() {
         </motion.div>
       </div>
 
-      {/* --- BARRA DE ESTATÍSTICAS (O GRADIENTE SUAVE) --- */}
+      {/* --- BARRA DE ESTATÍSTICAS --- */}
       <motion.div 
-        className="relative w-full py-24" 
+        className="relative w-full py-24 overflow-hidden" // Adicionado overflow-hidden para cortar as ondas se sobrarem
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        {/* O DEGRADÊ PERFEITO (IGUAL À IMAGEM):
-           - Ellipse: Cria o formato oval/horizontal.
-           - Cores: Centro Roxo (#5b21b6) -> Escurece (#170a28) -> Preto Puro (#000000).
-           - Isso garante que não haja "borda" dura em cima ou embaixo.
-        */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#5b21b6_0%,#170a28_40%,#000000_80%)] opacity-90 pointer-events-none" />
+        {/* 1. O DEGRADÊ (A LUZ) - Fica atrás */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#5b21b6_0%,#170a28_40%,#000000_80%)] opacity-90 z-0" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        {/* 2. AS LINHAS (WAVE PATTERN) - Ficam NA FRENTE da luz para serem iluminadas */}
+        {/* Adicionei opacity-40 e mix-blend-overlay para interagir com o roxo */}
+        <div className="absolute inset-0 z-10 opacity-40 mix-blend-plus-lighter pointer-events-none">
+           <WavePattern />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
             {stats.map((stat, index) => (
               <div key={index} className="flex flex-col items-center justify-center p-4">
-                {/* NÚMEROS: White + Bold */}
+                {/* Ajuste o tamanho da fonte aqui no 'text-...' */}
                 <span className="text-5xl md:text-6xl font-satoshi font-bold text-white mb-3 drop-shadow-xl">
                   {stat.value}
                 </span>
-                {/* LEGENDAS: White + Bold + Uppercase */}
                 <span className="text-sm md:text-sm text-white font-satoshi font-bold tracking-widest uppercase">
                   {stat.label}
                 </span>
