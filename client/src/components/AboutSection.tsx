@@ -212,8 +212,8 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            {/* TÍTULO "Somos a Agência que" COM ESTILO DA FILOSOFIA */}
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(168,85,247,0.6)] mb-12"> {/* Aumentei o mb para mais espaçamento */}
+            {/* TÍTULO "Somos a Agência que" COM ESTILO PADRÃO (BRANCO) */}
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-12">
               Somos a Agência que
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -256,4 +256,3 @@ export default function AboutSection() {
     </section>
   );
 }
-
