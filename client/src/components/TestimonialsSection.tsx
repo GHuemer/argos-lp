@@ -6,19 +6,20 @@ export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
 
   const videos = [
-    {
-      title: 'Depoimento Bonde Lanches',
-      src: '/videos/IMG_4619.MOV',
-      company: 'Bonde Lanches',
-      category: 'Alimentos e Bebidas',
-    },
-    {
-      title: 'Depoimento Villela Odontologia',
-      src: '/videos/IMG_3270.MOV',
-      company: 'Villela Odontologia',
-      category: 'Clínica Odontológica',
-    },
-  ];
+  {
+    title: 'Depoimento Bonde Lanches',
+    src: 'https://drive.google.com/uc?export=download&id=ID_DO_VIDEO_1',
+    company: 'Bonde Lanches',
+    category: 'Alimentos e Bebidas',
+  },
+  {
+    title: 'Depoimento Villela Odontologia',
+    src: 'https://drive.google.com/uc?export=download&id=ID_DO_VIDEO_2',
+    company: 'Villela Odontologia',
+    category: 'Clínica Odontológica',
+  },
+];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
