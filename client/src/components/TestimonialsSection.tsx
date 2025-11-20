@@ -1,25 +1,61 @@
 import { motion } from 'framer-motion';
 import WavePattern from './WavePattern';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+
+function VideoOrIframe({ fileId, title, className }) {
+  // tenta vídeo nativo; se der erro, usa iframe preview
+  const [fallback, setFallback] = useState(false);
+  const videoRef = useRef(null);
+
+  // url para <video>
+  const videoSrc = `https://drive.google.com/uc?export=media&id=${fileId}`;
+  // url para iframe preview
+  const iframeSrc = `https://drive.google.com/file/d/${fileId}/preview`;
+
+  return (
+    <>
+      {!fallback ? (
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          controls
+          playsInline
+          className={className}
+          onError={() => {
+            // se erro, ativa fallback para iframe
+            setFallback(true);
+          }}
+        />
+      ) : (
+        <iframe
+          src={iframeSrc}
+          title={title}
+          className={className}
+          allow="autoplay; encrypted-media; picture-in-picture"
+        />
+      )}
+    </>
+  );
+}
 
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
 
   const videos = [
-  {
-    title: 'Depoimento Bonde Lanches',
-    src: 'https://drive.google.com/uc?export=download&id=15bvYQp39j3jdZFP6IdhtmNuQrHSF1G5N',
-    company: 'Bonde Lanches',
-    category: 'Alimentos e Bebidas',
-  },
-  {
-    title: 'Depoimento Villela Odontologia',
-    src: 'https://drive.google.com/uc?export=download&id=1BAQEdUP3IdgvGSKKqZBTF-UaghHno5q5',
-    company: 'Villela Odontologia',
-    category: 'Clínica Odontológica',
-  },
-];
-
+    {
+      title: 'Depoimento Bonde Lanches',
+      // IDs extraídos das suas URLs
+      id: '15bvYQp39j3jdZFP6IdhtmNuQrHSF1G5N',
+      company: 'Bonde Lanches',
+      category: 'Alimentos e Bebidas',
+    },
+    {
+      title: 'Depoimento Villela Odontologia',
+      id: '1BAQEdUP3IdgvGSKKqZBTF-UaghHno5q5',
+      company: 'Villela Odontologia',
+      category: 'Clínica Odontológica',
+    },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -78,9 +114,9 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    <video
-                      src={video.src}
-                      controls
+                    <VideoOrIframe
+                      fileId={video.id}
+                      title={video.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -102,9 +138,9 @@ export default function TestimonialsSection() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                  <video
-                    src={videos[activeVideo].src}
-                    controls
+                  <VideoOrIframe
+                    fileId={videos[activeVideo].id}
+                    title={videos[activeVideo].title}
                     className="w-full h-full object-cover"
                   />
                 </div>
