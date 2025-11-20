@@ -1,25 +1,22 @@
 import { motion } from 'framer-motion';
 import WavePattern from './WavePattern';
+import { useState } from 'react';
 
 export default function TestimonialsSection() {
-  const testimonials = [
+  const [activeVideo, setActiveVideo] = useState(0);
+
+  const videos = [
     {
-      name: 'Villela Odontologia',
-      role: 'Clínica Odontológica',
-      quote: 'A Argos transformou nossa presença digital e aumentou significativamente nossos agendamentos.',
-      icon: '🦷',
+      title: 'Depoimento Bonde Lanches',
+      src: '/videos/IMG_4619.MOV',
+      company: 'Bonde Lanches',
+      category: 'Alimentos e Bebidas',
     },
     {
-      name: 'Pati Pilates',
-      role: 'Studio de Pilates',
-      quote: 'Excelente trabalho em redes sociais. Nossas aulas estão sempre lotadas graças à estratégia deles.',
-      icon: '🧘',
-    },
-    {
-      name: 'Bonde',
-      role: 'Alimentos e Bebidas',
-      quote: 'A Argos entende o que fazemos e comunica com perfeição. Resultados incríveis em tráfego pago.',
-      icon: '🍔',
+      title: 'Depoimento Villela Odontologia',
+      src: '/videos/IMG_3270.MOV',
+      company: 'Villela Odontologia',
+      category: 'Clínica Odontológica',
     },
   ];
 
@@ -44,12 +41,10 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="relative w-full py-20 md:py-32 bg-black text-white overflow-hidden">
-      {/* Wave Pattern Background */}
+    <section id="depoimentos" className="relative w-full py-20 md:py-32 bg-black text-white overflow-hidden">
       <WavePattern />
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
         <motion.div
           className="mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -61,48 +56,78 @@ export default function TestimonialsSection() {
             Depoimentos de Clientes
           </h2>
           <p className="text-lg text-gray-300 font-satoshi">
-            O que nossos clientes dizem sobre nós
+            Veja o que nossos clientes dizem sobre nós
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          className="max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group"
-            >
+          {/* Desktop: Side by side */}
+          <div className="hidden md:grid grid-cols-2 gap-8 mb-8">
+            {videos.map((video, index) => (
+              <motion.div key={index} variants={itemVariants} className="group">
+                <motion.div
+                  className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black cursor-pointer"
+                  whileHover={{ borderColor: '#6B3FFF', scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
+                    <video
+                      src={video.src}
+                      controls
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
+                    <p className="font-satoshi font-semibold text-white text-lg">{video.company}</p>
+                    <p className="text-sm text-purple-300 font-satoshi">{video.category}</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Mobile: Carousel */}
+          <div className="md:hidden">
+            <motion.div key={activeVideo} variants={itemVariants} className="group">
               <motion.div
-                className="p-8 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm h-full cursor-pointer"
-                whileHover={{
-                  borderColor: '#6B3FFF',
-                  backgroundColor: 'rgba(107, 63, 255, 0.15)',
-                  scale: 1.05,
-                }}
+                className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black"
+                whileHover={{ borderColor: '#6B3FFF' }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-5xl mb-4">{testimonial.icon}</div>
-                <p className="text-gray-300 font-satoshi italic mb-6 leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-                <div className="border-t border-purple-500/20 pt-4">
-                  <p className="font-satoshi font-semibold text-white">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-sm text-purple-300 font-satoshi">
-                    {testimonial.role}
-                  </p>
+                <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
+                  <video
+                    src={videos[activeVideo].src}
+                    controls
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
+                  <p className="font-satoshi font-semibold text-white text-lg">{videos[activeVideo].company}</p>
+                  <p className="text-sm text-purple-300 font-satoshi">{videos[activeVideo].category}</p>
                 </div>
               </motion.div>
             </motion.div>
-          ))}
+
+            <div className="flex justify-center gap-3 mt-8">
+              {videos.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setActiveVideo(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    activeVideo === index ? 'bg-purple-500 w-8' : 'bg-purple-500/40 hover:bg-purple-500/60'
+                  }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                />
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
