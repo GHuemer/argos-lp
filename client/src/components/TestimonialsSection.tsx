@@ -3,18 +3,17 @@ import WavePattern from './WavePattern';
 import { useState } from 'react';
 
 /**
- * IframePreviewPlayer
+ * YouTubePreviewPlayer
  * - mostra um poster (thumbnail local) com botão Play centralizado
- * - ao clicar no Play, troca para o iframe preview do Google Drive
- * - sem controles extras, sem mensagens de erro
- *
- * Nota: usei o poster que você enviou (local path) conforme solicitado.
+ * - ao clicar no Play, carrega o embed do YouTube (autoplay)
+ * - sem controles custom, sem mensagens de erro — apenas poster + play -> iframe do YouTube
  */
-function IframePreviewPlayer({ fileId, title, className = '' }) {
-  const iframeSrc = `https://drive.google.com/file/d/${fileId}/preview`;
-  const posterPath = '/mnt/data/66b1ac05-c028-41ff-907b-5b5646110a00.png'; // thumb enviado
-
+function YouTubePreviewPlayer({ youtubeId, title, className = '' }) {
+  const posterPath = '/mnt/data/66b1ac05-c028-41ff-907b-5b5646110a00.png'; // seu poster local
   const [playing, setPlaying] = useState(false);
+
+  // autoplay=1 inicia automaticamente (alguns navegadores bloqueiam autoplay com som)
+  const iframeSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0`;
 
   return (
     <div className={`relative w-full h-full ${className}`} style={{ position: 'relative' }}>
@@ -38,20 +37,20 @@ function IframePreviewPlayer({ fileId, title, className = '' }) {
             </svg>
           </button>
 
-          {/* bottom overlay with company/category — kept light and non-intrusive */}
+          {/* bottom overlay with title — minimal */}
           <div className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-2xl">
-            {/* Intentionally minimal — you can remove or style as needed */}
             <div className="text-sm text-white/90">{title}</div>
           </div>
         </div>
       ) : (
-        // Iframe preview carregado ao clicar
+        // YouTube iframe carregado ao clicar
         <iframe
           src={iframeSrc}
           title={title}
           className="w-full h-full rounded-2xl overflow-hidden"
           allow="autoplay; encrypted-media; picture-in-picture"
           frameBorder="0"
+          allowFullScreen
         />
       )}
     </div>
@@ -61,16 +60,17 @@ function IframePreviewPlayer({ fileId, title, className = '' }) {
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
 
+  // Seus YouTube Shorts (IDs)
   const videos = [
     {
       title: 'Depoimento Bonde Lanches',
-      id: '15bvYQp39j3jdZFP6IdhtmNuQrHSF1G5N',
+      youtubeId: 'aoXF89AYBT0', // https://youtube.com/shorts/aoXF89AYBT0
       company: 'Bonde Lanches',
       category: 'Alimentos e Bebidas',
     },
     {
       title: 'Depoimento Villela Odontologia',
-      id: '1BAQEdUP3IdgvGSKKqZBTF-UaghHno5q5',
+      youtubeId: 'zEG4HtHn_Vo', // https://youtube.com/shorts/zEG4HtHn_Vo
       company: 'Villela Odontologia',
       category: 'Clínica Odontológica',
     },
@@ -126,8 +126,8 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    <IframePreviewPlayer
-                      fileId={video.id}
+                    <YouTubePreviewPlayer
+                      youtubeId={video.youtubeId}
                       title={video.title}
                       className="w-full h-full"
                     />
@@ -151,8 +151,8 @@ export default function TestimonialsSection() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                  <IframePreviewPlayer
-                    fileId={videos[activeVideo].id}
+                  <YouTubePreviewPlayer
+                    youtubeId={videos[activeVideo].youtubeId}
                     title={videos[activeVideo].title}
                     className="w-full h-full"
                   />
