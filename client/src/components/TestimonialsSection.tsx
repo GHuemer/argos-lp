@@ -1,80 +1,138 @@
 import { motion } from 'framer-motion';
 import WavePattern from './WavePattern';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
- * YouTubePreviewPlayer
- * - mostra um poster (thumbnail local) com botão Play centralizado
- * - ao clicar no Play, carrega o embed do YouTube (autoplay)
- * - sem controles custom, sem mensagens de erro — apenas poster + play -> iframe do YouTube
+ * YouTubePreviewPlayerWithModal
+ * - mostra poster com botão Play
+ * - ao clicar, abre modal fullscreen com o embed do YouTube (autoplay, controls)
+ * - fecha com ESC, clicando fora ou botão fechar
  */
-function YouTubePreviewPlayer({ youtubeId, title, className = '' }) {
-  const posterPath = '/mnt/data/66b1ac05-c028-41ff-907b-5b5646110a00.png'; // seu poster local
-  const [playing, setPlaying] = useState(false);
+function YouTubePreviewPlayerWithModal({
+  youtubeId,
+  title,
+  posterPath,
+  onOpen, // opcional callback
+}: {
+  youtubeId: string;
+  title: string;
+  posterPath: string;
+  onOpen?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
 
-  // autoplay=1 inicia automaticamente (alguns navegadores bloqueiam autoplay com som)
-  const iframeSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0`;
+  useEffect(() => {
+    // lock body scroll quando modal aberto
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [open]);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape' && open) setOpen(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const iframeSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&modestbranding=1`;
 
   return (
-    <div className={`relative w-full h-full ${className}`} style={{ position: 'relative' }}>
-      {!playing ? (
-        // Poster + Play
-        <div className="w-full h-full bg-black flex items-center justify-center overflow-hidden relative">
-          <img
-            src={posterPath}
-            alt={title}
-            className="w-full h-full object-cover rounded-2xl"
-          />
+    <>
+      {/* Poster card */}
+      <div className="w-full h-full bg-black flex items-center justify-center overflow-hidden relative">
+        <img
+          src={posterPath}
+          alt={title}
+          className="w-full h-full object-cover rounded-2xl"
+          style={{ pointerEvents: 'none' }}
+        />
 
+        <button
+          onClick={() => {
+            setOpen(true);
+            onOpen?.();
+          }}
+          aria-label={`Play ${title}`}
+          className="absolute z-20 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 p-4 transition cursor-pointer"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <path d="M5 3v18l15-9L5 3z" fill="white" />
+          </svg>
+        </button>
+
+        {/* bottom overlay with title */}
+        <div className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-2xl">
+          <div className="text-sm text-white/90">{title}</div>
+        </div>
+      </div>
+
+      {/* Fullscreen modal */}
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+          role="dialog"
+          aria-modal="true"
+          onMouseDown={(e) => {
+            // clicar no overlay fecha (mas não fecha se clicar no iframe)
+            if (e.target === e.currentTarget) setOpen(false);
+          }}
+        >
+          {/* Close button (top-right) */}
           <button
-            onClick={() => setPlaying(true)}
-            aria-label={`Play ${title}`}
-            className="absolute z-20 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 p-4 transition"
-            style={{ backdropFilter: 'blur(4px)' }}
+            onClick={() => setOpen(false)}
+            className="absolute top-4 right-4 z-60 bg-black/40 text-white rounded-full p-2 hover:bg-black/60"
+            aria-label="Fechar vídeo"
           >
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 3v18l15-9L5 3z" fill="white" />
-            </svg>
+            ✕
           </button>
 
-          {/* bottom overlay with title — minimal */}
-          <div className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 rounded-b-2xl">
-            <div className="text-sm text-white/90">{title}</div>
+          {/* iframe container — ocupa 100vw x 100vh */}
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ maxWidth: '100vw', maxHeight: '100vh' }}
+          >
+            <iframe
+              src={iframeSrc}
+              title={title}
+              className="w-full h-full"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              frameBorder="0"
+              allowFullScreen
+            />
           </div>
         </div>
-      ) : (
-        // YouTube iframe carregado ao clicar
-        <iframe
-          src={iframeSrc}
-          title={title}
-          className="w-full h-full rounded-2xl overflow-hidden"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          frameBorder="0"
-          allowFullScreen
-        />
       )}
-    </div>
+    </>
   );
 }
 
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
 
-  // Seus YouTube Shorts (IDs)
+  // IDs dos seus YouTube Shorts
   const videos = [
     {
       title: 'Depoimento Bonde Lanches',
-      youtubeId: 'aoXF89AYBT0', // https://youtube.com/shorts/aoXF89AYBT0
+      youtubeId: 'aoXF89AYBT0',
       company: 'Bonde Lanches',
       category: 'Alimentos e Bebidas',
     },
     {
       title: 'Depoimento Villela Odontologia',
-      youtubeId: 'zEG4HtHn_Vo', // https://youtube.com/shorts/zEG4HtHn_Vo
+      youtubeId: 'zEG4HtHn_Vo',
       company: 'Villela Odontologia',
       category: 'Clínica Odontológica',
     },
   ];
+
+  const posterPath = '/mnt/data/83ac7d98-9afe-4618-8b86-91b8adf6497d.png'; // poster enviado por você
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -101,12 +159,8 @@ export default function TestimonialsSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
-            Depoimentos de Clientes
-          </h2>
-          <p className="text-lg text-gray-300 font-satoshi">
-            Veja o que nossos clientes dizem sobre nós
-          </p>
+          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">Depoimentos de Clientes</h2>
+          <p className="text-lg text-gray-300 font-satoshi">Veja o que nossos clientes dizem sobre nós</p>
         </motion.div>
 
         <motion.div
@@ -116,7 +170,7 @@ export default function TestimonialsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {/* Desktop: side by side */}
+          {/* Desktop: dois vídeos lado a lado */}
           <div className="hidden md:grid grid-cols-2 gap-8 mb-8">
             {videos.map((video, index) => (
               <motion.div key={index} variants={itemVariants} className="group">
@@ -125,11 +179,12 @@ export default function TestimonialsSection() {
                   whileHover={{ borderColor: '#6B3FFF', scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
+                  {/* Mantém proporção 9/16 no card */}
                   <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    <YouTubePreviewPlayer
+                    <YouTubePreviewPlayerWithModal
                       youtubeId={video.youtubeId}
                       title={video.title}
-                      className="w-full h-full"
+                      posterPath={posterPath}
                     />
                   </div>
 
@@ -142,39 +197,33 @@ export default function TestimonialsSection() {
             ))}
           </div>
 
-          {/* Mobile: carousel */}
+          {/* Mobile: full-height carousel estilo reel */}
           <div className="md:hidden">
-            <motion.div key={activeVideo} variants={itemVariants} className="group">
-              <motion.div
-                className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black"
-                whileHover={{ borderColor: '#6B3FFF' }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                  <YouTubePreviewPlayer
-                    youtubeId={videos[activeVideo].youtubeId}
-                    title={videos[activeVideo].title}
-                    className="w-full h-full"
-                  />
-                </div>
+            <div className="w-full h-screen snap-y snap-mandatory overflow-y-auto">
+              {videos.map((video, index) => (
+                <div key={index} className="w-full h-screen snap-start">
+                  <div className="w-full h-full flex items-center justify-center bg-black">
+                    <YouTubePreviewPlayerWithModal
+                      youtubeId={video.youtubeId}
+                      title={video.title}
+                      posterPath={posterPath}
+                    />
+                  </div>
 
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
-                  <p className="font-satoshi font-semibold text-white text-lg">{videos[activeVideo].company}</p>
-                  <p className="text-sm text-purple-300 font-satoshi">{videos[activeVideo].category}</p>
+                  <div className="absolute bottom-6 left-4 right-4 z-20">
+                    <div className="text-white font-satoshi text-lg">{video.company}</div>
+                    <div className="text-purple-300 text-sm">{video.category}</div>
+                  </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              ))}
+            </div>
 
-            <div className="flex justify-center gap-3 mt-8">
-              {videos.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setActiveVideo(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    activeVideo === index ? 'bg-purple-500 w-8' : 'bg-purple-500/40 hover:bg-purple-500/60'
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
+            {/* dots / nav simples */}
+            <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-30 flex flex-col gap-2">
+              {videos.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-3 h-3 rounded-full ${activeVideo === i ? 'bg-purple-500' : 'bg-white/30'}`}
                 />
               ))}
             </div>
