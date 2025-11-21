@@ -18,7 +18,7 @@ function YouTubePreviewPlayer({ youtubeId, title, className = '' }: { youtubeId:
     <div className={`relative w-full h-full ${className}`} style={{ position: 'relative' }}>
       {!playing ? (
         // Poster + Play
-        <div className="w-full h-full bg-black flex items-center justify-center overflow-hidden relative" style={{ pointerEvents: 'auto' }}>
+        <div className="w-full h-full bg-black flex items-center justify-center overflow-hidden relative">
           <img
             src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
             alt={title}
@@ -28,8 +28,8 @@ function YouTubePreviewPlayer({ youtubeId, title, className = '' }: { youtubeId:
           <button
             onClick={() => setPlaying(true)}
             aria-label={`Play ${title}`}
-            className="absolute z-20 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 p-4 transition cursor-pointer"
-            style={{ backdropFilter: 'blur(4px)', pointerEvents: 'auto' }}
+            className="absolute z-20 inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 p-4 transition"
+            style={{ backdropFilter: 'blur(4px)' }}
           >
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 3v18l15-9L5 3z" fill="white" />
@@ -43,17 +43,14 @@ function YouTubePreviewPlayer({ youtubeId, title, className = '' }: { youtubeId:
         </div>
       ) : (
         // YouTube iframe carregado ao clicar
-        <div style={{ pointerEvents: 'auto' }}>
-          <iframe
-            src={iframeSrc}
-            title={title}
-            className="w-full h-full rounded-2xl overflow-hidden"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            frameBorder="0"
-            allowFullScreen
-            style={{ pointerEvents: 'auto' }}
-          />
-        </div>
+        <iframe
+          src={iframeSrc}
+          title={title}
+          className="w-full h-full rounded-2xl overflow-hidden"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          frameBorder="0"
+          allowFullScreen
+        />
       )}
     </div>
   );
