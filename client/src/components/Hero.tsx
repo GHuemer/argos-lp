@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-// Certifique-se de que GradientHero também esteja em .tsx ou .js compatível
+// Certifique-se de que GradientHero está transparente (sem o rect de fundo)
 import GradientHero from './GradientHero';
 
 export default function Hero(): JSX.Element {
@@ -18,73 +18,59 @@ export default function Hero(): JSX.Element {
 
   return (
     <section
-      // Removemos as definições de background da section principal.
-      // Ela agora é apenas o container.
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden"
     >
       {/* ==================================================================
-          CAMADAS DE FUNDO
+          CAMADAS DE FUNDO (CORRIGIDO)
       ================================================================== */}
 
       {/*
-         CAMADA 1: FUNDO MOBILE (GRADIENTE ROXO)
-         - z-0: Fica atrás de tudo.
-         - md:hidden: Só aparece em telas pequenas.
-         - Usamos um estilo inline para recriar o gradiente radial roxo.
+         CAMADA UNIFICADA: FUNDO MOBILE E DESKTOP
+         Esta única div gerencia ambos os fundos para evitar sobreposição.
+
+         1. bg-[radial-gradient(...)]: Define o gradiente roxo como padrão (Mobile).
+         2. md:bg-[url(...)]: Sobrescreve o padrão com a imagem em telas médias+ (Desktop).
+         3. bg-cover bg-center: Ajusta a imagem do desktop para cobrir a tela.
       */}
       <div
-        className="absolute inset-0 z-0 md:hidden"
-        style={{
-          background: 'radial-gradient(circle at 50% 30%, #8B5FFF 0%, #5A2FE8 40%, #0a0510 70%)',
-        }}
+        className="absolute inset-0 z-0 bg-no-repeat
+                   bg-[radial-gradient(circle_at_50%_30%,#8B5FFF_0%,#5A2FE8_40%,#0a0510_70%)]
+                   md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center"
       />
 
       {/*
-         CAMADA 2: FUNDO DESKTOP (IMAGEM DOS ANÉIS)
-         - z-0: Fica no mesmo nível do gradiente mobile.
-         - hidden md:block: Só aparece em telas médias/grandes.
-      */}
-      <div
-        className="absolute inset-0 z-0 hidden md:block bg-cover bg-center bg-no-repeat"
-        style={{
-           backgroundImage: 'url(/img/c0295c170164767.6459641485952.webp)'
-        }}
-      />
-
-      {/*
-        CAMADA 3: SOBREPOSIÇÃO DE LINHAS (GradientHero Transparente)
-        - z-10: Fica POR CIMA dos fundos (mobile ou desktop).
-        - pointer-events-none: Garante que não atrapalhe cliques.
+        CAMADA SUPERIOR: SOBREPOSIÇÃO DE LINHAS (GradientHero Transparente)
+        Fica sempre por cima de qualquer fundo que esteja ativo.
       */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         <GradientHero />
       </div>
 
       {/*
-        CAMADA 4: OVERLAY ESCURO SUTIL (Opcional, para contraste)
-        - z-20: Fica por cima das linhas.
+        OVERLAY ESCURO SUTIL (Opcional)
+        Ajuda no contraste do texto em ambos os casos.
       */}
       <div className="absolute inset-0 bg-black/20 z-20 pointer-events-none" />
 
 
       {/* ==================================================================
-          CONTEÚDO (Com z-index maior que os fundos)
+          CONTEÚDO (Z-INDEX > 20)
       ================================================================== */}
 
-      {/* ESPAÇADOR DA NAVBAR (z-30) */}
+      {/* ESPAÇADOR DA NAVBAR */}
       <div className="h-20 w-full flex-shrink-0 relative z-30" aria-hidden="true" />
 
-      {/* CONTAINER PRINCIPAL DO CONTEÚDO (z-30) */}
+      {/* CONTAINER PRINCIPAL DO CONTEÚDO */}
       <div className="flex-1 flex items-center justify-center relative z-30 w-full px-4 pb-10">
 
-        {/* BLOCO DE CONTEÚDO */}
+        {/* BLOCO DE CONTEÚDO (Empurrado para baixo no desktop) */}
         <motion.div
           className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[59vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* LOGO MOBILE */}
+          {/* LOGO MOBILE (Aparece só se não for md) */}
           <motion.div variants={logoVariants} className="block md:hidden">
             <img
               src="/img/logo-argos.png"
@@ -125,7 +111,7 @@ export default function Hero(): JSX.Element {
         </motion.div>
       </div>
 
-      {/* Scroll indicator (z-30) */}
+      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 opacity-70"
         animate={{ y: [0, 10, 0] }}
