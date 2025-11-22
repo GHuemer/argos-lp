@@ -1,6 +1,6 @@
 import { motion, Variants } from 'framer-motion';
-// Certifique-se de que GradientHero está transparente (sem o rect de fundo)
-import GradientHero from './GradientHero';
+// Importamos o novo componente transparente
+import GradientDesktop from './GradientDesktop';
 
 export default function Hero(): JSX.Element {
   const containerVariants: Variants = {
@@ -21,34 +21,44 @@ export default function Hero(): JSX.Element {
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden"
     >
       {/* ==================================================================
-          CAMADAS DE FUNDO (CORRIGIDO)
+          ESTRUTURA DE CAMADAS DE FUNDO SEPARADAS
       ================================================================== */}
 
       {/*
-         CAMADA UNIFICADA: FUNDO MOBILE E DESKTOP
-         Esta única div gerencia ambos os fundos para evitar sobreposição.
-
-         1. bg-[radial-gradient(...)]: Define o gradiente roxo como padrão (Mobile).
-         2. md:bg-[url(...)]: Sobrescreve o padrão com a imagem em telas médias+ (Desktop).
-         3. bg-cover bg-center: Ajusta a imagem do desktop para cobrir a tela.
+         CAMADA 1 (Z-0): FUNDO MOBILE (GRADIENTE ROXO SÓLIDO)
+         - md:hidden: Esta DIV inteira some em telas médias+. Garantido.
       */}
       <div
-        className="absolute inset-0 z-0 bg-no-repeat
-                   bg-[radial-gradient(circle_at_50%_30%,#8B5FFF_0%,#5A2FE8_40%,#0a0510_70%)]
-                   md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center"
+        className="absolute inset-0 z-0 md:hidden"
+        style={{
+          background: 'radial-gradient(circle at 50% 30%, #8B5FFF 0%, #5A2FE8 40%, #0a0510 70%)',
+        }}
       />
 
       {/*
-        CAMADA SUPERIOR: SOBREPOSIÇÃO DE LINHAS (GradientHero Transparente)
-        Fica sempre por cima de qualquer fundo que esteja ativo.
+         CAMADA 2 (Z-0): FUNDO DESKTOP (IMAGEM DOS ANÉIS)
+         - hidden md:block: Só aparece em telas médias+. Fica no lugar do gradiente.
       */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        <GradientHero />
+      <div
+        className="absolute inset-0 z-0 hidden md:block bg-cover bg-center bg-no-repeat"
+        style={{
+           // Certifique-se que o caminho da imagem está correto
+           backgroundImage: 'url(/img/hero-final-bg.webp)'
+        }}
+      />
+
+      {/*
+        CAMADA 3 (Z-10): SOBREPOSIÇÃO DAS LINHAS (GradientDesktop)
+        - Aparece sempre (sem hidden).
+        - Como ele é transparente, ele apenas desenha as linhas sobre
+          qualquer fundo que esteja ativo na Camada 1 ou 2.
+      */}
+      <div className="absolute inset-0 z-10">
+        <GradientDesktop />
       </div>
 
       {/*
-        OVERLAY ESCURO SUTIL (Opcional)
-        Ajuda no contraste do texto em ambos os casos.
+        CAMADA 4 (Z-20): OVERLAY ESCURO SUTIL (Opcional)
       */}
       <div className="absolute inset-0 bg-black/20 z-20 pointer-events-none" />
 
@@ -63,14 +73,16 @@ export default function Hero(): JSX.Element {
       {/* CONTAINER PRINCIPAL DO CONTEÚDO */}
       <div className="flex-1 flex items-center justify-center relative z-30 w-full px-4 pb-10">
 
-        {/* BLOCO DE CONTEÚDO (Empurrado para baixo no desktop) */}
+        {/* BLOCO DE CONTEÚDO */}
         <motion.div
-          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[59vh]"
+          // No mobile: centralizado (justify-center).
+          // No desktop: alinhado ao topo (md:justify-start) com margem (md:mt-[45vh]).
+          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[45vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* LOGO MOBILE (Aparece só se não for md) */}
+          {/* LOGO MOBILE (Só aparece se não for md) */}
           <motion.div variants={logoVariants} className="block md:hidden">
             <img
               src="/img/logo-argos.png"
