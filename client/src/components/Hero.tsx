@@ -20,7 +20,7 @@ export default function Hero() {
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{
         // --- COLOQUE AQUI O CAMINHO DA NOVA IMAGEM COM A LOGO INTEGRADA ---
-        backgroundImage: 'url(/img/hero-final-bg.webp)',
+        backgroundImage: 'url(/img/c0295c170164767.6459641485952.webp)',
       }}
     >
       {/* Overlay escuro opcional para melhorar contraste se necessário */}
