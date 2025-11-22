@@ -18,7 +18,7 @@ const WavyBackground = () => {
     // yOffset: Posição vertical (0 = meio, negativo = pra cima, positivo = pra baixo)
     const waves = [
       // Ondas Superiores
-     // { amplitude: 90, frequency: 0.001, speed: 0.005, color: 'rgba(192, 132, 252, 0.2)', yOffset: -150 }, // Lilás bem claro, topo
+      { amplitude: 90, frequency: 0.001, speed: 0.005, color: 'rgba(147, 51, 234, 0.3)', yOffset: -150 }, // Lilás bem claro, topo
       { amplitude: 50, frequency: 0.002, speed: 0.008, color: 'rgba(168, 85, 247, 0.4)', yOffset: -100 }, // Roxo médio
       { amplitude: 30, frequency: 0.003, speed: 0.013, color: 'rgba(216, 180, 254, 0.5)', yOffset: -50 },  // Lilás brilhante
 
