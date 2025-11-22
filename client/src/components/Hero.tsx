@@ -43,7 +43,7 @@ export default function Hero(): JSX.Element {
         className="absolute inset-0 z-0 hidden md:block bg-cover bg-center bg-no-repeat"
         style={{
            // Certifique-se que o caminho da imagem está correto
-           backgroundImage: 'url(/img/hero-final-bg.webp)'
+           backgroundImage: 'url(/img/c0295c170164767.6459641485952.webp)'
         }}
       />
 
