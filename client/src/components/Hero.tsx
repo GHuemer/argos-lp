@@ -28,7 +28,7 @@ export default function Hero(): JSX.Element {
         --- FUNDO MOBILE (Gradiante) ---
         Visível apenas no mobile (md:hidden).
       */}
-      <div className="absolute inset-0 z-0 block">
+      <div className="absolute inset-0 z-0 block md:hidden">
         <GradientHero />
       </div>
 
