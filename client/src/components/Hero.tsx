@@ -22,7 +22,7 @@ export default function Hero(): JSX.Element {
       // Mobile: bg-none (usa o GradientHero abaixo)
       // Desktop (md:): Usa a imagem final, cobre tudo (bg-cover), centraliza (bg-center)
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden
-                 bg-none md:bg-[url('/img/hero-final-bg.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
+                 bg-none md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
     >
       {/*
         --- FUNDO MOBILE (Gradiante) ---
