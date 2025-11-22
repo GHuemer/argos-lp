@@ -63,7 +63,7 @@ export default function Navigation() {
             <motion.a
               key={index}
               href={item.href}
-              className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              className="text-white hover:text-white transition-colors text-sm font-medium"
               whileHover={{ color: '#fff' }}
             >
               {item.label}
@@ -95,7 +95,7 @@ export default function Navigation() {
             <motion.a
               key={index}
               href={item.href}
-              className="block text-gray-300 hover:text-white transition-colors text-sm font-medium py-2"
+              className="block text-white hover:text-white transition-colors text-sm font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {item.label}
