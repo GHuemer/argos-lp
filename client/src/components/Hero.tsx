@@ -53,7 +53,7 @@ export default function Hero(): JSX.Element {
         - Como ele é transparente, ele apenas desenha as linhas sobre
           qualquer fundo que esteja ativo na Camada 1 ou 2.
       */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-10 md:hidden">
         <GradientDesktop />
       </div>
 
