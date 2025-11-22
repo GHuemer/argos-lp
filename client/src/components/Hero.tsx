@@ -49,7 +49,7 @@ export default function Hero(): JSX.Element {
            md:mt-[45vh]: No desktop, adiciona uma margem gigante no topo para empurrar o texto para baixo da logo do fundo.
         */}
         <motion.div
-          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[70vh]"
+          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[65vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -106,7 +106,7 @@ export default function Hero(): JSX.Element {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-center justify-center">
+        <div className="w-5 h-6 border-2 border-white/50 rounded-full flex items-center justify-center">
           <motion.div
             className="w-1.5 h-1.5 bg-white rounded-full"
             animate={{ y: [0, 8, 0] }}
