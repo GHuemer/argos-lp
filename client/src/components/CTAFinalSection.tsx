@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
-// --- COMPONENTE DO FUNDO ANIMADO (CANVAS) ---
 const WavyBackground = () => {
   const canvasRef = useRef(null);
 
@@ -12,12 +11,25 @@ const WavyBackground = () => {
     let animationFrameId;
     let w, h;
 
-    // Configurações das ondas
-    // Cada objeto é uma "camada" de linha com velocidade e altura diferentes
+    // CONFIGURAÇÃO DAS LINHAS
+    // amplitude: Altura da onda
+    // frequency: Quantas curvas a onda tem (menor = mais esticado)
+    // speed: Velocidade do movimento
+    // yOffset: Posição vertical (0 = meio, negativo = pra cima, positivo = pra baixo)
     const waves = [
-      { amplitude: 30, frequency: 0.002, speed: 0.02, color: 'rgba(147, 51, 234, 0.3)', yOffset: 0 }, // Roxo
-      { amplitude: 50, frequency: 0.001, speed: 0.015, color: 'rgba(168, 85, 247, 0.2)', yOffset: 20 }, // Violeta claro
-      { amplitude: 20, frequency: 0.003, speed: 0.01, color: 'rgba(88, 28, 135, 0.4)', yOffset: -20 }, // Roxo escuro
+      // Ondas Superiores
+      { amplitude: 90, frequency: 0.001, speed: 0.005, color: 'rgba(192, 132, 252, 0.2)', yOffset: -150 }, // Lilás bem claro, topo
+      { amplitude: 50, frequency: 0.002, speed: 0.010, color: 'rgba(168, 85, 247, 0.4)', yOffset: -100 }, // Roxo médio
+      { amplitude: 30, frequency: 0.003, speed: 0.015, color: 'rgba(216, 180, 254, 0.5)', yOffset: -50 },  // Lilás brilhante
+
+      // Ondas Centrais (mais vibrantes)
+      { amplitude: 40, frequency: 0.004, speed: 0.020, color: 'rgba(233, 213, 255, 0.6)', yOffset: 0 },    // Quase branco/roxo, centro
+      { amplitude: 60, frequency: 0.002, speed: 0.012, color: 'rgba(192, 132, 252, 0.5)', yOffset: 30 },   // Roxo claro
+
+      // Ondas Inferiores
+      { amplitude: 40, frequency: 0.003, speed: 0.018, color: 'rgba(168, 85, 247, 0.4)', yOffset: 80 },   // Roxo médio
+      { amplitude: 70, frequency: 0.001, speed: 0.008, color: 'rgba(147, 51, 234, 0.3)', yOffset: 140 },  // Roxo escuro
+      { amplitude: 100, frequency: 0.0008, speed: 0.004, color: 'rgba(126, 34, 206, 0.2)', yOffset: 200 }, // Roxo profundo, base
     ];
 
     let time = 0;
@@ -28,24 +40,22 @@ const WavyBackground = () => {
     };
 
     const draw = () => {
-      // Limpa o canvas a cada frame (com um leve rastro preto para suavidade, opcional)
-      ctx.fillStyle = 'black';
+      // Fundo preto limpo
+      ctx.fillStyle = '#000000'; 
       ctx.fillRect(0, 0, w, h);
 
-      // Desenha cada onda
       waves.forEach((wave) => {
         ctx.beginPath();
         ctx.strokeStyle = wave.color;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1.5; // Linhas finas e elegantes
 
         for (let x = 0; x < w; x++) {
-          // A mágica matemática: y = centro + amplitude * sin(x * frequencia + tempo * velocidade)
-          // Adicionamos ondas secundárias para dar o efeito "topográfico" irregular
+          // Cálculo da onda com um pouco de variação para parecer orgânico
           const y =
             h / 2 +
             wave.yOffset +
             Math.sin(x * wave.frequency + time * wave.speed) * wave.amplitude +
-            Math.sin(x * wave.frequency * 2 + time * wave.speed * 1.5) * (wave.amplitude / 2);
+            Math.sin(x * wave.frequency * 0.5 + time * wave.speed * 0.5) * (wave.amplitude * 0.3); // Segunda onda para irregularidade
 
           ctx.lineTo(x, y);
         }
@@ -70,23 +80,21 @@ const WavyBackground = () => {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full z-0"
-      style={{ filter: 'blur(1px)' }} // Um leve blur deixa as linhas mais "neon"
+      // Um leve blur para dar o efeito "glow" (brilho neon)
+      style={{ filter: 'blur(0.5px)' }} 
     />
   );
 };
 
-// --- SUA SEÇÃO PRINCIPAL ---
 export default function CTAFinalSection() {
   return (
     <section className="relative w-full py-24 md:py-40 bg-black text-white overflow-hidden">
       
-      {/* 1. O Fundo Programático */}
       <WavyBackground />
 
-      {/* 2. Um gradiente sutil por cima para focar a atenção no centro e escurecer as bordas */}
-      <div className="absolute inset-0 z-0 bg-radial-gradient from-transparent via-black/60 to-black pointer-events-none" />
+      {/* Gradiente radial para escurecer as bordas e focar no centro */}
+      <div className="absolute inset-0 z-0 bg-radial-gradient from-transparent via-black/40 to-black pointer-events-none" />
 
-      {/* 3. O Conteúdo Centralizado */}
       <div className="container mx-auto px-4 relative z-10 text-center max-w-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -116,10 +124,9 @@ export default function CTAFinalSection() {
         </motion.div>
       </div>
 
-      {/* Estilo inline para o radial gradient customizado (ou adicione ao tailwind.config) */}
       <style jsx>{`
         .bg-radial-gradient {
-          background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,1) 100%);
+          background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,1) 100%);
         }
       `}</style>
     </section>
