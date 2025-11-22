@@ -37,10 +37,13 @@ export default function Navigation() {
         {/* Logo */}
         <motion.a
           href="#"
-          className="text-2xl font-display font-bold text-white"
           whileHover={{ scale: 1.05 }}
         >
-          argos
+          <img 
+            src="/img/logo-argos-branco-02.png" 
+            alt="Argos Logo" 
+            className="h-10 md:h-12"
+          />
         </motion.a>
 
         {/* Mobile Menu Button */}
