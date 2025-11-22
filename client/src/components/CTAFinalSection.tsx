@@ -28,7 +28,7 @@ const WavyBackground = () => {
 
       // Ondas Inferiores
       { amplitude: 40, frequency: 0.003, speed: 0.015, color: 'rgba(168, 85, 247, 0.4)', yOffset: 80 },   // Roxo médio
-      { amplitude: 70, frequency: 0.001, speed: 0.009, color: 'rgba(147, 51, 234, 0.3)', yOffset: 140 },  // Roxo escuro
+      { amplitude: 90, frequency: 0.001, speed: 0.009, color: 'rgba(147, 51, 234, 0.3)', yOffset: 140 },  // Roxo escuro
     // { amplitude: 100, frequency: 0.0008, speed: 0.004, color: 'rgba(126, 34, 206, 0.2)', yOffset: 200 }, // Roxo profundo, base
     ];
 
