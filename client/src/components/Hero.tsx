@@ -32,8 +32,6 @@ export default function Hero() {
 
   return (
     <section
-      // Adicionei 'pt-20' fixo para garantir espaço da navbar.
-      // Mantive flex items-center justify-center para centralizar o bloco todo.
       className="relative min-h-screen w-full text-white flex items-center justify-center overflow-hidden pt-20"
       style={{
         backgroundImage: 'url(/img/hero-background.png)',
@@ -46,35 +44,37 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        // ADICIONEI 'space-y-10 md:space-y-12' para gerenciar o espaçamento vertical automaticamente.
-        // ADICIONEI 'mt-10 md:mt-20' -> ESSE É O AJUSTE FINO para empurrar tudo para baixo e acertar o centro do alvo.
-        className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center justify-center space-y-10 md:space-y-12 mt-10 md:mt-20"
+        // MUDANÇA 1: Aumentei drasticamente o 'mt-' para empurrar tudo para baixo.
+        // MUDANÇA 4: Ajustei ligeiramente o space-y para os textos menores.
+        className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center justify-center space-y-8 md:space-y-10 mt-32 md:mt-56"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* LOGO CONTAINER - Removi as margens gigantes, o space-y do pai cuida disso agora */}
+        {/* LOGO CONTAINER */}
         <motion.div variants={logoVariants}>
           <img 
             src="/img/logo-argos.png" 
             alt="Argos Logo" 
-            className="w-48 md:w-72 h-auto mx-auto" 
+            // MUDANÇA 2: Aumentei o tamanho da logo (w-64 md:w-96)
+            className="w-64 md:w-96 h-auto mx-auto" 
           />
         </motion.div>
 
 
-        {/* TAGLINE E SUBTÍTULO - Removi margem inferior */}
+        {/* TAGLINE E SUBTÍTULO */}
         <motion.div
           variants={itemVariants}
-          className="space-y-4" 
+          // MUDANÇA 4: Espaçamento interno reduzido para textos menores
+          className="space-y-3" 
         >
-          {/* Título Principal - BOLD mantido */}
-          <h1 className="text-3xl md:text-5xl font-satoshi font-bold text-white tracking-wide leading-tight">
+          {/* Título Principal - MUDANÇA 3: Tamanho reduzido (text-2xl md:text-4xl) */}
+          <h1 className="text-2xl md:text-4xl font-satoshi font-bold text-white tracking-wide leading-tight">
             Ver antes. Ver mais. Ver além.
           </h1>
           
-          {/* Subtítulo - WHITE e BOLD mantidos */}
-          <p className="text-lg md:text-2xl text-white font-satoshi font-bold max-w-3xl mx-auto leading-relaxed">
+          {/* Subtítulo - MUDANÇA 3: Tamanho reduzido (text-base md:text-xl) e max-width ajustado */}
+          <p className="text-base md:text-xl text-white font-satoshi font-bold max-w-2xl mx-auto leading-relaxed">
             Marketing digital para empresas do mundo real
           </p>
         </motion.div>
@@ -87,7 +87,8 @@ export default function Hero() {
             href="https://wa.me/5516997616141"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-satoshi font-bold rounded-full transition-all shadow-lg shadow-purple-900/30 text-lg"
+            // MUDANÇA 4: Ajustei ligeiramente o padding e texto do botão para ficar proporcional
+            className="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-satoshi font-bold rounded-full transition-all shadow-lg shadow-purple-900/30 text-base md:text-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
