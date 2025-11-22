@@ -31,7 +31,7 @@ export default function Hero() {
         Ela serve para "empurrar" o conteúdo de texto para baixo, 
         deixando a área da logo no background livre.
       */}
-      <div className="w-full h-[50vh] md:h-[55vh] flex-shrink-0 relative z-10" />
+      <div className="w-full h-[60vh] md:h-[65vh] flex-shrink-0 relative z-10" />
 
 
       {/* CONTAINER DO CONTEÚDO DE TEXTO */}
