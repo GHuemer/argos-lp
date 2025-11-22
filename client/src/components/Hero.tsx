@@ -59,7 +59,7 @@ export default function Hero() {
         <motion.div
           // MUDANÇA CRÍTICA 4: REMOVIDAS TODAS AS MARGENS SUPERIORES (mt-).
           // O bloco agora é limpo e centralizado pelo pai.
-          className="container mx-auto px-4 text-center flex flex-col items-center justify-center space-y-8 md:space-y-10"
+          className="container mx-auto px-4 text-center flex flex-col items-center justify-center space-y-8 md:space-y-10 -mt-16"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
