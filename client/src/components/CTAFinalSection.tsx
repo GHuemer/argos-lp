@@ -18,18 +18,18 @@ const WavyBackground = () => {
     // yOffset: Posição vertical (0 = meio, negativo = pra cima, positivo = pra baixo)
     const waves = [
       // Ondas Superiores
-      { amplitude: 90, frequency: 0.001, speed: 0.005, color: 'rgba(192, 132, 252, 0.2)', yOffset: -150 }, // Lilás bem claro, topo
-      { amplitude: 50, frequency: 0.002, speed: 0.010, color: 'rgba(168, 85, 247, 0.4)', yOffset: -100 }, // Roxo médio
-      { amplitude: 30, frequency: 0.003, speed: 0.015, color: 'rgba(216, 180, 254, 0.5)', yOffset: -50 },  // Lilás brilhante
+     // { amplitude: 90, frequency: 0.001, speed: 0.005, color: 'rgba(192, 132, 252, 0.2)', yOffset: -150 }, // Lilás bem claro, topo
+      { amplitude: 50, frequency: 0.002, speed: 0.008, color: 'rgba(168, 85, 247, 0.4)', yOffset: -100 }, // Roxo médio
+      { amplitude: 30, frequency: 0.003, speed: 0.013, color: 'rgba(216, 180, 254, 0.5)', yOffset: -50 },  // Lilás brilhante
 
       // Ondas Centrais (mais vibrantes)
-      { amplitude: 40, frequency: 0.004, speed: 0.020, color: 'rgba(233, 213, 255, 0.6)', yOffset: 0 },    // Quase branco/roxo, centro
-      { amplitude: 60, frequency: 0.002, speed: 0.012, color: 'rgba(192, 132, 252, 0.5)', yOffset: 30 },   // Roxo claro
+      { amplitude: 40, frequency: 0.004, speed: 0.013, color: 'rgba(192, 132, 252, 0.5)', yOffset: 0 },    // Quase branco/roxo, centro
+      { amplitude: 60, frequency: 0.002, speed: 0.009, color: 'rgba(192, 132, 252, 0.5)', yOffset: 30 },   // Roxo claro
 
       // Ondas Inferiores
-      { amplitude: 40, frequency: 0.003, speed: 0.018, color: 'rgba(168, 85, 247, 0.4)', yOffset: 80 },   // Roxo médio
-      { amplitude: 70, frequency: 0.001, speed: 0.008, color: 'rgba(147, 51, 234, 0.3)', yOffset: 140 },  // Roxo escuro
-      { amplitude: 100, frequency: 0.0008, speed: 0.004, color: 'rgba(126, 34, 206, 0.2)', yOffset: 200 }, // Roxo profundo, base
+      { amplitude: 40, frequency: 0.003, speed: 0.015, color: 'rgba(168, 85, 247, 0.4)', yOffset: 80 },   // Roxo médio
+      { amplitude: 70, frequency: 0.001, speed: 0.009, color: 'rgba(147, 51, 234, 0.3)', yOffset: 140 },  // Roxo escuro
+    // { amplitude: 100, frequency: 0.0008, speed: 0.004, color: 'rgba(126, 34, 206, 0.2)', yOffset: 200 }, // Roxo profundo, base
     ];
 
     let time = 0;
