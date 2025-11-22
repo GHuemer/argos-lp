@@ -42,7 +42,7 @@ export default function Navigation() {
           <img 
             src="/img/logo-argos-branco-02.png" 
             alt="Argos Logo" 
-            className="h-10 md:h-12"
+            className="h-16 md:h-20"
           />
         </motion.a>
 
