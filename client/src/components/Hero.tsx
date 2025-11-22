@@ -77,7 +77,7 @@ export default function Hero(): JSX.Element {
         <motion.div
           // No mobile: centralizado (justify-center).
           // No desktop: alinhado ao topo (md:justify-start) com margem (md:mt-[45vh]).
-          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[59vh]"
+          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[53vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
