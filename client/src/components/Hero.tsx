@@ -24,7 +24,7 @@ export default function Hero(): JSX.Element {
       // 'bg-none': Padrão mobile (sem imagem de fundo na section).
       // 'md:bg-[url('/img/hero-final-bg.webp')]': Em desktop, aplica a imagem com a logo.
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden
-                 bg-none md:bg-[url('/img/hero-final-bg.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
+                 bg-none md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
     >
       {/*
         --- FUNDO MOBILE ---
