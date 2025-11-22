@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import GradientHero from './GradientHero';
 
 export default function Hero() {
   const containerVariants = {
@@ -32,9 +31,17 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-black text-white flex items-center justify-center overflow-hidden pt-20">
-      {/* Gradient Hero Background - Pitch Style */}
-      <GradientHero />
+    <section
+      className="relative min-h-screen w-full text-white flex items-center justify-center overflow-hidden pt-20"
+      style={{
+        backgroundImage: 'url(/img/hero-background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      {/* Overlay escuro para melhor legibilidade */}
+      <div className="absolute inset-0 bg-black/10" />
 
       {/* Content */}
       <motion.div
@@ -43,14 +50,6 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Main Title */}
-        <motion.h1
-          className="text-7xl md:text-8xl font-satoshi font-bold mb-8 tracking-tight"
-          variants={titleVariants}
-        >
-          argos
-        </motion.h1>
-
         {/* Tagline */}
         <motion.div
           variants={itemVariants}
@@ -59,7 +58,7 @@ export default function Hero() {
           <p className="text-2xl md:text-3xl font-satoshi font-light tracking-wide">
             Ver antes. Ver mais. Ver além.
           </p>
-          <p className="text-lg md:text-xl text-gray-400 font-satoshi font-light">
+          <p className="text-lg md:text-xl text-gray-300 font-satoshi font-light">
             Marketing digital para empresas do mundo real
           </p>
         </motion.div>
