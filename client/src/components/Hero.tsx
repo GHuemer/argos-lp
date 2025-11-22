@@ -3,7 +3,6 @@ import { motion, Variants } from 'framer-motion';
 import GradientHero from './GradientHero';
 
 export default function Hero(): JSX.Element {
-  // Tipagem explícita para as variantes do Framer Motion (boa prática em TS)
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.3 } },
@@ -19,41 +18,46 @@ export default function Hero(): JSX.Element {
 
   return (
     <section
-      // MUDANÇA IMPORTANTE PARA TSX:
-      // Movemos a lógica da imagem de fundo para classes Tailwind arbitrárias.
-      // 'bg-none': Padrão mobile (sem imagem de fundo na section).
-      // 'md:bg-[url('/img/hero-final-bg.webp')]': Em desktop, aplica a imagem com a logo.
+      // --- CONFIGURAÇÃO DO FUNDO ---
+      // Mobile: bg-none (usa o GradientHero abaixo)
+      // Desktop (md:): Usa a imagem final, cobre tudo (bg-cover), centraliza (bg-center)
       className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden
-                 bg-none md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
+                 bg-none md:bg-[url('/img/hero-final-bg.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
     >
       {/*
-        --- FUNDO MOBILE ---
-        Mostra o GradientHero APENAS em telas pequenas.
-        'block' (visível) no mobile, 'md:hidden' (escondido) no desktop.
+        --- FUNDO MOBILE (Gradiante) ---
+        Visível apenas no mobile (md:hidden).
       */}
       <div className="absolute inset-0 z-0 block md:hidden">
         <GradientHero />
       </div>
 
-      {/* Overlay escuro sutil */}
+      {/* Overlay escuro sutil (opcional, para contraste) */}
       <div className="absolute inset-0 bg-black/10 z-0" />
 
       {/* ESPAÇADOR DA NAVBAR */}
       <div className="h-20 w-full flex-shrink-0 relative z-10" aria-hidden="true" />
 
-      {/* CONTAINER CENTRALIZADOR */}
+      {/* CONTAINER PRINCIPAL DO CONTEÚDO */}
       <div className="flex-1 flex items-center justify-center relative z-10 w-full px-4 pb-10">
 
-        {/* BLOCO DE CONTEÚDO */}
+        {/*
+           BLOCO DE CONTEÚDO (Logo Mobile + Textos + Botão)
+           --- A CORREÇÃO DA SOBREPOSIÇÃO ESTÁ AQUI ---
+           justify-center: Centraliza no mobile.
+           md:justify-start: No desktop, alinha ao topo do container.
+           md:mt-[45vh]: No desktop, adiciona uma margem gigante no topo para empurrar o texto para baixo da logo do fundo.
+        */}
         <motion.div
-          className="container mx-auto text-center flex flex-col items-center justify-center space-y-8 md:space-y-6"
+          className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[70vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/*
-            --- LOGO (TAG IMG) ---
+            --- LOGO SEPARADA (TAG IMG) ---
             VISÍVEL APENAS NO MOBILE (block md:hidden).
+            No desktop, ela some para não ficar em cima da logo do fundo.
           */}
           <motion.div variants={logoVariants} className="block md:hidden">
             <img
