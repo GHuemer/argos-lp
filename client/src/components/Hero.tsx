@@ -1,63 +1,87 @@
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+// Certifique-se de que GradientHero também esteja em .tsx ou .js compatível
+import GradientHero from './GradientHero';
 
-// =========================================
-// COMPONENTE HERO PRINCIPAL (VERSÃO FINAL - LOGO NO BACKGROUND)
-// =========================================
-export default function Hero() {
-  // Variáveis de animação simplificadas (não precisamos mais da variante da logo)
-  const containerVariants = {
+export default function Hero(): JSX.Element {
+  // Tipagem explícita para as variantes do Framer Motion (boa prática em TS)
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.3 } },
   };
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+  const logoVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
   };
 
   return (
     <section
-      // Estrutura Flex vertical para empilhar os elementos
-      className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{
-        // --- COLOQUE AQUI O CAMINHO DA NOVA IMAGEM COM A LOGO INTEGRADA ---
-        backgroundImage: 'url(/img/c0295c170164767.6459641485952.webp)',
-      }}
+      // MUDANÇA IMPORTANTE PARA TSX:
+      // Movemos a lógica da imagem de fundo para classes Tailwind arbitrárias.
+      // 'bg-none': Padrão mobile (sem imagem de fundo na section).
+      // 'md:bg-[url('/img/hero-final-bg.webp')]': Em desktop, aplica a imagem com a logo.
+      className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden
+                 bg-none md:bg-[url('/img/hero-final-bg.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
     >
-      {/* Overlay escuro opcional para melhorar contraste se necessário */}
-      {/* <div className="absolute inset-0 bg-black/10 z-0" /> */}
-
-      {/* ESPAÇADOR SUPERIOR (O SEGREDO DO POSICIONAMENTO)
-        Esta div invisível ocupa uma porcentagem da altura da tela (ex: 55%).
-        Ela serve para "empurrar" o conteúdo de texto para baixo, 
-        deixando a área da logo no background livre.
+      {/*
+        --- FUNDO MOBILE ---
+        Mostra o GradientHero APENAS em telas pequenas.
+        'block' (visível) no mobile, 'md:hidden' (escondido) no desktop.
       */}
-      <div className="w-full h-[60vh] md:h-[65vh] flex-shrink-0 relative z-10" />
+      <div className="absolute inset-0 z-0 block md:hidden">
+        <GradientHero />
+      </div>
 
+      {/* Overlay escuro sutil */}
+      <div className="absolute inset-0 bg-black/10 z-0" />
 
-      {/* CONTAINER DO CONTEÚDO DE TEXTO */}
-      <div className="flex-1 flex flex-col items-center justify-start relative z-10 w-full px-4 pb-20">
-        
-        {/* BLOCO ANIMADO DE TEXTO E BOTÃO */}
+      {/* ESPAÇADOR DA NAVBAR */}
+      <div className="h-20 w-full flex-shrink-0 relative z-10" aria-hidden="true" />
+
+      {/* CONTAINER CENTRALIZADOR */}
+      <div className="flex-1 flex items-center justify-center relative z-10 w-full px-4 pb-10">
+
+        {/* BLOCO DE CONTEÚDO */}
         <motion.div
-          className="container mx-auto text-center flex flex-col items-center space-y-6"
+          className="container mx-auto text-center flex flex-col items-center justify-center space-y-8 md:space-y-6"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* --- LOGO REMOVIDA DAQUI --- */}
+          {/*
+            --- LOGO (TAG IMG) ---
+            VISÍVEL APENAS NO MOBILE (block md:hidden).
+          */}
+          <motion.div variants={logoVariants} className="block md:hidden">
+            <img
+              src="/img/logo-argos.png"
+              alt="Argos Logo"
+              className="w-56 h-auto mx-auto"
+            />
+          </motion.div>
 
-          {/* Textos */}
-          <motion.div variants={itemVariants} className="space-y-3">
+
+          {/* TAGLINE E SUBTÍTULO */}
+          <motion.div
+            variants={itemVariants}
+            className="space-y-4"
+          >
             <h1 className="text-2xl md:text-4xl font-satoshi font-bold text-white tracking-wide leading-tight">
               Ver antes. Ver mais. Ver além.
             </h1>
-            <p className="text-base md:text-xl text-white font-satoshi font-bold max-w-2xl mx-auto leading-relaxed">
+
+            <p className="text-base md:text-xl text-white font-satoshi font-bold max-w-2xl mx-auto leading-relaxed px-4">
               Marketing digital para empresas do mundo real
             </p>
           </motion.div>
 
           {/* CTA Button */}
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+          >
             <motion.a
               href="https://wa.me/5516997616141"
               target="_blank"
@@ -74,7 +98,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 opacity-70"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 opacity-70"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
