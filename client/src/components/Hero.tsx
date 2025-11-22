@@ -32,8 +32,9 @@ export default function Hero() {
 
   return (
     <section
-      // Adicionei 'md:pt-0' para permitir melhor centralização vertical em telas maiores
-      className="relative min-h-screen w-full text-white flex items-center justify-center overflow-hidden pt-24 md:pt-0"
+      // Adicionei 'pt-20' fixo para garantir espaço da navbar.
+      // Mantive flex items-center justify-center para centralizar o bloco todo.
+      className="relative min-h-screen w-full text-white flex items-center justify-center overflow-hidden pt-20"
       style={{
         backgroundImage: 'url(/img/hero-background.png)',
         backgroundSize: 'cover',
@@ -45,38 +46,34 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        // Adicionei um padding-top base e removi em md para melhor controle vertical
-        className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center justify-center h-full"
+        // ADICIONEI 'space-y-10 md:space-y-12' para gerenciar o espaçamento vertical automaticamente.
+        // ADICIONEI 'mt-10 md:mt-20' -> ESSE É O AJUSTE FINO para empurrar tudo para baixo e acertar o centro do alvo.
+        className="relative z-10 container mx-auto px-4 text-center flex flex-col items-center justify-center space-y-10 md:space-y-12 mt-10 md:mt-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* LOGO CONTAINER
-          Aumentei MUITO a margem inferior (mb-24) para empurrar os textos para baixo
-          e deixar a logo mais isolada no centro visual dos círculos.
-        */}
-        <motion.div variants={logoVariants} className="mb-24 md:mb-32">
+        {/* LOGO CONTAINER - Removi as margens gigantes, o space-y do pai cuida disso agora */}
+        <motion.div variants={logoVariants}>
           <img 
             src="/img/logo-argos.png" 
             alt="Argos Logo" 
-            // Aumentei ligeiramente a logo em desktop para mais presença no centro
             className="w-48 md:w-72 h-auto mx-auto" 
           />
         </motion.div>
 
 
-        {/* TAGLINE E SUBTÍTULO */}
+        {/* TAGLINE E SUBTÍTULO - Removi margem inferior */}
         <motion.div
           variants={itemVariants}
-          // Aumentei o espaçamento entre este bloco e o botão
-          className="space-y-4 mb-16" 
+          className="space-y-4" 
         >
-          {/* Título Principal - Agora BOLD */}
+          {/* Título Principal - BOLD mantido */}
           <h1 className="text-3xl md:text-5xl font-satoshi font-bold text-white tracking-wide leading-tight">
             Ver antes. Ver mais. Ver além.
           </h1>
           
-          {/* Subtítulo - Agora WHITE e BOLD */}
+          {/* Subtítulo - WHITE e BOLD mantidos */}
           <p className="text-lg md:text-2xl text-white font-satoshi font-bold max-w-3xl mx-auto leading-relaxed">
             Marketing digital para empresas do mundo real
           </p>
