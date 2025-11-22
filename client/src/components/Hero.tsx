@@ -18,47 +18,73 @@ export default function Hero(): JSX.Element {
 
   return (
     <section
-      // --- CONFIGURAÇÃO DO FUNDO ---
-      // Mobile: bg-none (usa o GradientHero abaixo)
-      // Desktop (md:): Usa a imagem final, cobre tudo (bg-cover), centraliza (bg-center)
-      className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden
-                 bg-none md:bg-[url('/img/c0295c170164767.6459641485952.webp')] md:bg-cover md:bg-center md:bg-no-repeat"
+      // Removemos as definições de background da section principal.
+      // Ela agora é apenas o container.
+      className="relative min-h-screen w-full bg-[#0a0510] text-white flex flex-col overflow-hidden"
     >
+      {/* ==================================================================
+          CAMADAS DE FUNDO
+      ================================================================== */}
+
       {/*
-        --- FUNDO MOBILE (Gradiante) ---
-        Visível apenas no mobile (md:hidden).
+         CAMADA 1: FUNDO MOBILE (GRADIENTE ROXO)
+         - z-0: Fica atrás de tudo.
+         - md:hidden: Só aparece em telas pequenas.
+         - Usamos um estilo inline para recriar o gradiente radial roxo.
       */}
-      <div className="absolute inset-0 z-0 block md:hidden">
+      <div
+        className="absolute inset-0 z-0 md:hidden"
+        style={{
+          background: 'radial-gradient(circle at 50% 30%, #8B5FFF 0%, #5A2FE8 40%, #0a0510 70%)',
+        }}
+      />
+
+      {/*
+         CAMADA 2: FUNDO DESKTOP (IMAGEM DOS ANÉIS)
+         - z-0: Fica no mesmo nível do gradiente mobile.
+         - hidden md:block: Só aparece em telas médias/grandes.
+      */}
+      <div
+        className="absolute inset-0 z-0 hidden md:block bg-cover bg-center bg-no-repeat"
+        style={{
+           backgroundImage: 'url(/img/c0295c170164767.6459641485952.webp)'
+        }}
+      />
+
+      {/*
+        CAMADA 3: SOBREPOSIÇÃO DE LINHAS (GradientHero Transparente)
+        - z-10: Fica POR CIMA dos fundos (mobile ou desktop).
+        - pointer-events-none: Garante que não atrapalhe cliques.
+      */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
         <GradientHero />
       </div>
 
-      {/* Overlay escuro sutil (opcional, para contraste) */}
-      <div className="absolute inset-0 bg-black/10 z-0" />
+      {/*
+        CAMADA 4: OVERLAY ESCURO SUTIL (Opcional, para contraste)
+        - z-20: Fica por cima das linhas.
+      */}
+      <div className="absolute inset-0 bg-black/20 z-20 pointer-events-none" />
 
-      {/* ESPAÇADOR DA NAVBAR */}
-      <div className="h-20 w-full flex-shrink-0 relative z-10" aria-hidden="true" />
 
-      {/* CONTAINER PRINCIPAL DO CONTEÚDO */}
-      <div className="flex-1 flex items-center justify-center relative z-10 w-full px-4 pb-10">
+      {/* ==================================================================
+          CONTEÚDO (Com z-index maior que os fundos)
+      ================================================================== */}
 
-        {/*
-           BLOCO DE CONTEÚDO (Logo Mobile + Textos + Botão)
-           --- A CORREÇÃO DA SOBREPOSIÇÃO ESTÁ AQUI ---
-           justify-center: Centraliza no mobile.
-           md:justify-start: No desktop, alinha ao topo do container.
-           md:mt-[45vh]: No desktop, adiciona uma margem gigante no topo para empurrar o texto para baixo da logo do fundo.
-        */}
+      {/* ESPAÇADOR DA NAVBAR (z-30) */}
+      <div className="h-20 w-full flex-shrink-0 relative z-30" aria-hidden="true" />
+
+      {/* CONTAINER PRINCIPAL DO CONTEÚDO (z-30) */}
+      <div className="flex-1 flex items-center justify-center relative z-30 w-full px-4 pb-10">
+
+        {/* BLOCO DE CONTEÚDO */}
         <motion.div
           className="container mx-auto text-center flex flex-col items-center justify-center md:justify-start space-y-8 md:space-y-6 md:mt-[59vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/*
-            --- LOGO SEPARADA (TAG IMG) ---
-            VISÍVEL APENAS NO MOBILE (block md:hidden).
-            No desktop, ela some para não ficar em cima da logo do fundo.
-          */}
+          {/* LOGO MOBILE */}
           <motion.div variants={logoVariants} className="block md:hidden">
             <img
               src="/img/logo-argos.png"
@@ -67,8 +93,7 @@ export default function Hero(): JSX.Element {
             />
           </motion.div>
 
-
-          {/* TAGLINE E SUBTÍTULO */}
+          {/* TEXTOS */}
           <motion.div
             variants={itemVariants}
             className="space-y-4"
@@ -100,13 +125,13 @@ export default function Hero(): JSX.Element {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator (z-30) */}
       <motion.div
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 opacity-70"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 opacity-70"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-5 h-6 border-2 border-white/50 rounded-full flex items-center justify-center">
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-center justify-center">
           <motion.div
             className="w-1.5 h-1.5 bg-white rounded-full"
             animate={{ y: [0, 8, 0] }}
