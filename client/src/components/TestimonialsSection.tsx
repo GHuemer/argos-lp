@@ -73,7 +73,7 @@ function DesktopPlayer({ youtubeId, title, className }: { youtubeId: string; tit
 
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
-  const [activeVideoPlaying, setActiveVideoPlaying] = useState(0); // 0 indica que nenhum vídeo está tocando, 1 indica que o vídeo ativo está tocando
+  const [activeVideoPlaying, setActiveVideoPlaying] = useState(-1); // -1 indica que nenhum vídeo está tocando. O valor é o índice do vídeo que está tocando.
 
   // Seus YouTube Shorts (IDs)
   const videos = [
