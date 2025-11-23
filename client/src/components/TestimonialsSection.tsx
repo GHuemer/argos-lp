@@ -73,7 +73,7 @@ function DesktopPlayer({ youtubeId, title, className }: { youtubeId: string; tit
 
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
-  const [activeVideoPlaying, setActiveVideoPlaying] = useState(false);
+  const [activeVideoPlaying, setActiveVideoPlaying] = useState(0); // 0 indica que nenhum vídeo está tocando, 1 indica que o vídeo ativo está tocando
 
   // Seus YouTube Shorts (IDs)
   const videos = [
@@ -170,8 +170,8 @@ export default function TestimonialsSection() {
                     youtubeId={videos[activeVideo].youtubeId}
                     title={videos[activeVideo].title}
                     className="w-full h-full"
-                    playing={activeVideoPlaying}
-                    setPlaying={setActiveVideoPlaying}
+                    playing={activeVideoPlaying === activeVideo}
+                    setPlaying={(playing) => setActiveVideoPlaying(playing ? activeVideo : -1)}
                   />
                 </div>
 
@@ -188,7 +188,7 @@ export default function TestimonialsSection() {
                   key={index}
                   onClick={() => {
                     setActiveVideo(index);
-                    setActiveVideoPlaying(false); // Reseta o estado de reprodução ao mudar de vídeo
+                    setActiveVideoPlaying(-1); // Reseta o estado de reprodução ao mudar de vídeo
                   }}
                   className={`w-3 h-3 rounded-full transition-all ${
                     activeVideo === index ? 'bg-purple-500 w-8' : 'bg-purple-500/40 hover:bg-purple-500/60'
