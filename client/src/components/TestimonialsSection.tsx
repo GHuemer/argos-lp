@@ -8,9 +8,19 @@ import { useState } from 'react';
  * - ao clicar no Play, carrega o embed do YouTube (autoplay)
  * - com controles nativos do YouTube
  */
-function YouTubePreviewPlayer({ youtubeId, title, className = '' }: { youtubeId: string; title: string; className?: string }) {
-  const [playing, setPlaying] = useState(false);
-
+function YouTubePreviewPlayer({ 
+  youtubeId, 
+  title, 
+  className = '', 
+  playing, 
+  setPlaying 
+}: { 
+  youtubeId: string; 
+  title: string; 
+  className?: string; 
+  playing: boolean;
+  setPlaying: (playing: boolean) => void;
+}) {
   // autoplay=1 inicia automaticamente
   const iframeSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&modestbranding=1`;
 
@@ -56,8 +66,14 @@ function YouTubePreviewPlayer({ youtubeId, title, className = '' }: { youtubeId:
   );
 }
 
+function DesktopPlayer({ youtubeId, title, className }: { youtubeId: string; title: string; className?: string }) {
+  const [playing, setPlaying] = useState(false);
+  return <YouTubePreviewPlayer youtubeId={youtubeId} title={title} className={className} playing={playing} setPlaying={setPlaying} />;
+}
+
 export default function TestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState(0);
+  const [activeVideoPlaying, setActiveVideoPlaying] = useState(false);
 
   // Seus YouTube Shorts (IDs)
   const videos = [
@@ -125,7 +141,7 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    <YouTubePreviewPlayer
+                    <DesktopPlayer
                       youtubeId={video.youtubeId}
                       title={video.title}
                       className="w-full h-full"
@@ -154,6 +170,8 @@ export default function TestimonialsSection() {
                     youtubeId={videos[activeVideo].youtubeId}
                     title={videos[activeVideo].title}
                     className="w-full h-full"
+                    playing={activeVideoPlaying}
+                    setPlaying={setActiveVideoPlaying}
                   />
                 </div>
 
@@ -168,7 +186,10 @@ export default function TestimonialsSection() {
               {videos.map((_, index) => (
                 <motion.button
                   key={index}
-                  onClick={() => setActiveVideo(index)}
+                  onClick={() => {
+                    setActiveVideo(index);
+                    setActiveVideoPlaying(false); // Reseta o estado de reprodução ao mudar de vídeo
+                  }}
                   className={`w-3 h-3 rounded-full transition-all ${
                     activeVideo === index ? 'bg-purple-500 w-8' : 'bg-purple-500/40 hover:bg-purple-500/60'
                   }`}
