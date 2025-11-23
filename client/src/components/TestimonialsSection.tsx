@@ -72,8 +72,9 @@ function DesktopPlayer({ youtubeId, title, className }: { youtubeId: string; tit
 }
 
 export default function TestimonialsSection() {
-  const [activeVideo, setActiveVideo] = useState(0);
-  const [activeVideoPlaying, setActiveVideoPlaying] = useState(-1); // -1 indica que nenhum vídeo está tocando. O valor é o índice do vídeo que está tocando.
+  // Removendo estados de carrossel, pois o mobile agora exibe todos os vídeos verticalmente.
+  // const [activeVideo, setActiveVideo] = useState(0);
+  // const [activeVideoPlaying, setActiveVideoPlaying] = useState(-1);
 
   // Seus YouTube Shorts (IDs)
   const videos = [
@@ -157,47 +158,31 @@ export default function TestimonialsSection() {
             ))}
           </div>
 
-          {/* Mobile: carousel */}
-          <div className="md:hidden">
-            <motion.div key={activeVideo} variants={itemVariants} className="group">
-              <motion.div
-                className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black"
-                whileHover={{ borderColor: '#6B3FFF' }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                  <YouTubePreviewPlayer
-                    youtubeId={videos[activeVideo].youtubeId}
-                    title={videos[activeVideo].title}
-                    className="w-full h-full"
-                    playing={activeVideoPlaying === activeVideo}
-                    setPlaying={(playing) => setActiveVideoPlaying(playing ? activeVideo : -1)}
-                  />
-                </div>
+          {/* Mobile: vertical list */}
+          <div className="md:hidden grid grid-cols-1 gap-8 mb-8">
+            {videos.map((video, index) => (
+              <motion.div key={index} variants={itemVariants} className="group">
+                <motion.div
+                  className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black cursor-pointer"
+                  whileHover={{ borderColor: '#6B3FFF' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
+                    {/* Usando DesktopPlayer que gerencia o estado 'playing' internamente */}
+                    <DesktopPlayer
+                      youtubeId={video.youtubeId}
+                      title={video.title}
+                      className="w-full h-full"
+                    />
+                  </div>
 
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
-                  <p className="font-satoshi font-semibold text-white text-lg">{videos[activeVideo].company}</p>
-                  <p className="text-sm text-purple-300 font-satoshi">{videos[activeVideo].category}</p>
-                </div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
+                    <p className="font-satoshi font-semibold text-white text-lg">{video.company}</p>
+                    <p className="text-sm text-purple-300 font-satoshi">{video.category}</p>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-
-            <div className="flex justify-center gap-3 mt-8">
-              {videos.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => {
-                    setActiveVideo(index);
-                    setActiveVideoPlaying(-1); // Reseta o estado de reprodução ao mudar de vídeo
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    activeVideo === index ? 'bg-purple-500 w-8' : 'bg-purple-500/40 hover:bg-purple-500/60'
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                />
-              ))}
-            </div>
+            ))}
           </div>
         </motion.div>
       </div>
