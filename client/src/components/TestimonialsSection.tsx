@@ -56,7 +56,7 @@ function YouTubePreviewPlayer({
         <iframe
           src={iframeSrc}
           title={title}
-          className="w-full h-full rounded-2xl overflow-hidden"
+          className="w-full h-full rounded-2xl" // Removendo 'overflow-hidden' do iframe, se for o caso.
           allow="autoplay; encrypted-media; picture-in-picture"
           frameBorder="0"
           allowFullScreen
