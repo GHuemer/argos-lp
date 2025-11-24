@@ -65,20 +65,19 @@ export default function ClientsSection() {
               variants={itemVariants}
               className="group"
             >
+              {/* Removido o estilo de card e mantido apenas o container flex para centralização */}
               <motion.div
-                className="p-6 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm flex items-center justify-center text-center h-full cursor-pointer"
+                className="flex items-center justify-center h-full cursor-pointer p-4" // Adicionado p-4 para um pequeno padding de segurança
                 whileHover={{
-                  borderColor: '#6B3FFF',
-                  backgroundColor: 'rgba(107, 63, 255, 0.15)',
-                  scale: 1.05,
+                  scale: 1.1, // Aumentado o scale para dar um efeito de destaque na logo
                 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Substituído o componente Image do Next.js por uma tag <img> padrão */}
+                {/* Ajustado o estilo da imagem para preencher o espaço do grid */}
                 <img
                   src={client.logo}
                   alt={`Logo ${client.name}`}
-                  className="object-contain max-h-20 w-auto" // Adicionado max-h-20 para limitar a altura
+                  className="object-contain w-full h-full max-h-24" // w-full h-full para preencher o container, max-h-24 para limitar o tamanho
                 />
               </motion.div>
             </motion.div>
