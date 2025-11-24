@@ -82,7 +82,7 @@ export default function AboutSection() {
 
           {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
           {/* Ajustei a altura e largura máxima para a roda ter mais espaço e centralização */}
-          <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto my-7">
+          <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto mt-[-60px] mb-12">
             
             {/* Glow Central Roxo */}
             <div 
