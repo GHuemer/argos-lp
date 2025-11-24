@@ -233,7 +233,7 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background - Olho simples com duas faixas e pupila central */}
+            {/* SVG Background - Olho Geométrico Limpo (Estilo Canva) */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1200 600"
@@ -241,72 +241,54 @@ export default function AboutSection() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                <linearGradient id="outerGrad" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#5B21B6" />
-                  <stop offset="60%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#7C3AED" />
+                {/* 1. Gradiente Roxo Suave (Estilo Canva) 
+                   Em vez de uma cor chapada, um gradiente linear sutil
+                   dá um acabamento mais premium e moderno.
+                */}
+                <linearGradient id="canvaPurpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8B5CF6" /> {/* Roxo mais claro */}
+                  <stop offset="100%" stopColor="#6D28D9" /> {/* Roxo mais intenso */}
                 </linearGradient>
             
-                <radialGradient id="irisGrad" cx="40%" cy="40%" r="60%">
-                  <stop offset="0%" stopColor="#E9D5FF" stopOpacity="0.95" />
-                  <stop offset="45%" stopColor="#A78BFA" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#5B21B6" stopOpacity="1" />
-                </radialGradient>
-            
-                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="30" result="b" />
-                  <feBlend in="SourceGraphic" in2="b" mode="normal" />
-                </filter>
+                {/* 2. A Máscara de Recorte
+                   Esta é a chave para o visual limpo. Definimos uma forma que será
+                   "subtraída" da forma principal para criar o buraco entre a borda e a pupila.
+                */}
+                <mask id="holeMask">
+                  {/* Começa com tudo branco (visível) */}
+                  <rect x="0" y="0" width="1200" height="600" fill="white"/>
+                  {/* Desenha a forma preta que será o buraco. 
+                     É uma forma de amêndoa ligeiramente menor que a principal.
+                  */}
+                  <path
+                    d="M 350,300 A 400,200 0 0,1 850,300 A 400,200 0 0,1 350,300 Z"
+                    fill="black"
+                  />
+                </mask>
               </defs>
             
-              {/* fundo preto */}
-              <rect width="1200" height="600" fill="#000" />
+              {/* Fundo preto sólido */}
+              <rect width="1200" height="600" fill="#000000" />
             
-              {/* FAIXA SUPERIOR (forma preenchida — começa fina no centro e abre nas pontas) */}
+              {/* FORMA PRINCIPAL (A "casca" do olho)
+                 É a forma de amêndoa grande externa. Aplicamos a máscara nela
+                 para criar o buraco no meio automaticamente.
+              */}
               <path
-                d="
-                  M 160 300
-                  C 300 120, 900 120, 1040 300
-                  C 930 340, 270 340, 160 300
-                  Z
-                "
-                fill="url(#outerGrad)"
-                opacity="0.94"
+                d="M 200,300 A 600,300 0 0,1 1000,300 A 600,300 0 0,1 200,300 Z"
+                fill="url(#canvaPurpleGrad)"
+                mask="url(#holeMask)"
               />
             
-              {/* FAIXA INFERIOR (espelho invertido, cria as "retas" curvas que se encontram por dentro) */}
-              <path
-                d="
-                  M 160 300
-                  C 300 480, 900 480, 1040 300
-                  C 930 260, 270 260, 160 300
-                  Z
-                "
-                fill="url(#outerGrad)"
-                opacity="0.94"
+              {/* A PUPILA CENTRAL
+                 Um círculo simples e perfeito no centro, usando o mesmo gradiente.
+              */}
+              <circle 
+                cx="600" 
+                cy="300" 
+                r="120" 
+                fill="url(#canvaPurpleGrad)" 
               />
-            
-              {/* recorte interior preto para simular a área escura entre faixas (como na foto) */}
-              <ellipse cx="600" cy="300" rx="410" ry="200" fill="#000" />
-            
-              {/* halo/pano por trás da pupila para suavizar */}
-              <ellipse cx="600" cy="300" rx="240" ry="160" fill="url(#irisGrad)" opacity="0.22" filter="url(#softGlow)" />
-            
-              {/* ÍRIS / PUPILA (elipse central) */}
-              <ellipse
-                cx="600"
-                cy="300"
-                rx="150"
-                ry="110"
-                fill="url(#irisGrad)"
-                opacity="0.98"
-              />
-            
-              {/* Núcleo escuro dentro da pupila */}
-              <circle cx="620" cy="290" r="36" fill="#2B0F3B" opacity="0.9" />
-            
-              {/* pequeno brilho */}
-              <ellipse cx="560" cy="255" rx="10" ry="6" fill="#FFF" opacity="0.14" />
             </svg>
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
