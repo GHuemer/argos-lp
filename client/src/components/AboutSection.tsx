@@ -235,52 +235,64 @@ export default function AboutSection() {
           {/* ====== SPACER ADICIONADO: garante que o bloco final fique mais para baixo ====== */}
           <div className="h-16 md:h-32 lg:h-48" />
 
-          {/* Final Message - Minimalista com fundo de ondas suave */}
-          <motion.div
-            className="relative w-full py-24 md:py-40 overflow-hidden"
-            variants={itemVariants}
+        {/* Final Message - AGORA COM O SVG DO OLHO ROXO */}
+        <motion.div
+          className="relative w-full py-24 md:py-40 overflow-hidden"
+          variants={itemVariants}
+        >
+          {/* SVG Background - Olho Roxo Fiel à Imagem */}
+          <svg 
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 1200 600"
+            preserveAspectRatio="xMidYMid slice"
           >
-            {/* SVG Background - Ondas suaves e minimalistas */}
-            <svg 
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 1200 600"
-              preserveAspectRatio="xMidYMid slice"
-            >
-              {/* Gradiente de fundo */}
-              <defs>
-                <radialGradient id="waveBg" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#1a0033" />
-                  <stop offset="100%" stopColor="#000000" />
-                </radialGradient>
-              </defs>
-              
-              {/* Fundo base */}
-              <rect width="1200" height="600" fill="url(#waveBg)" />
-              
-              {/* Ondas minimalistas - apenas 3 círculos com opacidade reduzida */}
-              <circle cx="600" cy="300" r="350" fill="none" stroke="#6B3FFF" strokeWidth="1" opacity="0.1" />
-              <circle cx="600" cy="300" r="250" fill="none" stroke="#7C3AED" strokeWidth="1" opacity="0.15" />
-              <circle cx="600" cy="300" r="150" fill="none" stroke="#8B5FFF" strokeWidth="1" opacity="0.2" />
-            </svg>
+            {/* Camada Base: Fundo PRETO SÓLIDO */}
+            <rect width="1200" height="600" fill="#000000" />
             
-            {/* Conteúdo centralizado */}
-            <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-              {/* Títulos agrupados em um único <p> para remover espaçamento entre eles */}
-                <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
-                  <span className="text-gray-300 block">A Argos nasce da visão.</span>
-                  <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent block">
-                    E vive para proteger a visão de quem confia na gente.
-                  </span>
-                </p>
-              <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
-                Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
-                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+            {/* 1. Anel Externo (Abertura do Olho) */}
+            <path 
+                d="M 200,300 A 500,280 0 0,1 1000,300"
+                fill="none"
+                stroke="#7C3AED"
+                strokeWidth="60"
+                strokeLinecap="round"
+                opacity="0.8"
+            />
+            <path 
+                d="M 200,300 A 500,280 0 0,0 1000,300"
+                fill="none"
+                stroke="#7C3AED"
+                strokeWidth="60"
+                strokeLinecap="round"
+                opacity="0.8"
+            />
+  
+            {/* 2. Círculo/Elipse Interna (Pupila) */}
+            <ellipse 
+                cx="600" 
+                cy="300" 
+                rx="150" 
+                ry="100" 
+                fill="#7C3AED"
+                opacity="1"
+            />
+          </svg>
+          
+          {/* Conteúdo centralizado */}
+          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+            {/* Títulos agrupados em um único <p> para remover espaçamento entre eles */}
+              <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
+                <span className="text-gray-300 block">A Argos nasce da visão.</span>
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent block">
+                  E vive para proteger a visão de quem confia na gente.
+                </span>
               </p>
-            </div>
-          </motion.div>
-
+            <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
+              Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
+              Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+            </p>
+          </div>
         </motion.div>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }
