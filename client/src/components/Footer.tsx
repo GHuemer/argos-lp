@@ -144,10 +144,10 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-purple-300 transition-colors font-satoshi block mb-2"
             >
-              WhatsApp: +55 16 99761-6141
+              Telefone: +55 16 99761-6141
             </a>
             <p className="text-gray-400 font-satoshi mb-6">
-              Araraquara, SP
+              
             </p>
 
             {/* Social Icons */}
