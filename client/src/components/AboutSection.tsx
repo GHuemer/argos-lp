@@ -233,7 +233,7 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background - Olho Geométrico Limpo (Estilo Canva) */}
+            {/* SVG Background - Olho Geométrico "Wide" (Aberto) */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1200 600"
@@ -241,53 +241,41 @@ export default function AboutSection() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* 1. Gradiente Roxo Suave (Estilo Canva) 
-                   Em vez de uma cor chapada, um gradiente linear sutil
-                   dá um acabamento mais premium e moderno.
+                {/* Máscara de Recorte (O "Buraco" do olho) 
+                   Aumentei a altura aqui também para acompanhar a abertura do olho
+                   e deixar bastante espaço preto (distância) entre a borda e a pupila.
                 */}
-                <linearGradient id="canvaPurpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B5CF6" /> {/* Roxo mais claro */}
-                  <stop offset="100%" stopColor="#6D28D9" /> {/* Roxo mais intenso */}
-                </linearGradient>
-            
-                {/* 2. A Máscara de Recorte
-                   Esta é a chave para o visual limpo. Definimos uma forma que será
-                   "subtraída" da forma principal para criar o buraco entre a borda e a pupila.
-                */}
-                <mask id="holeMask">
-                  {/* Começa com tudo branco (visível) */}
+                <mask id="wideHoleMask">
                   <rect x="0" y="0" width="1200" height="600" fill="white"/>
-                  {/* Desenha a forma preta que será o buraco. 
-                     É uma forma de amêndoa ligeiramente menor que a principal.
-                  */}
+                  {/* Forma do recorte (Preta = transparente) */}
                   <path
-                    d="M 350,300 A 400,200 0 0,1 850,300 A 400,200 0 0,1 350,300 Z"
+                    d="M 250,300 A 550,320 0 0,1 950,300 A 550,320 0 0,1 250,300 Z"
                     fill="black"
                   />
                 </mask>
               </defs>
             
-              {/* Fundo preto sólido */}
+              {/* Fundo Preto Absoluto */}
               <rect width="1200" height="600" fill="#000000" />
             
-              {/* FORMA PRINCIPAL (A "casca" do olho)
-                 É a forma de amêndoa grande externa. Aplicamos a máscara nela
-                 para criar o buraco no meio automaticamente.
+              {/* FORMA EXTERNA (Os Arcos)
+                 Aumentei o segundo número do comando 'A' (de 300 para 400).
+                 Isso faz o arco ficar mais "alto", afastando a parte de cima da de baixo.
               */}
               <path
-                d="M 200,300 A 600,300 0 0,1 1000,300 A 600,300 0 0,1 200,300 Z"
-                fill="url(#canvaPurpleGrad)"
-                mask="url(#holeMask)"
+                d="M 150,300 A 650,400 0 0,1 1050,300 A 650,400 0 0,1 150,300 Z"
+                fill="#7C3AED" 
+                mask="url(#wideHoleMask)"
               />
             
-              {/* A PUPILA CENTRAL
-                 Um círculo simples e perfeito no centro, usando o mesmo gradiente.
+              {/* A PUPILA (Círculo Central)
+                 Reduzi o raio 'r' de 120 para 70 para ficar pequena e minimalista.
               */}
               <circle 
                 cx="600" 
                 cy="300" 
-                r="120" 
-                fill="url(#canvaPurpleGrad)" 
+                r="70" 
+                fill="#7C3AED" 
               />
             </svg>
             {/* Conteúdo centralizado */}
