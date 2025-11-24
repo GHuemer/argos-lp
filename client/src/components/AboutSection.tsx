@@ -233,7 +233,7 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background - Olho Aberto (Amplitude Alta) com Borda Fina */}
+           {/* SVG Background - Olho MUITO Alto e Fino */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1200 600"
@@ -241,15 +241,15 @@ export default function AboutSection() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* MÁSCARA (O RECORTE DE DENTRO) 
-                   Aqui está o truque: Aumentei drasticamente a altura aqui (420) 
-                   para acompanhar o aumento do arco de fora.
+                {/* MÁSCARA (O BURACO) 
+                   Aumentei drasticamente os valores aqui para ficarem
+                   quase iguais aos de fora.
+                   Altura agora é 620.
                 */}
-                <mask id="openEyeMask">
+                <mask id="superHighThinMask">
                   <rect x="0" y="0" width="1200" height="600" fill="white"/>
-                  {/* Forma do buraco preto */}
                   <path
-                    d="M 250,300 A 550,420 0 0,1 950,300 A 550,420 0 0,1 250,300 Z"
+                    d="M 180,300 A 620,620 0 0,1 1020,300 A 620,620 0 0,1 180,300 Z"
                     fill="black"
                   />
                 </mask>
@@ -258,19 +258,19 @@ export default function AboutSection() {
               {/* Fundo Preto */}
               <rect width="1200" height="600" fill="#000000" />
             
-              {/* FORMA DE FORA (A BORDA ROXA)
-                 Aumentei a altura para 500 (era 400).
+              {/* FORMA DE FORA (ROXA)
+                 Aumentei a altura para 650.
                  
-                 MATEMÁTICA DA GROSSURA:
-                 Raio de Fora (500) - Raio de Dentro (420) = 80 (Espessura da linha)
+                 A MATEMÁTICA DA ESPESSURA:
+                 Altura de Fora (650) - Altura de Dentro (620) = 30 (Uma linha bem fina)
               */}
               <path
-                d="M 150,300 A 650,500 0 0,1 1050,300 A 650,500 0 0,1 150,300 Z"
+                d="M 150,300 A 650,650 0 0,1 1050,300 A 650,650 0 0,1 150,300 Z"
                 fill="#7C3AED" 
-                mask="url(#openEyeMask)"
+                mask="url(#superHighThinMask)"
               />
             
-              {/* Pupila Pequena */}
+              {/* Pupila (Mantida pequena) */}
               <circle cx="600" cy="300" r="70" fill="#7C3AED" />
             </svg>
             {/* Conteúdo centralizado */}
