@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
 import WavePattern from './WavePattern';
+import Image from 'next/image'; // Importe o componente Image do Next.js
 
 export default function ClientsSection() {
+  // Array de objetos com nome do cliente e caminho da logo
   const clients = [
-    'Villela Odontologia',
-    'Pati Pilates',
-    'Bonde Lanches',
-    'Bonde Bebidas',
-    'Xprime',
+    { name: 'Bonde Pizzas', logo: '/img/logo-bonde.png' },
+    { name: 'Gold Cut', logo: '/img/logo-goldcut.png' },
+    { name: 'Villela Odontologia', logo: '/img/logo-villela.png' },
+    { name: 'Mavin Imóveis', logo: '/img/logo-mavin.png' },
+    { name: 'Xprime Academia', logo: '/img/logo-xprime.png' },
   ];
 
   const containerVariants = {
@@ -57,9 +59,9 @@ export default function ClientsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {clients.map((client, index) => (
+          {clients.map((client) => (
             <motion.div
-              key={index}
+              key={client.name}
               variants={itemVariants}
               className="group"
             >
@@ -72,9 +74,14 @@ export default function ClientsSection() {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="font-satoshi font-semibold text-gray-200 group-hover:text-purple-300 transition-colors">
-                  {client}
-                </p>
+                {/* Componente Image para renderizar a logo */}
+                <Image
+                  src={client.logo}
+                  alt={`Logo ${client.name}`}
+                  width={150} // Ajuste a largura conforme necessário
+                  height={80} // Ajuste a altura conforme necessário
+                  className="object-contain"
+                />
               </motion.div>
             </motion.div>
           ))}
