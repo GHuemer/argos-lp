@@ -186,7 +186,7 @@ export default function AboutSection() {
           {/* --- FIM DA SEÇÃO DA RODA (DESKTOP) --- */}
 
 
-          {/* --- INÍCIO DA LISTA PARA MOBILE (Visível apenas em telas pequenas) --- */}
+          {/* --- INÍCIO DA LISTA PARA MOBILE --- */}
           <div className="grid grid-cols-1 gap-4 md:hidden">
             {pillarsList.map((pillar, index) => (
               <motion.div
@@ -205,16 +205,18 @@ export default function AboutSection() {
 
           {/* Philosophy Box */}
           <motion.div
-            className="mt-32 mb-32"
+            className="mt-60 mb-32" 
             variants={itemVariants}
           >
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-8 text-center">
+            <h3 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-20 text-center">
               Nossa Filosofia
             </h3>
-            <p className="text-3xl md:text-4xl text-center font-satoshi font-bold mb-8 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+            
+            <p className="text-4xl md:text-5xl text-center font-satoshi font-bold mb-20 py-4 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.7)]">
               Ver antes. Ver mais. Ver além.
             </p>
-            <p className="text-gray-300 leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
+            
+            <p className="text-white leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
           </motion.div>
@@ -224,8 +226,12 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            <h3 className="text-3xl font-satoshi font-bold text-center md:text-left">Somos a Agência que</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Título em branco e maior */}
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-24">
+              Somos a Agência que
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
               {[
                 'Previne erros antes que aconteçam',
                 'Enxerga oportunidades antes dos concorrentes',
@@ -236,30 +242,60 @@ export default function AboutSection() {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-start gap-3 p-4 rounded-lg border border-purple-500/20 hover:border-purple-500/50 bg-black/40 transition-colors group"
+                  className="flex items-start gap-3 group"
                   variants={itemVariants}
                 >
                   <span className="text-purple-500 font-bold text-xl mt-1 group-hover:text-purple-300 transition-colors">✓</span>
-                  <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors">{item}</p>
+                  <p className="text-gray-300 font-satoshi group-hover:text-white transition-colors text-lg">{item}</p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Final Message */}
+          {/* Final Message - Minimalista com fundo de ondas suave */}
           <motion.div
-            className="p-8 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm text-center"
+            className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            <p className="text-2xl font-satoshi font-bold mb-4 text-white">
-              A Argos nasce da visão. <br className="hidden md:block"/>
-              <span className="text-purple-400">E vive para proteger a visão de quem confia na gente.</span>
-            </p>
-            <p className="text-gray-400 font-satoshi text-sm md:text-base mt-4">
-              Se você quer apenas posts, qualquer agência serve. <br />
-              Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
-            </p>
+            {/* SVG Background - Ondas suaves e minimalistas */}
+            <svg 
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 1200 600"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              {/* Gradiente de fundo */}
+              <defs>
+                <radialGradient id="waveBg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#1a0033" />
+                  <stop offset="100%" stopColor="#000000" />
+                </radialGradient>
+              </defs>
+              
+              {/* Fundo base */}
+              <rect width="1200" height="600" fill="url(#waveBg)" />
+              
+              {/* Ondas minimalistas - apenas 3 círculos com opacidade reduzida */}
+              <circle cx="600" cy="300" r="350" fill="none" stroke="#6B3FFF" strokeWidth="1" opacity="0.1" />
+              <circle cx="600" cy="300" r="250" fill="none" stroke="#7C3AED" strokeWidth="1" opacity="0.15" />
+              <circle cx="600" cy="300" r="150" fill="none" stroke="#8B5FFF" strokeWidth="1" opacity="0.2" />
+            </svg>
+            
+            {/* Conteúdo centralizado */}
+            <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+              {/* Títulos agrupados em um único <p> para remover espaçamento entre eles */}
+                <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
+                  <span className="text-gray-300 block">A Argos nasce da visão.</span>
+                  <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent block">
+                    E vive para proteger a visão de quem confia na gente.
+                  </span>
+                </p>
+              <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
+                Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
+                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+              </p>
+            </div>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
