@@ -61,7 +61,7 @@ export default function ClientsSection() {
               className="group"
             >
               <div
-                className="p-6 md:p-8 flex items-center justify-center rounded-2xl bg-gradient-to-br from-white/12 to-white/5 backdrop-blur-md ring-1 ring-white/20 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
+                className="p-4 md:p-5 flex items-center justify-center rounded-2xl bg-white/25 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
               >
                 <img
                   src={client.logo}
