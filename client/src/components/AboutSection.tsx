@@ -263,7 +263,7 @@ export default function AboutSection() {
                  Isso faz o arco ficar mais "alto", afastando a parte de cima da de baixo.
               */}
               <path
-                d="M 150,300 A 650,400 0 0,1 1050,300 A 650,400 0 0,1 150,300 Z"
+                d="M 150,300 A 650,530 0 0,1 1050,300 A 650,400 0 0,1 150,300 Z"
                 fill="#7C3AED" 
                 mask="url(#wideHoleMask)"
               />
