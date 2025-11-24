@@ -37,8 +37,6 @@ export default function AboutSection() {
       <WavePattern />
 
       {/* Glow roxo será posicionado dentro da seção da roda no desktop */}
-
-
       <div className="container mx-auto px-4 relative z-10">
         {/* Header - RECOLOCADO AQUI */}
         <motion.div
@@ -81,14 +79,13 @@ export default function AboutSection() {
           </motion.p>
 
           {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
-          {/* Ajustei a altura e largura máxima para a roda ter mais espaço e centralização */}
           <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto mt-[-60px] mb-12">
             {/* Glow Central Roxo */}
-            <div 
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-5" 
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-5"
             >
-              <div 
-                className="w-[300px] h-[300px] rounded-full" 
+              <div
+                className="w-[300px] h-[300px] rounded-full"
                 style={{
                   background: 'radial-gradient(circle, rgba(217, 70, 239, 0.6) 0%, rgba(168, 85, 247, 0.3) 40%, transparent 70%)',
                   filter: 'blur(60px)',
@@ -96,21 +93,19 @@ export default function AboutSection() {
                 }}
               ></div>
             </div>
-            
+
             {/* SVG Lines Animation */}
-            <motion.svg 
+            <motion.svg
               className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              viewBox="0 0 1000 500" // Ajustei o viewBox para a nova altura
+              viewBox="0 0 1000 500"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              {/* Centro da roda */}
               <circle cx="500" cy="250" r="6" fill="#A855F7" className="animate-pulse">
-                 <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
               </circle>
 
-              {/* Linhas conectando o centro às caixas */}
               <motion.line x1="500" y1="250" x2="80" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
               <motion.line x1="500" y1="250" x2="920" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
@@ -123,8 +118,8 @@ export default function AboutSection() {
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
             </motion.svg>
 
-            {/* Boxes... (sem alteração) */}
-            <motion.div 
+            {/* Boxes... */}
+            <motion.div
               className="absolute top-1/2 left-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
@@ -132,7 +127,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Vigilância constante</span>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="absolute top-1/2 right-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
@@ -140,7 +135,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Proteção total</span>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="absolute bottom-[30px] left-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
@@ -148,7 +143,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Visão além do óbvio</span>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="absolute bottom-[30px] right-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
@@ -156,14 +151,13 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Beleza e presença</span>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
             >
               <span className="text-white font-satoshi font-bold">Atenção absoluta</span>
             </motion.div>
-
           </div>
           {/* --- FIM DA SEÇÃO DA RODA (DESKTOP) --- */}
 
@@ -185,17 +179,17 @@ export default function AboutSection() {
 
           {/* Philosophy Box */}
           <motion.div
-            className="mt-60 mb-32" 
+            className="mt-60 mb-32"
             variants={itemVariants}
           >
             <h3 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-20 text-center">
               Nossa Filosofia
             </h3>
-            
+
             <p className="text-4xl md:text-5xl text-center font-satoshi font-bold mb-20 py-4 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.7)]">
               Ver antes. Ver mais. Ver além.
             </p>
-            
+
             <p className="text-white leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
@@ -206,11 +200,10 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            {/* Título em branco e maior */}
             <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-24">
               Somos a Agência que
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
               {[
                 'Previne erros antes que aconteçam',
@@ -235,64 +228,62 @@ export default function AboutSection() {
           {/* ====== SPACER ADICIONADO: garante que o bloco final fique mais para baixo ====== */}
           <div className="h-16 md:h-32 lg:h-48" />
 
-        {/* Final Message - AGORA COM O SVG DO OLHO ROXO */}
-        <motion.div
-          className="relative w-full py-24 md:py-40 overflow-hidden"
-          variants={itemVariants}
-        >
-          {/* SVG Background - Olho Roxo Fiel à Imagem */}
-          <svg 
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 1200 600"
-            preserveAspectRatio="xMidYMid slice"
+          {/* Final Message - AGORA COM O SVG DO OLHO ROXO */}
+          <motion.div
+            className="relative w-full py-24 md:py-40 overflow-hidden"
+            variants={itemVariants}
           >
-            {/* Camada Base: Fundo PRETO SÓLIDO */}
-            <rect width="1200" height="600" fill="#000000" />
-            
-            {/* 1. Anel Externo (Abertura do Olho) */}
-            <path 
+            {/* SVG Background - Olho Roxo Fiel à Imagem */}
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 1200 600"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <rect width="1200" height="600" fill="#000000" />
+
+              <path
                 d="M 200,300 A 500,280 0 0,1 1000,300"
                 fill="none"
                 stroke="#7C3AED"
                 strokeWidth="60"
                 strokeLinecap="round"
                 opacity="0.8"
-            />
-            <path 
+              />
+              <path
                 d="M 200,300 A 500,280 0 0,0 1000,300"
                 fill="none"
                 stroke="#7C3AED"
                 strokeWidth="60"
                 strokeLinecap="round"
                 opacity="0.8"
-            />
-  
-            {/* 2. Círculo/Elipse Interna (Pupila) */}
-            <ellipse 
-                cx="600" 
-                cy="300" 
-                rx="150" 
-                ry="100" 
+              />
+
+              <ellipse
+                cx="600"
+                cy="300"
+                rx="150"
+                ry="100"
                 fill="#7C3AED"
                 opacity="1"
-            />
-          </svg>
-          
-          {/* Conteúdo centralizado */}
-          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-            {/* Títulos agrupados em um único <p> para remover espaçamento entre eles */}
+              />
+            </svg>
+
+            {/* Conteúdo centralizado */}
+            <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
               <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
                 <span className="text-gray-300 block">A Argos nasce da visão.</span>
                 <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent block">
                   E vive para proteger a visão de quem confia na gente.
                 </span>
               </p>
-            <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
-              Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
-              Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
-            </p>
-          </div>
-        </motion.div>
-      </section>
-    );
-  }
+              <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
+                Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
+                Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div> {/* <-- fecha o Main Content Wrapper */}
+      </div> {/* <-- fecha o container */}
+    </section>
+  );
+}
