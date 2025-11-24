@@ -233,7 +233,7 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background - Olho Geométrico "Wide" (Aberto) */}
+            {/* SVG Background - Olho Aberto (Amplitude Alta) com Borda Fina */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1200 600"
@@ -241,42 +241,37 @@ export default function AboutSection() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* Máscara de Recorte (O "Buraco" do olho) 
-                   Aumentei a altura aqui também para acompanhar a abertura do olho
-                   e deixar bastante espaço preto (distância) entre a borda e a pupila.
+                {/* MÁSCARA (O RECORTE DE DENTRO) 
+                   Aqui está o truque: Aumentei drasticamente a altura aqui (420) 
+                   para acompanhar o aumento do arco de fora.
                 */}
-                <mask id="wideHoleMask">
+                <mask id="openEyeMask">
                   <rect x="0" y="0" width="1200" height="600" fill="white"/>
-                  {/* Forma do recorte (Preta = transparente) */}
+                  {/* Forma do buraco preto */}
                   <path
-                    d="M 250,300 A 550,320 0 0,1 950,300 A 550,320 0 0,1 250,300 Z"
+                    d="M 250,300 A 550,420 0 0,1 950,300 A 550,420 0 0,1 250,300 Z"
                     fill="black"
                   />
                 </mask>
               </defs>
             
-              {/* Fundo Preto Absoluto */}
+              {/* Fundo Preto */}
               <rect width="1200" height="600" fill="#000000" />
             
-              {/* FORMA EXTERNA (Os Arcos)
-                 Aumentei o segundo número do comando 'A' (de 300 para 400).
-                 Isso faz o arco ficar mais "alto", afastando a parte de cima da de baixo.
+              {/* FORMA DE FORA (A BORDA ROXA)
+                 Aumentei a altura para 500 (era 400).
+                 
+                 MATEMÁTICA DA GROSSURA:
+                 Raio de Fora (500) - Raio de Dentro (420) = 80 (Espessura da linha)
               */}
               <path
-                d="M 150,300 A 650,300 0 0,1 1050,300 A 650,500 0 0,1 150,300 Z"
+                d="M 150,300 A 650,500 0 0,1 1050,300 A 650,500 0 0,1 150,300 Z"
                 fill="#7C3AED" 
-                mask="url(#wideHoleMask)"
+                mask="url(#openEyeMask)"
               />
             
-              {/* A PUPILA (Círculo Central)
-                 Reduzi o raio 'r' de 120 para 70 para ficar pequena e minimalista.
-              */}
-              <circle 
-                cx="600" 
-                cy="300" 
-                r="70" 
-                fill="#7C3AED" 
-              />
+              {/* Pupila Pequena */}
+              <circle cx="600" cy="300" r="70" fill="#7C3AED" />
             </svg>
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
