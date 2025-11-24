@@ -182,7 +182,7 @@ export default function AboutSection() {
             className="mt-60 mb-32"
             variants={itemVariants}
           >
-            <h3 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-20 text-center">
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold mb-20 text-center">
               Nossa Filosofia
             </h3>
 
