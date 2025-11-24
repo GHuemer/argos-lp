@@ -4,6 +4,56 @@ import { Instagram, Linkedin } from 'lucide-react';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // utils (self-contained)
+  function slugify(text) {
+    return text
+      .toString()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+  }
+
+  function getScrollParent(node) {
+    if (!node) return document.scrollingElement || document.documentElement;
+    let parent = node.parentElement;
+    while (parent) {
+      const style = getComputedStyle(parent);
+      const overflowY = style.overflowY;
+      if (/(auto|scroll|overlay)/.test(overflowY) && parent.scrollHeight > parent.clientHeight) {
+        return parent;
+      }
+      parent = parent.parentElement;
+    }
+    return document.scrollingElement || document.documentElement;
+  }
+
+  function smoothScrollToElementById(id, { offset = 0, behavior = 'smooth' } = {}) {
+    const el = document.getElementById(id);
+    if (!el) return false;
+
+    const scrollParent = getScrollParent(el);
+    if (scrollParent === (document.scrollingElement || document.documentElement)) {
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior });
+    } else {
+      const parentRect = scrollParent.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const top = elRect.top - parentRect.top + scrollParent.scrollTop - offset;
+      scrollParent.scrollTo({ top, behavior });
+    }
+    return true;
+  }
+
+  // Use os mesmos hrefs do Navigation (mantém consistência)
+  const navLinks = [
+    { label: 'Sobre', href: '#about' },
+    { label: 'Serviços', href: '#services' },
+    { label: 'Clientes', href: '#clients' },
+    { label: 'Metodologia', href: '#methodology' },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,6 +74,27 @@ export default function Footer() {
     },
   };
 
+  const handleFooterNavClick = (e, href) => {
+    // link externo (ex.: wa.me) passa direto
+    if (/^https?:\/\//.test(href)) return;
+    e.preventDefault();
+
+    const rawId = href.replace('#', '');
+    // normaliza (tenta slugify) — mas aqui já usamos os slugs do Navigation
+    const id = slugify(rawId);
+    const header = document.querySelector('nav') || document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 0;
+
+    const ok = smoothScrollToElementById(id, { offset: headerHeight + 12, behavior: 'smooth' });
+    if (!ok) {
+      // se ainda não existe (lazy render), atualiza hash e tenta de novo após pequeno delay
+      history.replaceState(null, '', `#${id}`);
+      setTimeout(() => smoothScrollToElementById(id, { offset: headerHeight + 12, behavior: 'smooth' }), 60);
+    } else {
+      history.replaceState(null, '', `#${id}`);
+    }
+  };
+
   return (
     <footer className="relative w-full bg-black text-white border-t border-purple-500/20 overflow-hidden">
       <div className="container mx-auto px-4 py-16">
@@ -36,9 +107,9 @@ export default function Footer() {
         >
           {/* Brand */}
           <motion.div variants={itemVariants}>
-            <img 
-              src="/img/logo-argos.png" 
-              alt="Argos Logo" 
+            <img
+              src="/img/logo-argos.png"
+              alt="Argos Logo"
               className="h-12 mb-4 object-contain"
             />
             <p className="text-gray-400 font-satoshi">
@@ -50,13 +121,14 @@ export default function Footer() {
           <motion.div variants={itemVariants}>
             <h4 className="font-satoshi font-bold mb-4">Navegação</h4>
             <ul className="space-y-2">
-              {['Sobre', 'Serviços', 'Clientes', 'Metodologia'].map((link) => (
-                <li key={link}>
+              {navLinks.map((link) => (
+                <li key={link.href}>
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={link.href}
+                    onClick={(e) => handleFooterNavClick(e, link.href)}
                     className="text-gray-400 hover:text-purple-300 transition-colors font-satoshi"
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -77,7 +149,7 @@ export default function Footer() {
             <p className="text-gray-400 font-satoshi mb-6">
               Araraquara, SP
             </p>
-            
+
             {/* Social Icons */}
             <div className="flex gap-4">
               <a
