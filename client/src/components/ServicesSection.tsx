@@ -61,7 +61,7 @@ export default function ServicesSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-satoshi text-white font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
             Serviços
           </h2>
           <p className="text-lg text-white font-satoshi">
