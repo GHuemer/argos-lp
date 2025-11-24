@@ -233,7 +233,7 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-            {/* SVG Background - Olho Roxo (substitua o bloco antigo por este) */}
+            {/* SVG Background - Olho simples com duas faixas e pupila central */}
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1200 600"
@@ -241,109 +241,72 @@ export default function AboutSection() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* Gradiente do anel externo */}
-                <linearGradient id="ringGrad" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#6D28D9" stopOpacity="0.95" />
-                  <stop offset="50%" stopColor="#A855F7" stopOpacity="0.85" />
-                  <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.9" />
+                <linearGradient id="outerGrad" x1="0" x2="1">
+                  <stop offset="0%" stopColor="#5B21B6" />
+                  <stop offset="60%" stopColor="#8B5CF6" />
+                  <stop offset="100%" stopColor="#7C3AED" />
                 </linearGradient>
             
-                {/* Gradiente radial da pupila */}
-                <radialGradient id="pupilGrad" cx="40%" cy="40%" r="70%">
-                  <stop offset="0%" stopColor="#C084FC" stopOpacity="0.95" />
-                  <stop offset="50%" stopColor="#7C3AED" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#4C1D95" stopOpacity="1" />
+                <radialGradient id="irisGrad" cx="40%" cy="40%" r="60%">
+                  <stop offset="0%" stopColor="#E9D5FF" stopOpacity="0.95" />
+                  <stop offset="45%" stopColor="#A78BFA" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#5B21B6" stopOpacity="1" />
                 </radialGradient>
             
-                {/* Glow central (blur) */}
-                <filter id="bigBlur">
-                  <feGaussianBlur stdDeviation="40" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="30" result="b" />
+                  <feBlend in="SourceGraphic" in2="b" mode="normal" />
                 </filter>
-            
-                {/* Máscara para "pontas" laterais — corta o elipse para criar o formato pontudo */}
-                <mask id="eyeMask">
-                  {/* área branca = visível */}
-                  <rect x="0" y="0" width="1200" height="600" fill="white" />
-                  {/* polígonos pretos = recorte (esquerda e direita) */}
-                  <polygon points="0,220 120,300 0,380" fill="black" />
-                  <polygon points="1200,220 1080,300 1200,380" fill="black" />
-                </mask>
               </defs>
             
-              {/* Fundo preto sólido */}
+              {/* fundo preto */}
               <rect width="1200" height="600" fill="#000" />
             
-              {/* Anel externo (elipse com stroke grosso), recortado pelas pontas via máscara */}
-              <g mask="url(#eyeMask)">
-                <ellipse
-                  cx="600"
-                  cy="300"
-                  rx="520"
-                  ry="260"
-                  fill="none"
-                  stroke="url(#ringGrad)"
-                  strokeWidth="120"
-                  strokeLinecap="round"
-                  opacity="0.88"
-                />
-              </g>
-            
-              {/* Glow grande por trás do centro (suaviza e dá aquele halo roxo) */}
-              <ellipse
-                cx="600"
-                cy="300"
-                rx="300"
-                ry="200"
-                fill="url(#pupilGrad)"
-                opacity="0.22"
-                filter="url(#bigBlur)"
-              />
-            
-              {/* Elipse interna (pupila / íris) — levemente deslocada e rotacionada para ficar mais orgânica */}
-              <ellipse
-                cx="600"
-                cy="300"
-                rx="170"
-                ry="120"
-                fill="url(#pupilGrad)"
-                transform="rotate(-6 600 300)"
-                opacity="0.96"
-              />
-            
-              {/* Ponto mais escuro dentro da pupila para profundidade */}
-              <ellipse
-                cx="620"
-                cy="290"
-                rx="45"
-                ry="34"
-                fill="#2A0F46"
-                opacity="0.75"
-                transform="rotate(-6 620 290)"
-              />
-            
-              {/* Reflexo sutil (brilho) */}
-              <ellipse
-                cx="560"
-                cy="255"
-                rx="12"
-                ry="8"
-                fill="#FFFFFF"
-                opacity="0.16"
-                transform="rotate(-6 560 255)"
-              />
-            
-              {/* Linha inferior fina que remete ao contorno mais claro da imagem */}
+              {/* FAIXA SUPERIOR (forma preenchida — começa fina no centro e abre nas pontas) */}
               <path
-                d="M120 430 C 350 500, 850 500, 1080 430"
-                stroke="#7C3AED"
-                strokeWidth="6"
-                strokeOpacity="0.12"
-                fill="none"
+                d="
+                  M 160 300
+                  C 300 120, 900 120, 1040 300
+                  C 930 340, 270 340, 160 300
+                  Z
+                "
+                fill="url(#outerGrad)"
+                opacity="0.94"
               />
+            
+              {/* FAIXA INFERIOR (espelho invertido, cria as "retas" curvas que se encontram por dentro) */}
+              <path
+                d="
+                  M 160 300
+                  C 300 480, 900 480, 1040 300
+                  C 930 260, 270 260, 160 300
+                  Z
+                "
+                fill="url(#outerGrad)"
+                opacity="0.94"
+              />
+            
+              {/* recorte interior preto para simular a área escura entre faixas (como na foto) */}
+              <ellipse cx="600" cy="300" rx="410" ry="200" fill="#000" />
+            
+              {/* halo/pano por trás da pupila para suavizar */}
+              <ellipse cx="600" cy="300" rx="240" ry="160" fill="url(#irisGrad)" opacity="0.22" filter="url(#softGlow)" />
+            
+              {/* ÍRIS / PUPILA (elipse central) */}
+              <ellipse
+                cx="600"
+                cy="300"
+                rx="150"
+                ry="110"
+                fill="url(#irisGrad)"
+                opacity="0.98"
+              />
+            
+              {/* Núcleo escuro dentro da pupila */}
+              <circle cx="620" cy="290" r="36" fill="#2B0F3B" opacity="0.9" />
+            
+              {/* pequeno brilho */}
+              <ellipse cx="560" cy="255" rx="10" ry="6" fill="#FFF" opacity="0.14" />
             </svg>
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
