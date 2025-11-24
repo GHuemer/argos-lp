@@ -83,7 +83,6 @@ export default function AboutSection() {
           {/* --- INÍCIO DA SEÇÃO DA RODA (DESKTOP) --- */}
           {/* Ajustei a altura e largura máxima para a roda ter mais espaço e centralização */}
           <div className="hidden md:block relative w-full h-[500px] max-w-[1000px] mx-auto mt-[-60px] mb-12">
-            
             {/* Glow Central Roxo */}
             <div 
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-5" 
@@ -112,32 +111,19 @@ export default function AboutSection() {
               </circle>
 
               {/* Linhas conectando o centro às caixas */}
-              {/* Recalculadas para bater exatamente nos cards com width 192px (w-48) */}
-              {/* Coordenadas do Centro: (500, 250) */}
-              
-              {/* Linha para Vigilância constante (Esquerda-Centro) */}
               <motion.line x1="500" y1="250" x2="80" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
-              
-              {/* Linha para Proteção total (Direita-Centro) */}
               <motion.line x1="500" y1="250" x2="920" y2="250" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
-              
-              {/* Linha para Visão além do óbvio (Baixo-Esquerda) */}
               <motion.line x1="500" y1="250" x2="150" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
-              
-              {/* Linha para Beleza e presença (Baixo-Direita) */}
               <motion.line x1="500" y1="250" x2="850" y2="450" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
-              
-              {/* Linha para Atenção absoluta (Inferior-Centro) */}
               <motion.line x1="500" y1="250" x2="500" y2="470" stroke="#A855F7" strokeWidth="2" strokeOpacity="0.6"
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, delay: 0.2 }} />
-
             </motion.svg>
 
-            {/* Box 1: Vigilância constante (Esquerda-Centro) */}
+            {/* Boxes... (sem alteração) */}
             <motion.div 
               className="absolute top-1/2 left-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
@@ -146,7 +132,6 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Vigilância constante</span>
             </motion.div>
 
-            {/* Box 2: Proteção total (Direita-Centro) */}
             <motion.div 
               className="absolute top-1/2 right-0 -translate-y-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
@@ -155,7 +140,6 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Proteção total</span>
             </motion.div>
 
-            {/* Box 3: Visão além do óbvio (Inferior-Esquerda) */}
             <motion.div 
               className="absolute bottom-[30px] left-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -164,8 +148,7 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Visão além do óbvio</span>
             </motion.div>
 
-             {/* Box 4: Beleza e presença (Inferior-Direita) */}
-             <motion.div 
+            <motion.div 
               className="absolute bottom-[30px] right-[5%] w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, borderColor: '#A855F7' }}
@@ -173,7 +156,6 @@ export default function AboutSection() {
               <span className="text-white font-satoshi font-bold">Beleza e presença</span>
             </motion.div>
 
-            {/* Box 5: Atenção absoluta (Fundo-Centro) */}
             <motion.div 
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 p-4 text-center rounded-xl border border-purple-500/40 bg-black/60 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.2)] z-10"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
@@ -184,7 +166,6 @@ export default function AboutSection() {
 
           </div>
           {/* --- FIM DA SEÇÃO DA RODA (DESKTOP) --- */}
-
 
           {/* --- INÍCIO DA LISTA PARA MOBILE --- */}
           <div className="grid grid-cols-1 gap-4 md:hidden">
@@ -201,7 +182,6 @@ export default function AboutSection() {
             ))}
           </div>
           {/* --- FIM DA LISTA MOBILE --- */}
-
 
           {/* Philosophy Box */}
           <motion.div
@@ -252,9 +232,12 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
+          {/* ====== SPACER ADICIONADO: garante que o bloco final fique mais para baixo ====== */}
+          <div className="h-16 md:h-32 lg:h-48" />
+
           {/* Final Message - Minimalista com fundo de ondas suave */}
           <motion.div
-            className="relative w-full py-24 md:py-40 m-20 overflow-hidden"
+            className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
             {/* SVG Background - Ondas suaves e minimalistas */}
