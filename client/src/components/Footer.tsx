@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -35,7 +36,11 @@ export default function Footer() {
         >
           {/* Brand */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-3xl font-satoshi font-bold mb-4">argos</h3>
+            <img 
+              src="/img/logo-argos.png" 
+              alt="Argos Logo" 
+              className="h-12 mb-4 object-contain"
+            />
             <p className="text-gray-400 font-satoshi">
               Agência de marketing digital que enxerga além.
             </p>
@@ -69,9 +74,31 @@ export default function Footer() {
             >
               WhatsApp: +55 16 99761-6141
             </a>
-            <p className="text-gray-400 font-satoshi">
+            <p className="text-gray-400 font-satoshi mb-6">
               Araraquara, SP
             </p>
+            
+            {/* Social Icons */}
+            <div className="flex gap-4">
+              <a
+                href="https://www.instagram.com/argos.marketingdigital?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-pink-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={24} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/daviaraujo0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={24} />
+              </a>
+            </div>
           </motion.div>
         </motion.div>
 
