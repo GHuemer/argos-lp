@@ -34,7 +34,7 @@ export default function ClientsSection() {
       <div className="container mx-auto px-4 relative z-10">
         {/* HEADER */}
         <motion.div
-          className="mb-16 text-center"
+          className="mb-20 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
@@ -45,31 +45,34 @@ export default function ClientsSection() {
           </h2>
         </motion.div>
 
-        {/* GRID MELHORADO */}
+        {/* GRID OTIMIZADO */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-6xl mx-auto items-center"
+          className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
           {clients.map((client) => (
-            <motion.div key={client.name} variants={itemVariants}>
-
+            <motion.div 
+              key={client.name} 
+              variants={itemVariants}
+              whileHover={{ scale: 1.08, y: -5 }}
+              className="group"
+            >
               <div
-                className="p-4 flex items-center justify-center rounded-2xl bg-white/8 backdrop-blur-sm ring-1 ring-white/10 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="p-6 md:p-8 flex items-center justify-center rounded-2xl bg-gradient-to-br from-white/12 to-white/5 backdrop-blur-md ring-1 ring-white/20 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
               >
                 <img
                   src={client.logo}
                   alt={`Logo ${client.name}`}
                   loading="lazy"
-                  className="max-h-36 object-contain w-auto"
-                  style={{
-                    filter: 'brightness(1.5) contrast(1.1)', // deixa mais visível
-                  }}
+                  className="max-h-32 md:max-h-48 object-contain w-auto filter brightness-0 invert group-hover:brightness-110 transition-all duration-300"
                 />
               </div>
-
+              <p className="text-center text-sm md:text-base text-gray-400 font-satoshi mt-4 group-hover:text-white transition-colors">
+                {client.name}
+              </p>
             </motion.div>
           ))}
         </motion.div>
