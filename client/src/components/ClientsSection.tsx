@@ -40,7 +40,7 @@ export default function ClientsSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
             Clientes que Confiam na Argos
           </h2>
         </motion.div>
