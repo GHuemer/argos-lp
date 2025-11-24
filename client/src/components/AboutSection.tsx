@@ -200,7 +200,7 @@ export default function AboutSection() {
             className="space-y-8 pt-8"
             variants={containerVariants}
           >
-            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center text-white mb-24">
+            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-center mb-24">
               Somos a Agência que
             </h3>
 
