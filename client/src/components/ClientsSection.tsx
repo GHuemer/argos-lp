@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import WavePattern from './WavePattern';
-import Image from 'next/image'; // Importe o componente Image do Next.js
+// Removida a importação de 'next/image' para corrigir o erro do Rollup/Vite
 
 export default function ClientsSection() {
   // Array de objetos com nome do cliente e caminho da logo
@@ -74,13 +74,11 @@ export default function ClientsSection() {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Componente Image para renderizar a logo */}
-                <Image
+                {/* Substituído o componente Image do Next.js por uma tag <img> padrão */}
+                <img
                   src={client.logo}
                   alt={`Logo ${client.name}`}
-                  width={150} // Ajuste a largura conforme necessário
-                  height={80} // Ajuste a altura conforme necessário
-                  className="object-contain"
+                  className="object-contain max-h-20 w-auto" // Adicionado max-h-20 para limitar a altura
                 />
               </motion.div>
             </motion.div>
