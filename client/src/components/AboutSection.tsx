@@ -233,21 +233,8 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-           {/* --- INÍCIO DA SUBSTITUIÇÃO --- */}
-
-            <img
-              src="/img/olho-roxo.png" // Certifique-se que o arquivo está na pasta 'public'
-              alt="Fundo Olho Roxo Argos"
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-40"
-              // absolute inset-0: Posiciona atrás de tudo, colado nas bordas.
-              // w-full h-full: Garante que ocupe todo o espaço.
-              // object-cover: Cobre a área sem distorcer a imagem (corta excessos se precisar).
-              // pointer-events-none: Garante que a imagem não atrapalhe cliques no texto (opcional, mas boa prática).
-            />
-
-            {/* --- FIM DA SUBSTITUIÇÃO --- */}
-            
-            {/* Conteúdo centralizado */}
+                     
+           {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
               <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
                 <span className="text-gray-300 block">A Argos nasce da visão.</span>
