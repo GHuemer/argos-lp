@@ -236,7 +236,7 @@ export default function AboutSection() {
            {/* --- INÍCIO DA SUBSTITUIÇÃO --- */}
 
             <img
-              src="/olho-roxo.png" // Certifique-se que o arquivo está na pasta 'public'
+              src="/img/olho-roxo.png" // Certifique-se que o arquivo está na pasta 'public'
               alt="Fundo Olho Roxo Argos"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               // absolute inset-0: Posiciona atrás de tudo, colado nas bordas.
