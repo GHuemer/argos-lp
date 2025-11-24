@@ -238,7 +238,7 @@ export default function AboutSection() {
             <img
               src="/img/olho-roxo.png" // Certifique-se que o arquivo está na pasta 'public'
               alt="Fundo Olho Roxo Argos"
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-40"
               // absolute inset-0: Posiciona atrás de tudo, colado nas bordas.
               // w-full h-full: Garante que ocupe todo o espaço.
               // object-cover: Cobre a área sem distorcer a imagem (corta excessos se precisar).
