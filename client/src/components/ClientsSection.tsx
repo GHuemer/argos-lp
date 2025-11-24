@@ -40,7 +40,7 @@ export default function ClientsSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl text-white font-satoshi font-bold mb-4">
             Clientes que Confiam na Argos
           </h2>
         </motion.div>
@@ -61,7 +61,7 @@ export default function ClientsSection() {
               className="group"
             >
               <div
-                className="p-4 md:p-5 flex items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
+                className="p-4 md:p-5 flex items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
               >
                 <img
                   src={client.logo}
@@ -70,7 +70,7 @@ export default function ClientsSection() {
                   className="max-h-48 md:max-h-64 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                 />
               </div>
-              <p className="text-center text-sm md:text-base text-gray-400 font-satoshi mt-4 group-hover:text-white transition-colors">
+              <p className="text-center text-sm md:text-base text-white font-satoshi font-bold mt-4 group-hover:text-white transition-colors">
                 {client.name}
               </p>
             </motion.div>
