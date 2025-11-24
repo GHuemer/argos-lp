@@ -254,7 +254,7 @@ export default function AboutSection() {
 
           {/* Final Message - Minimalista com fundo de ondas suave */}
           <motion.div
-            className="relative w-full py-24 md:py-40 overflow-hidden"
+            className="relative w-full py-24 md:py-40 m-20 overflow-hidden"
             variants={itemVariants}
           >
             {/* SVG Background - Ondas suaves e minimalistas */}
