@@ -67,7 +67,7 @@ export default function ClientsSection() {
                   src={client.logo}
                   alt={`Logo ${client.name}`}
                   loading="lazy"
-                  className="max-h-32 md:max-h-48 object-contain w-auto filter brightness-0 invert group-hover:brightness-110 transition-all duration-300"
+                  className="max-h-32 md:max-h-48 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                 />
               </div>
               <p className="text-center text-sm md:text-base text-gray-400 font-satoshi mt-4 group-hover:text-white transition-colors">
