@@ -233,46 +233,20 @@ export default function AboutSection() {
             className="relative w-full py-24 md:py-40 overflow-hidden"
             variants={itemVariants}
           >
-           {/* SVG Background - Olho MUITO Alto e Fino */}
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 1200 600"
-              preserveAspectRatio="xMidYMid slice"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                {/* MÁSCARA (O BURACO) 
-                   Aumentei drasticamente os valores aqui para ficarem
-                   quase iguais aos de fora.
-                   Altura agora é 620.
-                */}
-                <mask id="superHighThinMask">
-                  <rect x="0" y="0" width="1200" height="600" fill="white"/>
-                  <path
-                    d="M 180,300 A 620,620 0 0,1 1020,300 A 620,620 0 0,1 180,300 Z"
-                    fill="black"
-                  />
-                </mask>
-              </defs>
+           {/* --- INÍCIO DA SUBSTITUIÇÃO --- */}
+
+            <img
+              src="/olho-roxo.png" // Certifique-se que o arquivo está na pasta 'public'
+              alt="Fundo Olho Roxo Argos"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              // absolute inset-0: Posiciona atrás de tudo, colado nas bordas.
+              // w-full h-full: Garante que ocupe todo o espaço.
+              // object-cover: Cobre a área sem distorcer a imagem (corta excessos se precisar).
+              // pointer-events-none: Garante que a imagem não atrapalhe cliques no texto (opcional, mas boa prática).
+            />
+
+            {/* --- FIM DA SUBSTITUIÇÃO --- */}
             
-              {/* Fundo Preto */}
-              <rect width="1200" height="600" fill="#000000" />
-            
-              {/* FORMA DE FORA (ROXA)
-                 Aumentei a altura para 650.
-                 
-                 A MATEMÁTICA DA ESPESSURA:
-                 Altura de Fora (650) - Altura de Dentro (620) = 30 (Uma linha bem fina)
-              */}
-              <path
-                d="M 150,300 A 650,650 0 0,1 1050,300 A 650,650 0 0,1 150,300 Z"
-                fill="#7C3AED" 
-                mask="url(#superHighThinMask)"
-              />
-            
-              {/* Pupila (Mantida pequena) */}
-              <circle cx="600" cy="300" r="70" fill="#7C3AED" />
-            </svg>
             {/* Conteúdo centralizado */}
             <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
               <p className="text-2xl md:text-4xl font-satoshi font-bold mb-16 leading-tight">
