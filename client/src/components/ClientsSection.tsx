@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-// Removi o useState pois não precisamos mais controlar qual imagem está "ativa"
 import WavePattern from './WavePattern';
 
 export default function ClientsSection() {
@@ -55,7 +54,7 @@ export default function ClientsSection() {
           </h2>
         </motion.div>
 
-        {/* GRID OTIMIZADO */}
+        {/* GRID */}
         <motion.div
           className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
@@ -64,42 +63,39 @@ export default function ClientsSection() {
           viewport={{ once: true, margin: '-100px' }}
         >
           {clients.map((client) => {
-            // Verifica se é o card do Bonde
             const isBonde = client.name === 'Bonde Pizzas' && client.images;
 
             return (
               <motion.div 
                 key={client.name} 
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }} // Efeito hover suave no card inteiro
+                whileHover={{ scale: 1.05, y: -5 }}
                 className="group"
               >
                 <div
-                  className="p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[200px] md:min-h-[240px]"
+                  className="p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
                 >
                   {isBonde ? (
-                    /* Layout específico para o Bonde: 3 imagens empilhadas */
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-3 py-2">
+                    /* --- LAYOUT ESPECIAL PARA O GRUPO BONDE (Pequenas e empilhadas) --- */
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
                       {client.images.map((img, idx) => (
                         <img
                           key={idx}
                           src={img}
                           alt={`${client.name} - ${idx + 1}`}
-                          /* Ajuste de tamanho aqui:
-                             h-10 (mobile) e md:h-12 (desktop) garante que as 3 caibam
-                             sem esticar o card, mantendo o aspecto original.
-                          */
+                          /* Mantendo o tamanho reduzido apenas aqui para caberem as 3 */
                           className="h-10 md:h-12 object-contain w-auto hover:scale-110 transition-transform duration-300"
                         />
                       ))}
                     </div>
                   ) : (
-                    /* Layout padrão para os outros clientes */
+                    /* --- LAYOUT PADRÃO (Restaurado para o tamanho grande original) --- */
                     <img
                       src={client.logo}
                       alt={`Logo ${client.name}`}
                       loading="lazy"
-                      className="max-h-20 md:max-h-24 object-contain w-auto transition-all duration-300 group-hover:scale-110"
+                      /* Voltei exatamente a classe original que você tinha */
+                      className="max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                     />
                   )}
                 </div>
