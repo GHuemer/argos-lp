@@ -49,7 +49,7 @@ export default function AboutSection() {
           <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
             A Origem do Nome
           </h2>
-          <p className="text-lg text-gray-300 font-satoshi">
+          <p className="text-lg text-gray-300 font-bold font-satoshi">
             que define nossa essência
           </p>
         </motion.div>
@@ -64,7 +64,7 @@ export default function AboutSection() {
         >
           {/* Description Text */}
           <motion.p
-            className="text-lg leading-relaxed text-gray-300 font-satoshi text-center max-w-3xl mx-auto"
+            className="text-lg leading-relaxed text-gray-300 font-satoshi text-center font-bold max-w-3xl mx-auto"
             variants={itemVariants}
           >
             Argos Panoptes, na mitologia grega, era conhecido como o gigante de mil olhos — o guardião criado por Hera para vigiar o que era mais importante para ela. Seu corpo era coberto de olhos. Enquanto metade dormia, a outra metade permanecia acordada. Nada escapava ao seu olhar.
@@ -190,7 +190,7 @@ export default function AboutSection() {
               Ver antes. Ver mais. Ver além.
             </p>
 
-            <p className="text-white leading-relaxed font-satoshi text-center max-w-3xl mx-auto text-lg">
+            <p className="text-white leading-relaxed font-satoshi font-bold text-center max-w-3xl mx-auto text-lg">
               Pegamos o significado de Argos Panoptes e transformamos em filosofia. Aqui, trabalhamos como Argos trabalhava: sempre atentos às mudanças, sempre vigilantes quanto à imagem dos nossos clientes, sempre protegendo reputação e posicionamento.
             </p>
           </motion.div>
@@ -204,7 +204,7 @@ export default function AboutSection() {
               Somos a Agência que
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white font-satoshi font-bold">
               {[
                 'Previne erros antes que aconteçam',
                 'Enxerga oportunidades antes dos concorrentes',
@@ -242,7 +242,7 @@ export default function AboutSection() {
                   E vive para proteger a visão de quem confia na gente.
                 </span>
               </p>
-              <p className="text-white font-satoshi group-hover:text-white transition-colors text-lg">
+              <p className="text-white font-satoshi font-bold group-hover:text-white transition-colors text-lg">
                 Se você quer apenas posts, qualquer agência serve. <br className="hidden md:block" />
                 Se você quer posicionamento, vigilância e estratégia, a Argos existe exatamente para isso.
               </p>
