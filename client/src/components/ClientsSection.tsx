@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import WavePattern from './WavePattern';
 
 export default function ClientsSection() {
+  const [bondeImageIndex, setBondeImageIndex] = useState(0);
+
   const clients = [
-    { name: 'Bonde Pizzas', logo: '/img/logo-bonde.png' },
-    { name: 'Gold Cut', logo: '/img/logo-goldcut.png' },
     { name: 'Villela Odontologia', logo: '/img/logo-villela.png' },
+    { name: 'Gold Cut', logo: '/img/logo-goldcut.png' },
+    { 
+      name: 'Bonde Pizzas', 
+      logo: '/img/logo-bonde.png',
+      images: [
+        '/img/logo-bonde.png',
+        '/img/bonde-bebidas.png',
+        '/img/bonde-crepes.png'
+      ]
+    },
     { name: 'Mavin Imóveis', logo: '/img/logo-mavin.png' },
     { name: 'Xprime Academia', logo: '/img/logo-xprime.png' },
   ];
@@ -53,28 +64,58 @@ export default function ClientsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {clients.map((client) => (
-            <motion.div 
-              key={client.name} 
-              variants={itemVariants}
-              whileHover={{ scale: 1.08, y: -5 }}
-              className="group"
-            >
-              <div
-                className="p-4 md:p-5 flex items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
+          {clients.map((client) => {
+            const isBonde = client.name === 'Bonde Pizzas' && client.images;
+            const displayImage = isBonde ? client.images[bondeImageIndex] : client.logo;
+
+            return (
+              <motion.div 
+                key={client.name} 
+                variants={itemVariants}
+                whileHover={{ scale: 1.08, y: -5 }}
+                className="group"
               >
-                <img
-                  src={client.logo}
-                  alt={`Logo ${client.name}`}
-                  loading="lazy"
-                  className="max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 group-hover:scale-110"
-                />
-              </div>
-              <p className="text-center text-sm md:text-base text-white font-satoshi font-bold mt-4 group-hover:text-white transition-colors">
-                {client.name}
-              </p>
-            </motion.div>
-          ))}
+                <div
+                  className="p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
+                  onClick={() => {
+                    if (isBonde) {
+                      setBondeImageIndex((prev) => (prev + 1) % client.images.length);
+                    }
+                  }}
+                >
+                  {isBonde ? (
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+                      {client.images.map((img, idx) => (
+                        <motion.img
+                          key={idx}
+                          src={img}
+                          alt={`${client.name} - ${idx + 1}`}
+                          className={`max-h-16 md:max-h-20 object-contain w-auto transition-all duration-300 ${
+                            idx === bondeImageIndex ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-70'
+                          }`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setBondeImageIndex(idx);
+                          }}
+                          style={{ cursor: 'pointer' }}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <img
+                      src={displayImage}
+                      alt={`Logo ${client.name}`}
+                      loading="lazy"
+                      className="max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 group-hover:scale-110"
+                    />
+                  )}
+                </div>
+                <p className="text-center text-sm md:text-base text-white font-satoshi font-bold mt-4 group-hover:text-white transition-colors">
+                  {client.name}
+                </p>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
