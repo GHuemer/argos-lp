@@ -7,7 +7,7 @@ export default function ClientsSection() {
     { name: 'Villela Odontologia', logo: '/img/logo-villela.png' },
     { name: 'Gold Cut', logo: '/img/logo-goldcut.png' },
     { 
-      name: 'Bonde Pizzas', 
+      name: 'Grupo Bonde', 
       logo: '/img/logo-bonde.png',
       images: [
         '/img/logo-bonde.png',
