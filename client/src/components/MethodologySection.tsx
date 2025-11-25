@@ -36,9 +36,9 @@ export default function MethodologySection() {
           </h2>
 
           {/* Descrição */}
-          <p className="text-lg text-gray-400 font-satoshi font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 font-satoshi font-bold leading-relaxed max-w-2xl mx-auto">
             Transformando o Instagram em um gerador previsível de autoridade e demanda. 
-            É um processo testado, organizado e pensado para longo prazo — <span className="text-gray-200">sem improvisos.</span>
+            É um processo testado, organizado e pensado para longo prazo — <span className="text-gray-100">sem improvisos.</span>
           </p>
         </motion.div>
       </div>
