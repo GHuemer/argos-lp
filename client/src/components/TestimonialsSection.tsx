@@ -120,7 +120,7 @@ export default function TestimonialsSection() {
           <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
             Depoimentos de Clientes
           </h2>
-          <p className="text-lg text-gray-300 font-satoshi">
+          <p className="text-lg text-gray-300 font-bold font-satoshi">
             Veja o que nossos clientes dizem sobre nós
           </p>
         </motion.div>
