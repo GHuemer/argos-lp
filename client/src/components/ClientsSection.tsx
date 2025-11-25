@@ -84,14 +84,14 @@ export default function ClientsSection() {
                   }}
                 >
                   {isBonde ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
                       {client.images.map((img, idx) => (
                         <motion.img
                           key={idx}
                           src={img}
                           alt={`${client.name} - ${idx + 1}`}
-                          className={`max-h-16 md:max-h-20 object-contain w-auto transition-all duration-300 ${
-                            idx === bondeImageIndex ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-70'
+                          className={`max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 ${
+                            idx === bondeImageIndex ? 'opacity-100 scale-100' : 'opacity-30 hover:opacity-60'
                           }`}
                           onClick={(e) => {
                             e.stopPropagation();
