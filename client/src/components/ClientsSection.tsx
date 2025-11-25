@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+// Removi o useState pois não precisamos mais controlar qual imagem está "ativa"
 import WavePattern from './WavePattern';
 
 export default function ClientsSection() {
-  const [bondeImageIndex, setBondeImageIndex] = useState(0);
 
   const clients = [
     { name: 'Villela Odontologia', logo: '/img/logo-villela.png' },
@@ -65,48 +64,42 @@ export default function ClientsSection() {
           viewport={{ once: true, margin: '-100px' }}
         >
           {clients.map((client) => {
+            // Verifica se é o card do Bonde
             const isBonde = client.name === 'Bonde Pizzas' && client.images;
-            const displayImage = isBonde ? client.images[bondeImageIndex] : client.logo;
 
             return (
               <motion.div 
                 key={client.name} 
                 variants={itemVariants}
-                whileHover={{ scale: 1.08, y: -5 }}
+                whileHover={{ scale: 1.05, y: -5 }} // Efeito hover suave no card inteiro
                 className="group"
               >
                 <div
-                  className="p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[180px] md:min-h-[220px]"
-                  onClick={() => {
-                    if (isBonde) {
-                      setBondeImageIndex((prev) => (prev + 1) % client.images.length);
-                    }
-                  }}
+                  className="p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[200px] md:min-h-[240px]"
                 >
                   {isBonde ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
+                    /* Layout específico para o Bonde: 3 imagens empilhadas */
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-3 py-2">
                       {client.images.map((img, idx) => (
-                        <motion.img
+                        <img
                           key={idx}
                           src={img}
                           alt={`${client.name} - ${idx + 1}`}
-                          className={`max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 ${
-                            idx === bondeImageIndex ? 'opacity-100 scale-100' : 'opacity-30 hover:opacity-60'
-                          }`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setBondeImageIndex(idx);
-                          }}
-                          style={{ cursor: 'pointer' }}
+                          /* Ajuste de tamanho aqui:
+                             h-10 (mobile) e md:h-12 (desktop) garante que as 3 caibam
+                             sem esticar o card, mantendo o aspecto original.
+                          */
+                          className="h-10 md:h-12 object-contain w-auto hover:scale-110 transition-transform duration-300"
                         />
                       ))}
                     </div>
                   ) : (
+                    /* Layout padrão para os outros clientes */
                     <img
-                      src={displayImage}
+                      src={client.logo}
                       alt={`Logo ${client.name}`}
                       loading="lazy"
-                      className="max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 group-hover:scale-110"
+                      className="max-h-20 md:max-h-24 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                     />
                   )}
                 </div>
