@@ -38,7 +38,7 @@ export default function OfferSection() {
             </h2>
 
             <p className="text-xl text-gray-300 font-satoshi mb-8 leading-relaxed">
-              Consultoria estratégica de 60 minutos com nosso time de especialistas em marketing digital. Vamos analisar sua marca, sua presença atual e criar um plano de ação personalizado.
+              Fechando qualquer serviço, ganhe um ensaio fotográfico. Vamos analisar sua marca, sua presença atual e criar um plano de ação personalizado.
             </p>
 
             <div className="mb-8 space-y-4">
