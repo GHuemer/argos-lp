@@ -3,7 +3,7 @@ import WavePattern from './WavePattern';
 
 export default function MethodologySection() {
   const stats = [
-    { value: '500+', label: 'Alunos Transformados' },
+    { value: '10+', label: 'Empresas Transformadas' },
     { value: '3x', label: 'Aumento de Engajamento' },
     { value: '97%', label: 'Taxa de Satisfação' },
     { value: '30', label: 'Dias de Resultado' },
