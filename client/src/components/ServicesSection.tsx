@@ -64,7 +64,7 @@ export default function ServicesSection() {
           <h2 className="text-4xl md:text-5xl font-satoshi font-bold mb-4">
             Serviços
           </h2>
-          <p className="text-lg text-white font-satoshi">
+          <p className="text-lg text-white font-satoshi font-bold">
             Soluções completas para sua marca crescer
           </p>
         </motion.div>
