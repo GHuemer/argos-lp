@@ -55,8 +55,6 @@ export default function ClientsSection() {
         </motion.div>
 
         {/* GRID */}
-        {/* auto-rows-fr garante que se o conteúdo quebrar linha, mantenha consistência, 
-            mas o segredo está no h-full dos filhos abaixo */}
         <motion.div
           className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
@@ -72,24 +70,21 @@ export default function ClientsSection() {
                 key={client.name} 
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -5 }}
-                // ADICIONADO: 'h-full' para garantir que o container ocupe toda a altura da célula do grid
                 className="group h-full"
               >
                 <div
-                  // ALTERADO: 
-                  // 1. Adicionei 'h-full' para o card branco esticar até o limite
-                  // 2. Mantive 'flex flex-col justify-center' para centralizar o conteúdo verticalmente
                   className="h-full p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[220px]"
                 >
                   {isBonde ? (
-                    /* --- BONDE: Logos Pequenas e Empilhadas --- */
+                    /* --- BONDE: Logos Empilhadas e MAIORES --- */
                     <div className="flex flex-col items-center justify-center gap-2">
                       {client.images.map((img, idx) => (
                         <img
                           key={idx}
                           src={img}
                           alt={`${client.name} - ${idx + 1}`}
-                          className="h-10 md:h-12 object-contain w-auto hover:scale-110 transition-transform duration-300"
+                          // ALTERAÇÃO AQUI: Aumentei de h-10/md:h-12 para h-14/md:h-16
+                          className="h-14 md:h-16 object-contain w-auto hover:scale-110 transition-transform duration-300"
                         />
                       ))}
                     </div>
@@ -103,7 +98,6 @@ export default function ClientsSection() {
                     />
                   )}
                 </div>
-                {/* Título fora do card branco, alinhado no final */}
                 <p className="text-center text-sm md:text-base text-white font-satoshi font-bold mt-4 group-hover:text-white transition-colors">
                   {client.name}
                 </p>
