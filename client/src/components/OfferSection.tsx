@@ -37,21 +37,21 @@ export default function OfferSection() {
               Oferta Exclusiva
             </h2>
 
-            <p className="text-xl text-gray-300 font-satoshi mb-8 leading-relaxed">
+            <p className="text-xl text-gray-300 font-satoshi font-bold mb-8 leading-relaxed">
               Fechando qualquer serviço, ganhe um ensaio fotográfico. Vamos analisar sua marca, sua presença atual e criar um plano de ação personalizado.
             </p>
 
             <div className="mb-8 space-y-4">
-              <p className="text-lg font-satoshi text-purple-300">
+              <p className="text-lg font-satoshi font-bold text-purple-300">
                 ✓ Análise completa de sua presença digital
               </p>
-              <p className="text-lg font-satoshi text-purple-300">
+              <p className="text-lg font-satoshi font-bold text-purple-300">
                 ✓ Plano de ação personalizado
               </p>
-              <p className="text-lg font-satoshi text-purple-300">
+              <p className="text-lg font-satoshi font-bold text-purple-300">
                 ✓ Recomendações estratégicas
               </p>
-              <p className="text-lg font-satoshi text-purple-300">
+              <p className="text-lg font-satoshi font-bold text-purple-300">
                 ✓ Sem compromisso
               </p>
             </div>
@@ -70,7 +70,7 @@ export default function OfferSection() {
 
           {/* Additional Info */}
           <motion.p
-            className="text-center text-gray-400 font-satoshi mt-8"
+            className="text-center text-gray-300 font-satoshi font-bold mt-8"
             variants={itemVariants}
           >
             Limitado a 10 consultorias por mês. Aproveite enquanto houver vagas!
