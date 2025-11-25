@@ -106,7 +106,7 @@ export default function CTAFinalSection() {
             Pronto para posicionar sua marca em um novo nível?
           </h2>
           
-          <p className="text-lg text-gray-300 font-satoshi mb-12">
+          <p className="text-lg text-gray-300 font-satoshi font-bold mb-12">
             Entre em contato e receba uma avaliação gratuita.
           </p>
 
