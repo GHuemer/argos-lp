@@ -56,7 +56,8 @@ export default function ClientsSection() {
 
         {/* GRID */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto"
+          /* Adicionei 'auto-rows-fr' para ajudar a alinhar as alturas no mobile */
+          className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 max-w-7xl mx-auto auto-rows-fr"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -70,35 +71,45 @@ export default function ClientsSection() {
                 key={client.name} 
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="group h-full"
+                className="group h-full flex flex-col" // flex-col garante que o texto fique embaixo do card
               >
                 <div
-                  className="h-full p-4 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[220px]"
+                  // CORREÇÃO DE ALTURA:
+                  // min-h-[160px] no celular (pequeno)
+                  // md:min-h-[220px] no PC (grande, como vc gostou)
+                  className="flex-grow p-3 md:p-5 flex flex-col items-center justify-center rounded-2xl bg-white/80 backdrop-blur-md ring-1 ring-white/30 transition-all duration-300 hover:ring-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] min-h-[160px] md:min-h-[220px]"
                 >
                   {isBonde ? (
-                    /* --- BONDE: Logos Empilhadas e MAIORES --- */
+                    /* --- BONDE --- */
                     <div className="flex flex-col items-center justify-center gap-2">
                       {client.images.map((img, idx) => (
                         <img
                           key={idx}
                           src={img}
                           alt={`${client.name} - ${idx + 1}`}
-                          // ALTERAÇÃO AQUI: Aumentei de h-10/md:h-12 para h-14/md:h-16
-                          className="h-14 md:h-16 object-contain w-auto hover:scale-110 transition-transform duration-300"
+                          // CORREÇÃO DE TAMANHO BONDE:
+                          // h-10 no celular (pequeno para caberem os 3)
+                          // md:h-16 no PC (grande)
+                          className="h-10 md:h-16 object-contain w-auto hover:scale-110 transition-transform duration-300"
                         />
                       ))}
                     </div>
                   ) : (
-                    /* --- OUTROS: Logo Grande (Original) --- */
+                    /* --- OUTROS --- */
                     <img
                       src={client.logo}
                       alt={`Logo ${client.name}`}
                       loading="lazy"
-                      className="max-h-56 md:max-h-72 object-contain w-auto transition-all duration-300 group-hover:scale-110"
+                      // CORREÇÃO DE TAMANHO GERAL:
+                      // max-h-24 no celular (aprox 96px, ideal para grid de 2 colunas)
+                      // md:max-h-64 no PC (gigante como vc queria)
+                      className="max-h-24 md:max-h-64 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                     />
                   )}
                 </div>
-                <p className="text-center text-sm md:text-base text-white font-satoshi font-bold mt-4 group-hover:text-white transition-colors">
+                
+                {/* Título com margem segura */}
+                <p className="text-center text-xs md:text-base text-white font-satoshi font-bold mt-4 mb-2 group-hover:text-white transition-colors">
                   {client.name}
                 </p>
               </motion.div>
