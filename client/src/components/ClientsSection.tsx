@@ -63,7 +63,7 @@ export default function ClientsSection() {
           viewport={{ once: true, margin: '-100px' }}
         >
           {clients.map((client) => {
-            const isBonde = client.name === 'Bonde Pizzas' && client.images;
+            const isBonde = client.name === 'Grupo Bonde' && client.images;
 
             return (
               <motion.div 
