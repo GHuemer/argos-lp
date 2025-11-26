@@ -56,7 +56,7 @@ function YouTubePreviewPlayer({
         <iframe
           src={iframeSrc}
           title={title}
-          className="w-full h-full rounded-2xl" // Removendo 'overflow-hidden' do iframe, se for o caso.
+          className="w-full h-full rounded-2xl" 
           allow="autoplay; encrypted-media; picture-in-picture"
           frameBorder="0"
           allowFullScreen
@@ -72,23 +72,26 @@ function DesktopPlayer({ youtubeId, title, className }: { youtubeId: string; tit
 }
 
 export default function TestimonialsSection() {
-  // Removendo estados de carrossel, pois o mobile agora exibe todos os vídeos verticalmente.
-  // const [activeVideo, setActiveVideo] = useState(0);
-  // const [activeVideoPlaying, setActiveVideoPlaying] = useState(-1);
 
-  // Seus YouTube Shorts (IDs)
+  // Seus YouTube Shorts (IDs ATUALIZADOS)
   const videos = [
     {
-      title: 'Depoimento Bonde Lanches',
-      youtubeId: 'aoXF89AYBT0',
-      company: 'Bonde Lanches',
+      title: 'Depoimento Bonde',
+      youtubeId: 'JbZ8T0FqCHM', // ID Novo
+      company: 'Grupo Bonde',
       category: 'Alimentos e Bebidas',
     },
     {
       title: 'Depoimento Villela Odontologia',
-      youtubeId: 'zEG4HtHn_Vo',
+      youtubeId: '1Pf6dB_qA90', // ID Novo
       company: 'Villela Odontologia',
       category: 'Clínica Odontológica',
+    },
+    {
+      title: 'Depoimento Pati Pilates',
+      youtubeId: 'AOM1PXB9oTc', // ID Novo (Adicionado)
+      company: 'Pati Pilates',
+      category: 'Saúde e Bem-estar',
     },
   ];
 
@@ -132,33 +135,48 @@ export default function TestimonialsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {/* Desktop: side by side */}
+          {/* DESKTOP: Grid de 2 colunas.
+             A mágica acontece no .map abaixo: se for o 3º item, aplicamos classes para centralizar.
+          */}
           <div className="hidden md:grid grid-cols-2 gap-8 mb-8">
-            {videos.map((video, index) => (
-              <motion.div key={index} variants={itemVariants} className="group">
-                <motion.div
-                  className="relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black cursor-pointer"
-                  whileHover={{ borderColor: '#6B3FFF', scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
+            {videos.map((video, index) => {
+              // Lógica para centralizar o 3º elemento (índice 2)
+              const isThirdItem = index === 2;
+              
+              return (
+                <motion.div 
+                  key={index} 
+                  variants={itemVariants} 
+                  className={`group ${isThirdItem ? 'col-span-2' : ''}`}
                 >
-                  <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    <DesktopPlayer
-                      youtubeId={video.youtubeId}
-                      title={video.title}
-                      className="w-full h-full"
-                    />
-                  </div>
+                  <motion.div
+                    // Se for o terceiro item, definimos a largura manualmente para ser igual visualmente aos outros
+                    // (50% da largura total menos metade do gap) e centralizamos com mx-auto
+                    className={`relative rounded-2xl overflow-hidden border border-purple-500/30 bg-black cursor-pointer ${
+                      isThirdItem ? 'w-[calc(50%-1rem)] mx-auto' : 'w-full'
+                    }`}
+                    whileHover={{ borderColor: '#6B3FFF', scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
+                      <DesktopPlayer
+                        youtubeId={video.youtubeId}
+                        title={video.title}
+                        className="w-full h-full"
+                      />
+                    </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
-                    <p className="font-satoshi font-semibold text-white text-lg">{video.company}</p>
-                    <p className="text-sm text-purple-300 font-satoshi">{video.category}</p>
-                  </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
+                      <p className="font-satoshi font-semibold text-white text-lg">{video.company}</p>
+                      <p className="text-sm text-purple-300 font-satoshi">{video.category}</p>
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Mobile: vertical list */}
+          {/* MOBILE: Lista vertical (Grid de 1 coluna) - Mantido igual */}
           <div className="md:hidden grid grid-cols-1 gap-8 mb-8">
             {videos.map((video, index) => (
               <motion.div key={index} variants={itemVariants} className="group">
@@ -168,7 +186,6 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative w-full aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-                    {/* Usando DesktopPlayer que gerencia o estado 'playing' internamente */}
                     <DesktopPlayer
                       youtubeId={video.youtubeId}
                       title={video.title}
