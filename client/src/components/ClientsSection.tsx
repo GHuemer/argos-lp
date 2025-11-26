@@ -103,7 +103,7 @@ export default function ClientsSection() {
                       // CORREÇÃO DE TAMANHO GERAL:
                       // max-h-24 no celular (aprox 96px, ideal para grid de 2 colunas)
                       // md:max-h-64 no PC (gigante como vc queria)
-                      className="max-h-24 md:max-h-64 object-contain w-auto transition-all duration-300 group-hover:scale-110"
+                      className="max-h-35 md:max-h-64 object-contain w-auto transition-all duration-300 group-hover:scale-110"
                     />
                   )}
                 </div>
